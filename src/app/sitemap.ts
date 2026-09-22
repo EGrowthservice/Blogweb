@@ -3,7 +3,9 @@ import { getAllArticles } from '@/lib/articles';
 import { CATEGORIES } from '@/data/mockArticles';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = process.env.NEXTAUTH_URL || 'https://pulse-entertainment.com';
+  const baseUrl =
+    process.env.NEXTAUTH_URL ||
+    (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'https://pulse-entertainment.com');
 
   // 1. Static Pages
   const staticPages: MetadataRoute.Sitemap = [
