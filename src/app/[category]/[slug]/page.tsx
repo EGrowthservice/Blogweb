@@ -3,10 +3,15 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import { getArticleBySlug, getRelatedArticles } from '@/lib/articles';
 import { CATEGORIES } from '@/data/mockArticles';
-import BookmarkButton from '@/components/BookmarkButton';
 import ShareButtons from '@/components/ShareButtons';
+
+const BookmarkButton = dynamic(() => import('@/components/BookmarkButton'), {
+  ssr: false,
+  loading: () => <span className="inline-block w-9 h-9 rounded-xl bg-neutral-900 border border-neutral-800" />,
+});
 import CommentSection from '@/components/CommentSection';
 import AdBanner from '@/components/AdBanner';
 import ArticleCard from '@/components/ArticleCard';

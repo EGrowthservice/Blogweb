@@ -3,9 +3,14 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { getAllArticles, getFeaturedArticles, getTrendingArticles } from '@/lib/articles';
 import ArticleCard from '@/components/ArticleCard';
+import dynamic from 'next/dynamic';
 import AdBanner from '@/components/AdBanner';
-import BookmarkButton from '@/components/BookmarkButton';
 import NewsletterForm from '@/components/NewsletterForm';
+
+const BookmarkButton = dynamic(() => import('@/components/BookmarkButton'), {
+  ssr: false,
+  loading: () => <span className="inline-block w-8 h-8 rounded-full bg-neutral-800/40" />,
+});
 import BoxOfficeWidget from '@/components/BoxOfficeWidget';
 import { Clock, Flame, Sparkles, ChevronRight, Mail } from 'lucide-react';
 

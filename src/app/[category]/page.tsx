@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { CATEGORIES } from '@/data/mockArticles';
 import { getArticlesByCategory, getTrendingArticles } from '@/lib/articles';
 import ArticleCard from '@/components/ArticleCard';
+import CategoryArticleList from '@/components/CategoryArticleList';
 import AdBanner from '@/components/AdBanner';
 import { ChevronRight, Flame } from 'lucide-react';
 
@@ -71,16 +72,8 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         {/* Articles List (8 cols) */}
-        <div className="lg:col-span-8 space-y-6">
-          {articles.length === 0 ? (
-            <div className="py-16 text-center text-neutral-500 bg-neutral-900/40 rounded-2xl border border-neutral-800">
-              No articles found in this category yet. Check back soon!
-            </div>
-          ) : (
-            articles.map((article) => (
-              <ArticleCard key={article.id} article={article} layout="horizontal" />
-            ))
-          )}
+        <div className="lg:col-span-8">
+          <CategoryArticleList articles={articles} categoryName={cat.name} />
         </div>
 
         {/* Sidebar (4 cols) */}

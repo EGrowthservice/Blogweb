@@ -2,8 +2,13 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Clock } from 'lucide-react';
+import dynamic from 'next/dynamic';
 import { ArticleData } from '@/data/mockArticles';
-import BookmarkButton from './BookmarkButton';
+
+const BookmarkButton = dynamic(() => import('./BookmarkButton'), {
+  ssr: false,
+  loading: () => <span className="inline-block w-8 h-8 rounded-full bg-neutral-800/40" />,
+});
 
 interface ArticleCardProps {
   article: ArticleData;
