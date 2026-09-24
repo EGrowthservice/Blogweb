@@ -137,6 +137,29 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
     ],
   };
 
+  // Extract FAQ Structured Data if available in article content (Google Rich Snippets)
+  const faqRegex = /<h4[^>]*>(.*?)<\/h4>\s*<p[^>]*>(.*?)<\/p>/gi;
+  const faqMatches: RegExpExecArray[] = [];
+  let match: RegExpExecArray | null;
+  while ((match = faqRegex.exec(article.content)) !== null) {
+    faqMatches.push(match);
+  }
+  const faqJsonLd =
+    faqMatches.length > 0
+      ? {
+          '@context': 'https://schema.org',
+          '@type': 'FAQPage',
+          mainEntity: faqMatches.map((m) => ({
+            '@type': 'Question',
+            name: m[1].replace(/<[^>]+>/g, '').trim(),
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: m[2].replace(/<[^>]+>/g, '').trim(),
+            },
+          })),
+        }
+      : null;
+
   return (
     <>
       {/* Inject Structured Data */}
@@ -148,6 +171,12 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
+      {faqJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
+      )}
 
       <article className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Breadcrumb Navigation */}
