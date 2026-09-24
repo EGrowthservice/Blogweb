@@ -13,8 +13,10 @@ import {
   User as UserIcon,
   LogOut,
   ChevronDown,
+  ShieldCheck,
 } from 'lucide-react';
 import GoogleAuthModal from './GoogleAuthModal';
+import { trackClick, trackEvent } from '@/lib/tracking';
 
 const NAV_LINKS = [
   { name: 'Movies', href: '/movies' },
@@ -35,6 +37,7 @@ export default function Header() {
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchQuery.trim()) {
+      trackEvent('search', { search_term: searchQuery.trim() });
       window.location.href = `/search?q=${encodeURIComponent(searchQuery.trim())}`;
     }
   };
@@ -50,7 +53,7 @@ export default function Header() {
             </span>
             <div className="flex items-center gap-4 text-neutral-300 text-xs overflow-x-auto no-scrollbar">
               <Link href="/movies/inside-christopher-nolans-next-sci-fi-epic-hollywood-project" className="hover:text-brand-400 transition">
-                Nolan's Next Sci-Fi Epic
+                Nolan&apos;s Next Sci-Fi Epic
               </Link>
               <span className="text-neutral-700">•</span>
               <Link href="/tv-shows/the-bear-season-4-exclusive-cast-teases-culinary-chaos" className="hover:text-brand-400 transition">
@@ -110,6 +113,7 @@ export default function Header() {
                 <Link
                   key={link.name}
                   href={link.href}
+                  onClick={() => trackClick(link.name, 'navigation_menu')}
                   className="px-4 py-2 text-sm font-medium text-neutral-300 hover:text-white hover:bg-neutral-800/60 rounded-lg transition"
                 >
                   {link.name}
@@ -178,6 +182,16 @@ export default function Header() {
                         <Bookmark className="w-4 h-4 text-brand-400" />
                         <span>Saved Articles</span>
                       </Link>
+                      {(session.user as any)?.role && ['super_admin', 'admin', 'editor'].includes((session.user as any).role) && (
+                        <Link
+                          href="/admin"
+                          onClick={() => setUserDropdownOpen(false)}
+                          className="flex items-center gap-2 px-4 py-2.5 text-sm text-indigo-400 hover:text-indigo-300 hover:bg-neutral-800 transition font-medium"
+                        >
+                          <ShieldCheck className="w-4 h-4 text-indigo-400" />
+                          <span>Admin Dashboard</span>
+                        </Link>
+                      )}
                       <button
                         onClick={() => {
                           setUserDropdownOpen(false);
@@ -193,7 +207,10 @@ export default function Header() {
                 </div>
               ) : (
                 <button
-                  onClick={() => setAuthModalOpen(true)}
+                  onClick={() => {
+                    trackClick('header_sign_in_open', 'auth');
+                    setAuthModalOpen(true);
+                  }}
                   className="flex items-center gap-2 py-2 px-3.5 sm:px-4 bg-white hover:bg-neutral-100 text-neutral-950 text-xs sm:text-sm font-semibold rounded-full shadow transition"
                 >
                   <UserIcon className="w-4 h-4" />
@@ -234,7 +251,10 @@ export default function Header() {
               <Link
                 key={link.name}
                 href={link.href}
-                onClick={() => setMobileMenuOpen(false)}
+                onClick={() => {
+                  trackClick(link.name, 'mobile_menu');
+                  setMobileMenuOpen(false);
+                }}
                 className="block px-3 py-2.5 rounded-lg text-base font-medium text-neutral-200 hover:text-white hover:bg-neutral-800"
               >
                 {link.name}

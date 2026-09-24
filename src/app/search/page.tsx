@@ -81,7 +81,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
         <div className="py-16 text-center text-neutral-400 bg-neutral-900/40 rounded-2xl border border-neutral-800">
           <p className="text-base font-semibold text-white">No articles matched your query.</p>
           <p className="text-xs text-neutral-500 mt-2">
-            Try searching for broader terms like "Nolan", "Oscars", "The Bear", or "Gaming".
+            Try searching for broader terms like &quot;Nolan&quot;, &quot;Oscars&quot;, &quot;The Bear&quot;, or &quot;Gaming&quot;.
           </p>
         </div>
       ) : null}

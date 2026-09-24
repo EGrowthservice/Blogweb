@@ -7,6 +7,9 @@ import Footer from '@/components/Footer';
 import ReadingProgressBar from '@/components/ReadingProgressBar';
 import BackToTop from '@/components/BackToTop';
 import MobileBottomNav from '@/components/MobileBottomNav';
+import PublicLayoutWrapper from '@/components/PublicLayoutWrapper';
+import GoogleAnalytics from '@/components/analytics/GoogleAnalytics';
+import AdSenseScript from '@/components/ads/AdSenseScript';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -117,28 +120,17 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${outfit.variable} dark`}>
       <head>
-        {/* Google AdSense Script */}
-        {adsenseId && (
-          <script
-            async
-            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseId}`}
-            crossOrigin="anonymous"
-          />
-        )}
         {/* Organization & WebSite JSON-LD Schema */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
       </head>
-      <body className="min-h-screen flex flex-col bg-neutral-950 font-sans text-neutral-100 pb-16 md:pb-0">
-        <ReadingProgressBar />
+      <body className="min-h-screen flex flex-col bg-neutral-950 font-sans text-neutral-100">
+        <GoogleAnalytics />
+        <AdSenseScript />
         <AuthProvider>
-          <Header />
-          <main className="flex-1">{children}</main>
-          <Footer />
-          <MobileBottomNav />
-          <BackToTop />
+          <PublicLayoutWrapper>{children}</PublicLayoutWrapper>
         </AuthProvider>
       </body>
     </html>

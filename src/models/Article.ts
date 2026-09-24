@@ -1,5 +1,7 @@
 import mongoose, { Schema, Document, Model } from 'mongoose';
 
+export type PostStatus = 'draft' | 'published' | 'archived';
+
 export interface IAuthor {
   name: string;
   role: string;
@@ -13,25 +15,29 @@ export interface IArticle extends Document {
   slug: string;
   excerpt: string;
   content: string;
-  category: 'movies' | 'tv-shows' | 'celebrities' | 'music' | 'gaming';
+  category: string;
+  categoryId?: mongoose.Types.ObjectId;
+  authorId?: mongoose.Types.ObjectId;
   tags: string[];
   featuredImage: string;
   featuredImageAlt: string;
   author: IAuthor;
+  status: PostStatus;
   readTimeMinutes: number;
   isFeatured: boolean;
   isTrending: boolean;
   viewsCount: number;
   likesCount: number;
   publishedAt: Date;
+  createdAt: Date;
   updatedAt: Date;
 }
 
 const AuthorSchema = new Schema<IAuthor>({
   name: { type: String, required: true },
   role: { type: String, required: true, default: 'Entertainment Editor' },
-  avatar: { type: String, required: true },
-  bio: { type: String, required: true },
+  avatar: { type: String, required: true, default: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=256' },
+  bio: { type: String, required: true, default: 'Content Creator & Editor' },
   twitter: { type: String },
 });
 
@@ -44,7 +50,23 @@ const ArticleSchema = new Schema<IArticle>(
     category: {
       type: String,
       required: true,
-      enum: ['movies', 'tv-shows', 'celebrities', 'music', 'gaming'],
+      index: true,
+      trim: true,
+    },
+    categoryId: {
+      type: Schema.Types.ObjectId,
+      ref: 'Category',
+      index: true,
+    },
+    authorId: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+      index: true,
+    },
+    status: {
+      type: String,
+      enum: ['draft', 'published', 'archived'],
+      default: 'published',
       index: true,
     },
     tags: [{ type: String, index: true }],
