@@ -31,6 +31,9 @@ export const metadata: Metadata = {
   other: {
     'google-adsense-account': 'ca-pub-3542813933597668',
   },
+  alternates: {
+    canonical: './',
+  },
   title: {
     default: 'PULSE Entertainment | Hollywood News, Movies, TV & Pop Culture',
     template: '%s | PULSE Entertainment',

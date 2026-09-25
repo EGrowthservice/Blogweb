@@ -41,26 +41,26 @@ export default function ContactPage() {
             <div className="space-y-3 text-xs text-neutral-300">
               <div>
                 <p className="font-semibold text-white">General Inquiries:</p>
-                <a href="mailto:contact@pulse-entertainment.com" className="text-brand-400 hover:underline">
-                  contact@pulse-entertainment.com
+                <a href="mailto:contact@pulseetm.click" className="text-brand-400 hover:underline">
+                  contact@pulseetm.click
                 </a>
               </div>
               <div>
                 <p className="font-semibold text-white">News Tips & Leaks:</p>
-                <a href="mailto:tips@pulse-entertainment.com" className="text-brand-400 hover:underline">
-                  tips@pulse-entertainment.com
+                <a href="mailto:tips@pulseetm.click" className="text-brand-400 hover:underline">
+                  tips@pulseetm.click
                 </a>
               </div>
               <div>
                 <p className="font-semibold text-white">Press & Studio Screeners:</p>
-                <a href="mailto:press@pulse-entertainment.com" className="text-brand-400 hover:underline">
-                  press@pulse-entertainment.com
+                <a href="mailto:press@pulseetm.click" className="text-brand-400 hover:underline">
+                  press@pulseetm.click
                 </a>
               </div>
               <div>
                 <p className="font-semibold text-white">Advertising & Sponsorships:</p>
-                <a href="mailto:ads@pulse-entertainment.com" className="text-brand-400 hover:underline">
-                  ads@pulse-entertainment.com
+                <a href="mailto:ads@pulseetm.click" className="text-brand-400 hover:underline">
+                  ads@pulseetm.click
                 </a>
               </div>
             </div>

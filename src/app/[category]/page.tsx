@@ -21,16 +21,19 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
     return { title: 'Category Not Found' };
   }
 
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.pulseetm.click';
+  const categoryUrl = `${baseUrl}/${cat.slug}`;
+
   return {
     title: `${cat.name} News & Reviews | PULSE Entertainment`,
     description: cat.description,
     openGraph: {
       title: `${cat.name} | PULSE Entertainment`,
       description: cat.description,
-      url: `https://pulse-entertainment.com/${cat.slug}`,
+      url: categoryUrl,
     },
     alternates: {
-      canonical: `https://pulse-entertainment.com/${cat.slug}`,
+      canonical: categoryUrl,
     },
   };
 }
@@ -41,13 +44,40 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
     notFound();
   }
 
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.pulseetm.click';
+  const categoryUrl = `${baseUrl}/${cat.slug}`;
+
   const [articles, trending] = await Promise.all([
     getArticlesByCategory(params.category),
     getTrendingArticles(),
   ]);
 
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: baseUrl,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: cat.name,
+        item: categoryUrl,
+      },
+    ],
+  };
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      {/* Category Breadcrumb Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       {/* Breadcrumbs */}
       <nav className="flex items-center gap-2 text-xs text-neutral-400 mb-6">
         <Link href="/" className="hover:text-white transition">

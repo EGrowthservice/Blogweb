@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description:
     'Our comprehensive Privacy Policy detailing cookie usage, Google AdSense disclosures, CCPA rights for California residents, and data practices.',
   alternates: {
-    canonical: 'https://pulse-entertainment.com/privacy-policy',
+    canonical: 'https://www.pulseetm.click/privacy-policy',
   },
 };
 
@@ -126,8 +126,8 @@ export default function PrivacyPolicyPage() {
         </ul>
         <p>
           To exercise any of these rights, please email our Data Privacy Officer at{' '}
-          <a href="mailto:privacy@pulse-entertainment.com" className="text-brand-400 underline">
-            privacy@pulse-entertainment.com
+          <a href="mailto:privacy@pulseetm.click" className="text-brand-400 underline">
+            privacy@pulseetm.click
           </a>
           .
         </p>
@@ -153,10 +153,10 @@ export default function PrivacyPolicyPage() {
           If you have questions, comments, or requests regarding this Privacy Policy, please contact our privacy compliance desk:
         </p>
         <div className="p-4 rounded-xl bg-neutral-900 border border-neutral-800 text-xs space-y-1">
-          <p className="font-bold text-white">PULSE Entertainment Media Group, Inc.</p>
-          <p>Attn: Data Privacy & Legal Compliance</p>
-          <p>9255 Sunset Blvd, Suite 800, West Hollywood, CA 90069</p>
-          <p>Email: <a href="mailto:privacy@pulse-entertainment.com" className="text-brand-400 underline">privacy@pulse-entertainment.com</a></p>
+          <p className="font-bold text-white">PULSE Entertainment</p>
+          <p>Founder & Publisher: Hieu Truong (Trương Hiếu)</p>
+          <p>Location: Ho Chi Minh City, Vietnam (Global English Edition)</p>
+          <p>Email: <a href="mailto:privacy@pulseetm.click" className="text-brand-400 underline">privacy@pulseetm.click</a></p>
         </div>
       </section>
     </div>

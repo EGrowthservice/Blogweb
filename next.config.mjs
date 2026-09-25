@@ -20,6 +20,20 @@ const nextConfig = {
   },
   poweredByHeader: false,
   compress: true,
+  async redirects() {
+    return [
+      {
+        source: '/celebrity',
+        destination: '/celebrities',
+        permanent: true,
+      },
+      {
+        source: '/category/:slug',
+        destination: '/:slug',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

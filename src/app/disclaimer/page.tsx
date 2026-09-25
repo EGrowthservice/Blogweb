@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description:
     'Editorial disclaimer, Fair Use notice under 17 U.S. Code § 107, and advertising disclosures for PULSE Entertainment.',
   alternates: {
-    canonical: 'https://pulse-entertainment.com/disclaimer',
+    canonical: 'https://www.pulseetm.click/disclaimer',
   },
 };
 

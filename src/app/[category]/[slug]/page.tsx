@@ -32,7 +32,7 @@ export async function generateMetadata({ params }: ArticlePageProps): Promise<Me
     return { title: 'Article Not Found' };
   }
 
-  const siteBase = process.env.NEXT_PUBLIC_SITE_URL || process.env.NEXTAUTH_URL || 'https://pulse-entertainment.com';
+  const siteBase = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.pulseetm.click';
   const url = `${siteBase}/${article.category}/${article.slug}`;
 
   const publishedIso = typeof article.publishedAt === 'string' ? article.publishedAt : new Date(article.publishedAt).toISOString();
@@ -79,7 +79,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
     notFound();
   }
 
-  const siteBase = process.env.NEXT_PUBLIC_SITE_URL || process.env.NEXTAUTH_URL || 'https://pulse-entertainment.com';
+  const siteBase = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.pulseetm.click';
   const relatedArticles = await getRelatedArticles(article.slug, article.category, 3);
   const categoryInfo = CATEGORIES.find((c) => c.slug === article.category);
 

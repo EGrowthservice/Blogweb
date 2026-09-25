@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description:
     'Terms of Service, intellectual property policies, DMCA notice, and conditions of use for PULSE Entertainment.',
   alternates: {
-    canonical: 'https://pulse-entertainment.com/terms-of-service',
+    canonical: 'https://www.pulseetm.click/terms-of-service',
   },
 };
 
@@ -29,14 +29,14 @@ export default function TermsOfServicePage() {
       <section className="space-y-4">
         <h2 className="text-xl font-bold text-white">1. Acceptance of Terms</h2>
         <p>
-          By accessing or using PULSE Entertainment (&quot;the Service&quot;), whether as a registered user or an unregistered guest, you agree to be bound by these Terms of Service and all applicable laws and regulations of the United States. If you do not agree with any of these terms, you are prohibited from using or accessing this site.
+          By accessing or using PULSE Entertainment (&quot;the Service&quot;), whether as a registered user or an unregistered guest, you agree to be bound by these Terms of Service and all applicable laws and regulations. If you do not agree with any of these terms, you are prohibited from using or accessing this site.
         </p>
       </section>
 
       <section className="space-y-4 pt-4 border-t border-neutral-800">
         <h2 className="text-xl font-bold text-white">2. Intellectual Property Rights</h2>
         <p>
-          All original editorial text, analysis, visual design, software, and arrangement on PULSE Entertainment are the exclusive property of PULSE Entertainment Media Group, Inc. and are protected by United States and international copyright, trademark, and other intellectual property laws.
+          All original editorial text, analysis, visual design, software, and arrangement on PULSE Entertainment are the exclusive property of PULSE Entertainment (founded and published by Hieu Truong) and are protected by copyright, trademark, and intellectual property laws.
         </p>
         <p>
           Movie stills, promotional television materials, and album covers featured on this site are utilized in accordance with the <strong>Fair Use Doctrine</strong> (17 U.S. Code § 107) for purposes of criticism, commentary, news reporting, scholarship, and research.
@@ -56,7 +56,7 @@ export default function TermsOfServicePage() {
           <li>A statement made under penalty of perjury that the information provided is accurate.</li>
         </ul>
         <p className="text-xs">
-          DMCA notices must be sent to: <a href="mailto:dmca@pulse-entertainment.com" className="text-brand-400 underline">dmca@pulse-entertainment.com</a>.
+          DMCA notices must be sent to: <a href="mailto:dmca@pulseetm.click" className="text-brand-400 underline">dmca@pulseetm.click</a>.
         </p>
       </section>
 

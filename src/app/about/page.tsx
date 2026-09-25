@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   description:
     'Meet Hieu Truong (Trương Hiếu), Founder and Solo Publisher of PULSE Entertainment. Learn about our fact-checking methodology, editorial ethics, and commitment to cultural journalism.',
   alternates: {
-    canonical: 'https://pulse-entertainment.com/about',
+    canonical: 'https://www.pulseetm.click/about',
   },
 };
 
@@ -67,11 +67,11 @@ export default function AboutPage() {
 
             <div className="pt-2 flex flex-wrap items-center gap-4 text-xs text-neutral-300">
               <a
-                href="mailto:contact@pulse-entertainment.com"
+                href="mailto:contact@pulseetm.click"
                 className="flex items-center gap-1.5 text-brand-400 hover:text-brand-300 underline"
               >
                 <Mail className="w-3.5 h-3.5" />
-                contact@pulse-entertainment.com
+                contact@pulseetm.click
               </a>
               <span className="text-neutral-600">•</span>
               <span className="flex items-center gap-1.5 text-neutral-400">
@@ -153,7 +153,7 @@ export default function AboutPage() {
           <Link href="/contact" className="text-brand-400 underline hover:text-white">
             Contact Form
           </Link>{' '}
-          or reach out at <a href="mailto:contact@pulse-entertainment.com" className="text-brand-400 underline">contact@pulse-entertainment.com</a>.
+          or reach out at <a href="mailto:contact@pulseetm.click" className="text-brand-400 underline">contact@pulseetm.click</a>.
         </p>
       </section>
     </div>
