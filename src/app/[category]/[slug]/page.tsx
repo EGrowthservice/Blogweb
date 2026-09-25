@@ -32,7 +32,10 @@ export async function generateMetadata({ params }: ArticlePageProps): Promise<Me
     return { title: 'Article Not Found' };
   }
 
-  const url = `https://pulse-entertainment.com/${article.category}/${article.slug}`;
+  const siteBase = process.env.NEXT_PUBLIC_SITE_URL || process.env.NEXTAUTH_URL || 'https://pulse-entertainment.com';
+  const url = `${siteBase}/${article.category}/${article.slug}`;
+
+  const publishedIso = typeof article.publishedAt === 'string' ? article.publishedAt : new Date(article.publishedAt).toISOString();
 
   return {
     title: `${article.title} | PULSE Entertainment`,
@@ -48,7 +51,7 @@ export async function generateMetadata({ params }: ArticlePageProps): Promise<Me
       url,
       siteName: 'PULSE Entertainment',
       type: 'article',
-      publishedTime: article.publishedAt,
+      publishedTime: publishedIso,
       authors: [article.author.name],
       tags: article.tags,
       images: [
@@ -76,6 +79,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
     notFound();
   }
 
+  const siteBase = process.env.NEXT_PUBLIC_SITE_URL || process.env.NEXTAUTH_URL || 'https://pulse-entertainment.com';
   const relatedArticles = await getRelatedArticles(article.slug, article.category, 3);
   const categoryInfo = CATEGORIES.find((c) => c.slug === article.category);
 
@@ -86,7 +90,8 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
     year: 'numeric',
   });
 
-  const pageUrl = `https://pulse-entertainment.com/${article.category}/${article.slug}`;
+  const pageUrl = `${siteBase}/${article.category}/${article.slug}`;
+  const publishedIso = typeof article.publishedAt === 'string' ? article.publishedAt : new Date(article.publishedAt).toISOString();
 
   // Rich Snippet JSON-LD Schema: NewsArticle + BreadcrumbList (E-E-A-T & Google News compliance)
   const jsonLd = {
@@ -99,20 +104,20 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
     headline: article.title,
     description: article.excerpt,
     image: [article.featuredImage],
-    datePublished: article.publishedAt,
-    dateModified: article.publishedAt,
+    datePublished: publishedIso,
+    dateModified: publishedIso,
     author: {
       '@type': 'Person',
       name: article.author.name,
       jobTitle: article.author.role,
-      url: `https://pulse-entertainment.com/about#${encodeURIComponent(article.author.name)}`,
+      url: `${siteBase}/about`,
     },
     publisher: {
       '@type': 'Organization',
       name: 'PULSE Entertainment',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://pulse-entertainment.com/logo.png',
+        url: `${siteBase}/logo.png`,
       },
     },
   };
@@ -125,13 +130,13 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         '@type': 'ListItem',
         position: 1,
         name: 'Home',
-        item: 'https://pulse-entertainment.com',
+        item: siteBase,
       },
       {
         '@type': 'ListItem',
         position: 2,
         name: categoryInfo?.name || article.category,
-        item: `https://pulse-entertainment.com/${article.category}`,
+        item: `${siteBase}/${article.category}`,
       },
       {
         '@type': 'ListItem',

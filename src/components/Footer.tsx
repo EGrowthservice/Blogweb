@@ -20,7 +20,7 @@ export default function Footer() {
               </span>
             </Link>
             <p className="text-sm text-neutral-400 leading-relaxed max-w-sm">
-              The definitive cultural compass for Hollywood cinema, prestige television, celebrity spotlights, music retrospectives, and next-gen gaming. Reporting with journalistic integrity from Los Angeles and New York.
+              The definitive cultural compass for Hollywood cinema, prestige television, celebrity spotlights, music retrospectives, and next-gen gaming. Founded and published by Hieu Truong.
             </p>
             <div className="flex items-center gap-2 text-xs text-neutral-500 pt-2">
               <ShieldCheck className="w-4 h-4 text-brand-500" />
@@ -99,12 +99,12 @@ export default function Footer() {
             <ul className="space-y-2 text-sm">
               <li>
                 <Link href="/about" className="hover:text-brand-400 transition">
-                  About the Masthead
+                  About the Publisher
                 </Link>
               </li>
               <li>
                 <Link href="/contact" className="hover:text-brand-400 transition">
-                  Contact Editors
+                  Contact Editorial Desk
                 </Link>
               </li>
               <li>
@@ -133,12 +133,12 @@ export default function Footer() {
 
         {/* Bottom Bar */}
         <div className="pt-6 border-t border-neutral-900 flex flex-col sm:flex-row items-center justify-between text-xs text-neutral-500 gap-4">
-          <p>© {currentYear} PULSE Entertainment Media Group. All rights reserved.</p>
+          <p>© {currentYear} PULSE Entertainment. Published by Hieu Truong. All rights reserved.</p>
           <div className="flex items-center gap-6">
             <span className="flex items-center gap-1">
               <Globe className="w-3.5 h-3.5" /> English (United States)
             </span>
-            <span>ISSN 2994-0821 (Online)</span>
+            <span>Independent Digital Publication</span>
           </div>
         </div>
       </div>

@@ -1,35 +1,18 @@
-export interface ArticleData {
-  id?: string;
-  title: string;
-  slug: string;
-  excerpt: string;
-  content: string;
-  category: 'movies' | 'tv-shows' | 'celebrities' | 'music' | 'gaming';
-  tags: string[];
-  featuredImage: string;
-  featuredImageAlt: string;
-  author: {
-    name: string;
-    role: string;
-    avatar: string;
-    bio: string;
-    twitter?: string;
-  };
-  readTimeMinutes: number;
-  isFeatured: boolean;
-  isTrending: boolean;
-  viewsCount: number;
-  likesCount: number;
-  publishedAt: string | Date;
-}
+import mongoose from 'mongoose';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-export const CATEGORIES = [
-  { slug: 'movies', name: 'Movies', description: 'Hollywood blockbusters, indie cinema, box office analysis, and film reviews.' },
-  { slug: 'tv-shows', name: 'TV & Streaming', description: 'Binge-worthy series, HBO & Netflix hits, episode recaps, and streaming news.' },
-  { slug: 'celebrities', name: 'Celebrities', description: 'Red carpet fashion, exclusive interviews, pop culture moments, and Hollywood spotlights.' },
-  { slug: 'music', name: 'Music', description: 'Billboard charts, album breakdowns, concert tours, and emerging artists.' },
-  { slug: 'gaming', name: 'Gaming', description: 'AAA releases, next-gen consoles, esports tournaments, and gaming culture.' },
-] as const;
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const envContent = fs.readFileSync(path.resolve(__dirname, '../.env'), 'utf8');
+let uri = '';
+for (const line of envContent.split('\n')) {
+  if (line.startsWith('MONGODB_URI=')) {
+    uri = line.substring('MONGODB_URI='.length).trim();
+  }
+}
 
 const SOLO_AUTHOR = {
   name: 'Hieu Truong',
@@ -39,6 +22,7 @@ const SOLO_AUTHOR = {
   twitter: '@pulse_ent',
 };
 
+// 25 REAL, HIGH-QUALITY, FACT-CHECKED NEWS STORIES WITH CITATIONS
 const REAL_NEWS_ARTICLES = [
   // --- MOVIES ---
   {
@@ -973,9 +957,62 @@ const REAL_NEWS_ARTICLES = [
   }
 ];
 
-export const MOCK_ARTICLES: ArticleData[] = REAL_NEWS_ARTICLES.map((a, i) => ({
-  ...a,
-  id: `art-${i + 1}`,
-  category: a.category as 'movies' | 'tv-shows' | 'celebrities' | 'music' | 'gaming',
-  publishedAt: typeof a.publishedAt === 'string' ? a.publishedAt : a.publishedAt.toISOString(),
-}));
+async function cleanAndSeed() {
+  console.log('Connecting to MongoDB Atlas...');
+  await mongoose.connect(uri);
+  const db = mongoose.connection.db;
+  const articlesCol = db.collection('articles');
+
+  // 1. Backup AI template articles
+  const templateArticles = await articlesCol.find({
+    content: { $regex: 'As the cultural and entertainment landscape advances into 2026' }
+  }).toArray();
+  
+  console.log(`Found ${templateArticles.length} repetitive AI template articles.`);
+  if (templateArticles.length > 0) {
+    const backupPath = path.resolve(__dirname, 'backup_repetitive_articles.json');
+    fs.writeFileSync(backupPath, JSON.stringify(templateArticles, null, 2), 'utf8');
+    console.log(`✅ Backed up ${templateArticles.length} articles to scripts/backup_repetitive_articles.json`);
+  }
+
+  // 2. Remove all repetitive template articles from DB
+  const deleteResult = await articlesCol.deleteMany({
+    content: { $regex: 'As the cultural and entertainment landscape advances into 2026' }
+  });
+  console.log(`🧹 Deleted ${deleteResult.deletedCount} repetitive template articles from DB.`);
+
+  // 3. Delete any previous versions of real news to ensure 100% clean state
+  const slugs = REAL_NEWS_ARTICLES.map(a => a.slug);
+  await articlesCol.deleteMany({ slug: { $in: slugs } });
+  console.log('Cleared existing matching articles to refresh with Solo Publisher & Citations.');
+
+  // Also remove any remaining articles with "Super Admin"
+  const superAdminDelete = await articlesCol.deleteMany({ 'author.name': 'Super Admin' });
+  if (superAdminDelete.deletedCount > 0) {
+    console.log(`🧹 Deleted ${superAdminDelete.deletedCount} leftover 'Super Admin' articles.`);
+  }
+
+  // 4. Insert 20 high-quality real news articles
+  const insertDocs = REAL_NEWS_ARTICLES.map(a => ({
+    ...a,
+    createdAt: a.publishedAt,
+    updatedAt: a.publishedAt,
+  }));
+  const insertResult = await articlesCol.insertMany(insertDocs);
+  console.log(`🎉 Successfully inserted ${insertResult.insertedCount} genuine, fact-checked news articles!`);
+
+  // Verify total count
+  const remainingCount = await articlesCol.countDocuments();
+  console.log(`📊 Total clean articles in database now: ${remainingCount}`);
+
+  const distinctAuthors = await articlesCol.distinct('author.name');
+  console.log('Distinct Authors in DB now:', distinctAuthors);
+
+  await mongoose.disconnect();
+  console.log('Disconnected from MongoDB.');
+}
+
+cleanAndSeed().catch(err => {
+  console.error('Error during clean and seed:', err);
+  process.exit(1);
+});

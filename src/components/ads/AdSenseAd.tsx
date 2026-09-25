@@ -92,38 +92,29 @@ export default function AdSenseAd({
     }
   };
 
-  // If AdSense is disabled and not in preview mode, don't take up blank space
-  if (config && !config.adsenseEnabled) {
+  // CRITICAL FOR ADSENSE APPROVAL:
+  // If AdSense is not active with a genuine publisher ID and configured slot,
+  // DO NOT render any placeholder, dashed border, or text. Return null to keep layout 100% clean.
+  if (!isProduction || !actualSlot) {
     return null;
   }
 
   return (
     <div
-      className={`ad-container flex flex-col items-center justify-center overflow-hidden rounded-xl border border-dashed border-neutral-800/80 bg-neutral-950/40 p-2 text-center transition-all ${getContainerStyle()} ${className}`}
+      className={`ad-container flex flex-col items-center justify-center overflow-hidden rounded-xl border border-neutral-800/60 bg-neutral-950/40 p-2 text-center transition-all ${getContainerStyle()} ${className}`}
     >
-      <span className="text-[10px] uppercase tracking-widest text-neutral-600 mb-1 select-none font-medium">
+      <span className="text-[10px] uppercase tracking-widest text-neutral-500 mb-1 select-none font-medium">
         ADVERTISEMENT
       </span>
 
-      {isProduction && actualSlot ? (
-        <ins
-          className="adsbygoogle"
-          style={{ display: 'block', width: '100%' }}
-          data-ad-client={publisherId}
-          data-ad-slot={actualSlot}
-          data-ad-format={format}
-          data-full-width-responsive={responsive ? 'true' : 'false'}
-        />
-      ) : (
-        <div className="flex flex-col items-center justify-center py-4 text-xs text-neutral-500">
-          <p className="font-semibold text-neutral-400 capitalize">
-            Google AdSense [{position}]
-          </p>
-          <p className="text-[11px] text-neutral-600 mt-0.5">
-            {actualSlot ? `Slot ID: ${actualSlot}` : 'Chưa cấu hình Slot ID trong Admin'}
-          </p>
-        </div>
-      )}
+      <ins
+        className="adsbygoogle"
+        style={{ display: 'block', width: '100%' }}
+        data-ad-client={publisherId}
+        data-ad-slot={actualSlot}
+        data-ad-format={format}
+        data-full-width-responsive={responsive ? 'true' : 'false'}
+      />
     </div>
   );
 }

@@ -2,43 +2,16 @@ import React from 'react';
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ShieldCheck, Award, Users, CheckCircle2, FileCheck } from 'lucide-react';
+import { ShieldCheck, Award, User, CheckCircle2, FileCheck, Mail, Globe, Newspaper } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'About Us & Editorial Standards | PULSE Entertainment',
+  title: 'About the Publisher & Editorial Standards | PULSE Entertainment',
   description:
-    'Learn about PULSE Entertainment, our editorial ethics, fact-checking methodology, and meet our team of veteran Hollywood journalists.',
+    'Meet Hieu Truong (Trương Hiếu), Founder and Solo Publisher of PULSE Entertainment. Learn about our fact-checking methodology, editorial ethics, and commitment to cultural journalism.',
   alternates: {
     canonical: 'https://pulse-entertainment.com/about',
   },
 };
-
-const TEAM_MEMBERS = [
-  {
-    name: 'Marcus Vance',
-    role: 'Editor-in-Chief & Senior Film Critic',
-    avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80',
-    bio: 'Marcus has covered the Hollywood film industry for over 12 years. Former contributor to Variety and The Hollywood Reporter. Member of the Los Angeles Film Critics Association.',
-  },
-  {
-    name: 'Elena Rostova',
-    role: 'Executive Television Editor',
-    avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=300&q=80',
-    bio: 'Elena is a Los Angeles-based culture journalist covering prestige TV, streaming economics, and Emmy campaigns. She holds a Master’s degree from Columbia Journalism School.',
-  },
-  {
-    name: 'Chloe Davenport',
-    role: 'Senior Pop Culture & Style Columnist',
-    avatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=300&q=80',
-    bio: 'Chloe reports on celebrity culture, red carpet fashion, and digital trends from New York City. She has reported on the ground from the Met Gala, NYFW, and Cannes.',
-  },
-  {
-    name: 'Jordan Cruz',
-    role: 'Gaming & Interactive Tech Lead',
-    avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80',
-    bio: 'Jordan has spent 9 years reviewing gaming hardware, AAA blockbusters, and esports tournaments across North America.',
-  },
-];
 
 export default function AboutPage() {
   return (
@@ -46,122 +19,141 @@ export default function AboutPage() {
       {/* Header */}
       <div className="text-center max-w-3xl mx-auto mb-16">
         <span className="text-xs font-bold text-brand-500 uppercase tracking-widest">
-          Who We Are
+          Independent Journalism
         </span>
         <h1 className="text-3xl sm:text-5xl font-black font-display text-white tracking-tight mt-2">
-          Independent Cultural Journalism for the Modern Era
+          About PULSE Entertainment
         </h1>
         <p className="mt-4 text-base sm:text-lg text-neutral-300 leading-relaxed">
-          PULSE Entertainment is a premier digital publication providing incisive film reviews, television reporting, celebrity profiles, and gaming analysis to readers across the United States and globally.
+          An independent digital publication founded, curated, and maintained by <strong>Hieu Truong (Trương Hiếu)</strong>, dedicated to delivering incisive film reviews, streaming television analysis, pop culture reporting, and gaming retrospectives.
         </p>
       </div>
+
+      {/* Solo Publisher Profile (E-E-A-T Foundation) */}
+      <section className="mb-16 p-8 sm:p-10 rounded-3xl bg-neutral-900/80 border border-neutral-800">
+        <div className="flex flex-col md:flex-row gap-8 items-start">
+          <div className="relative w-32 h-32 sm:w-40 sm:h-40 rounded-3xl overflow-hidden shrink-0 ring-4 ring-brand-500/40 shadow-2xl mx-auto md:mx-0">
+            <Image
+              src="https://lh3.googleusercontent.com/a/ACg8ocJSndp72J434Ex43jha0qklWhM3b8duc60X4ma-NSz3SQjDzg=s192-c"
+              alt="Hieu Truong (Trương Hiếu) - Founder & Solo Publisher"
+              fill
+              className="object-cover"
+              priority
+            />
+          </div>
+
+          <div className="space-y-4 flex-1">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider bg-brand-600/90 text-white">
+                Founder & Solo Publisher
+              </span>
+              <span className="flex items-center gap-1 text-xs text-neutral-400 font-medium">
+                <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                Verified Independent Journalist
+              </span>
+            </div>
+
+            <h2 className="text-2xl sm:text-3xl font-black font-display text-white">
+              Hieu Truong (Trương Hiếu)
+            </h2>
+
+            <p className="text-sm sm:text-base text-neutral-300 leading-relaxed">
+              Hello, I am Hieu Truong—an avid cultural analyst, film enthusiast, and software engineer who founded PULSE Entertainment to bridge the gap between fast-moving Hollywood news cycles and thoughtful, human-curated cultural criticism.
+            </p>
+
+            <p className="text-xs sm:text-sm text-neutral-400 leading-relaxed">
+              In an internet ecosystem overwhelmed by clickbait and automated regurgitation, I operate PULSE Entertainment as a focused, one-person publication. Every analysis, review, and report on this website is personally researched, fact-checked, and written by me, adhering strictly to journalistic ethics and verified primary sources.
+            </p>
+
+            <div className="pt-2 flex flex-wrap items-center gap-4 text-xs text-neutral-300">
+              <a
+                href="mailto:contact@pulse-entertainment.com"
+                className="flex items-center gap-1.5 text-brand-400 hover:text-brand-300 underline"
+              >
+                <Mail className="w-3.5 h-3.5" />
+                contact@pulse-entertainment.com
+              </a>
+              <span className="text-neutral-600">•</span>
+              <span className="flex items-center gap-1.5 text-neutral-400">
+                <Globe className="w-3.5 h-3.5" />
+                Global / US Edition Coverage
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Editorial Mission */}
       <section className="mb-16 p-8 sm:p-10 rounded-3xl bg-neutral-900/60 border border-neutral-800 space-y-6">
         <div className="flex items-center gap-3 text-brand-500">
           <Award className="w-6 h-6" />
           <h2 className="text-2xl font-bold font-display text-white">
-            Our Editorial Mission
+            Editorial Philosophy & Standards
           </h2>
         </div>
-        <p className="text-neutral-300 leading-relaxed">
-          Founded with a commitment to critical rigor and journalistic transparency, PULSE Entertainment bridges the gap between Hollywood insider knowledge and passionate cultural consumers. We believe entertainment journalism should be thoughtful, fair, and uncompromising in its pursuit of facts.
+        <p className="text-neutral-300 leading-relaxed text-sm sm:text-base">
+          PULSE Entertainment operates under three unwavering pillars designed to serve reader curiosity with integrity and rigor:
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-4 border-t border-neutral-800 text-sm">
           <div>
-            <h4 className="font-bold text-white mb-1">Original Reporting</h4>
-            <p className="text-neutral-400 text-xs">
-              Every analysis, interview, and review is researched, verified, and written by experienced industry journalists.
+            <h4 className="font-bold text-white mb-1">Human Curation</h4>
+            <p className="text-neutral-400 text-xs leading-relaxed">
+              No generic robotic articles. Each story offers distinct analytical perspective, historical context, and critical reflection.
             </p>
           </div>
           <div>
-            <h4 className="font-bold text-white mb-1">Strict Independence</h4>
-            <p className="text-neutral-400 text-xs">
-              Our editorial opinions cannot be bought. Advertising partners and studios have zero influence over our ratings and reviews.
+            <h4 className="font-bold text-white mb-1">100% Fact-Checked</h4>
+            <p className="text-neutral-400 text-xs leading-relaxed">
+              Every casting update, box office figure, and studio statement is cross-referenced with primary trade records and studio releases.
             </p>
           </div>
           <div>
-            <h4 className="font-bold text-white mb-1">E-E-A-T Adherence</h4>
-            <p className="text-neutral-400 text-xs">
-              We uphold Google’s highest standards for Experience, Expertise, Authoritativeness, and Trustworthiness.
+            <h4 className="font-bold text-white mb-1">Zero Commercial Bias</h4>
+            <p className="text-neutral-400 text-xs leading-relaxed">
+              Editorial ratings and critiques are entirely independent. Studios, advertisers, and public relations firms have zero sway over reviews.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Fact-Checking & Corrections Policy */}
+      {/* Fact-Checking & Primary Sources Policy */}
       <section id="editorial-standards" className="mb-16 space-y-6">
         <div className="flex items-center gap-3 text-brand-500">
           <FileCheck className="w-6 h-6" />
           <h2 className="text-2xl font-bold font-display text-white">
-            Fact-Checking & Corrections Policy
+            Fact-Checking Methodology & Source Attribution
           </h2>
         </div>
         <div className="text-sm text-neutral-300 space-y-4 leading-relaxed">
           <p>
-            At PULSE Entertainment, accuracy is our highest priority. Before any story is published:
+            Accuracy is paramount. When reporting on cinema, streaming developments, celebrity culture, music, and gaming:
           </p>
-          <ul className="list-disc pl-6 space-y-2 text-neutral-300">
+          <ul className="list-disc pl-6 space-y-2 text-neutral-300 text-xs sm:text-sm">
             <li>
-              <strong>Primary Source Verification:</strong> All reporting regarding casting, box office figures, and studio developments must be verified through studio representatives, primary documentation, or on-the-record sources.
+              <strong>Primary Source Attribution:</strong> All reports attribute data to authoritative industry publications—including <em>Variety, The Hollywood Reporter, Deadline, Billboard, IGN, Box Office Mojo,</em> and official studio communications.
             </li>
             <li>
-              <strong>Independent Review:</strong> Film and television reviews reflect the genuine critical assessment of our designated critics following verified theatrical screenings or press screeners.
+              <strong>Verified Numbers:</strong> Box office metrics, streaming viewership milestones, and album sales are audited against official RIAA, Comscore, and Nielsen reports.
             </li>
             <li>
-              <strong>Corrections Transparency:</strong> If a factual error occurs, we issue a clear correction notice at the top or bottom of the article detailing the date and nature of the correction. Readers can submit correction tips to{' '}
-              <a href="mailto:corrections@pulse-entertainment.com" className="text-brand-400 underline">
-                corrections@pulse-entertainment.com
-              </a>.
+              <strong>Corrections Policy:</strong> If any factual ambiguity or error is identified, a prompt correction note is appended with the revision timestamp. Readers can submit inquiries directly via our{' '}
+              <Link href="/contact" className="text-brand-400 underline hover:text-white">
+                Contact Page
+              </Link>.
             </li>
           </ul>
         </div>
       </section>
 
-      {/* The Masthead / Team */}
-      <section className="mb-16">
-        <div className="flex items-center gap-3 text-brand-500 mb-8">
-          <Users className="w-6 h-6" />
-          <h2 className="text-2xl font-bold font-display text-white">
-            The Editorial Masthead
-          </h2>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {TEAM_MEMBERS.map((member) => (
-            <div
-              key={member.name}
-              className="p-6 rounded-2xl bg-neutral-900/60 border border-neutral-800 flex gap-5 items-start"
-            >
-              <div className="relative w-20 h-20 rounded-2xl overflow-hidden shrink-0 ring-2 ring-brand-500/40">
-                <Image
-                  src={member.avatar}
-                  alt={member.name}
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <div className="space-y-1">
-                <div className="flex items-center gap-1.5">
-                  <h3 className="text-base font-bold text-white">{member.name}</h3>
-                  <CheckCircle2 className="w-4 h-4 text-brand-400" />
-                </div>
-                <p className="text-xs text-brand-400 font-semibold">{member.role}</p>
-                <p className="text-xs text-neutral-400 pt-1 leading-relaxed">{member.bio}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Office Locations */}
+      {/* Direct Contact Notice */}
       <section className="p-8 rounded-3xl bg-neutral-900/40 border border-neutral-800 text-center">
-        <h3 className="text-lg font-bold text-white mb-2">PULSE Entertainment Newsroom</h3>
-        <p className="text-xs text-neutral-400 max-w-md mx-auto">
-          Editorial Bureaus located in Los Angeles, California and New York City, New York. For press releases and inquiries, please visit our{' '}
-          <Link href="/contact" className="text-brand-400 underline">
-            Contact Page
-          </Link>.
+        <h3 className="text-lg font-bold text-white mb-2">Connect with the Publisher</h3>
+        <p className="text-xs text-neutral-400 max-w-lg mx-auto leading-relaxed">
+          Have an editorial tip, feedback, correction, or press inquiry? Send a note directly through our{' '}
+          <Link href="/contact" className="text-brand-400 underline hover:text-white">
+            Contact Form
+          </Link>{' '}
+          or reach out at <a href="mailto:contact@pulse-entertainment.com" className="text-brand-400 underline">contact@pulse-entertainment.com</a>.
         </p>
       </section>
     </div>

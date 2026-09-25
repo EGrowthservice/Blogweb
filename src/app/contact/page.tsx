@@ -68,19 +68,22 @@ export default function ContactPage() {
 
           <div className="p-6 rounded-2xl bg-neutral-900/60 border border-neutral-800 space-y-4">
             <h3 className="text-base font-bold text-white flex items-center gap-2">
-              <MapPin className="w-5 h-5 text-brand-500" />
-              US Editorial Bureaus
+              <Shield className="w-5 h-5 text-brand-500" />
+              Publisher & Editorial Operations
             </h3>
             <div className="space-y-3 text-xs text-neutral-300">
               <div>
-                <p className="font-semibold text-white">Los Angeles Bureau:</p>
-                <p className="text-neutral-400">9255 Sunset Boulevard, Suite 800</p>
-                <p className="text-neutral-400">West Hollywood, CA 90069</p>
+                <p className="font-semibold text-white">Publisher / Editor-in-Chief:</p>
+                <p className="text-neutral-400">Hieu Truong (Trương Hiếu)</p>
               </div>
               <div>
-                <p className="font-semibold text-white">New York Bureau:</p>
-                <p className="text-neutral-400">575 Broadway, 4th Floor</p>
-                <p className="text-neutral-400">New York, NY 10012</p>
+                <p className="font-semibold text-white">Operating Model:</p>
+                <p className="text-neutral-400">Independent Digital Publication</p>
+                <p className="text-neutral-400">Remote Editorial Desk & Media Research</p>
+              </div>
+              <div>
+                <p className="font-semibold text-white">Correction & Fact-Check Response:</p>
+                <p className="text-neutral-400">Guaranteed review within 24–48 business hours</p>
               </div>
             </div>
           </div>

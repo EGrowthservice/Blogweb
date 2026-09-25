@@ -12,25 +12,27 @@ import GoogleAnalytics from '@/components/analytics/GoogleAnalytics';
 import AdSenseScript from '@/components/ads/AdSenseScript';
 
 const inter = Inter({
-  subsets: ['latin'],
+  subsets: ['latin', 'latin-ext', 'vietnamese'],
   variable: '--font-inter',
   display: 'swap',
 });
 
 const outfit = Outfit({
-  subsets: ['latin'],
+  subsets: ['latin', 'latin-ext'],
   variable: '--font-outfit',
   display: 'swap',
 });
 
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || process.env.NEXTAUTH_URL || 'https://pulse-entertainment.com';
+
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXTAUTH_URL || 'https://pulse-entertainment.com'),
+  metadataBase: new URL(baseUrl),
   title: {
     default: 'PULSE Entertainment | Hollywood News, Movies, TV & Pop Culture',
     template: '%s | PULSE Entertainment',
   },
   description:
-    'Your definitive cultural compass for Hollywood cinema, prestige television, celebrity spotlights, music retrospectives, and next-gen gaming.',
+    'Your definitive cultural compass for Hollywood cinema, prestige television, celebrity spotlights, music retrospectives, and next-gen gaming. Founded and edited by Hieu Truong.',
   keywords: [
     'Hollywood News',
     'Movie Reviews',
@@ -43,8 +45,8 @@ export const metadata: Metadata = {
     'Oscars',
     'Pop Culture',
   ],
-  authors: [{ name: 'PULSE Entertainment Editorial Board' }],
-  creator: 'PULSE Entertainment Media Group',
+  authors: [{ name: 'Hieu Truong (Trương Hiếu)', url: `${baseUrl}/about` }],
+  creator: 'Hieu Truong',
   publisher: 'PULSE Entertainment',
   robots: {
     index: true,
@@ -60,7 +62,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://pulse-entertainment.com',
+    url: baseUrl,
     siteName: 'PULSE Entertainment',
     title: 'PULSE Entertainment | Hollywood News, Movies, TV & Pop Culture',
     description:
@@ -82,18 +84,30 @@ export default function RootLayout({
 }) {
   const adsenseId = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID;
 
-  // Global Website & Organization JSON-LD Schema
+  // Global Website & Solo Publisher JSON-LD Schema
   const structuredData = {
     '@context': 'https://schema.org',
     '@graph': [
       {
+        '@type': 'Person',
+        '@id': `${baseUrl}/#publisher-person`,
+        name: 'Hieu Truong (Trương Hiếu)',
+        jobTitle: 'Founder, Solo Publisher & Editor-in-Chief',
+        url: `${baseUrl}/about`,
+        image: 'https://lh3.googleusercontent.com/a/ACg8ocJSndp72J434Ex43jha0qklWhM3b8duc60X4ma-NSz3SQjDzg=s192-c',
+        description: 'Independent cultural journalist and media analyst founded PULSE Entertainment to deliver fact-checked cinema reviews, streaming television analysis, and gaming retrospectives.',
+      },
+      {
         '@type': 'Organization',
-        '@id': 'https://pulse-entertainment.com/#organization',
+        '@id': `${baseUrl}/#organization`,
         name: 'PULSE Entertainment',
-        url: 'https://pulse-entertainment.com',
+        url: baseUrl,
+        founder: {
+          '@id': `${baseUrl}/#publisher-person`,
+        },
         logo: {
           '@type': 'ImageObject',
-          url: 'https://pulse-entertainment.com/logo.png',
+          url: `${baseUrl}/logo.png`,
         },
         sameAs: [
           'https://twitter.com/pulse_ent',
@@ -102,15 +116,15 @@ export default function RootLayout({
       },
       {
         '@type': 'WebSite',
-        '@id': 'https://pulse-entertainment.com/#website',
-        url: 'https://pulse-entertainment.com',
+        '@id': `${baseUrl}/#website`,
+        url: baseUrl,
         name: 'PULSE Entertainment',
         publisher: {
-          '@id': 'https://pulse-entertainment.com/#organization',
+          '@id': `${baseUrl}/#organization`,
         },
         potentialAction: {
           '@type': 'SearchAction',
-          target: 'https://pulse-entertainment.com/search?q={search_term_string}',
+          target: `${baseUrl}/search?q={search_term_string}`,
           'query-input': 'required name=search_term_string',
         },
       },
