@@ -24,10 +24,13 @@ const outfit = Outfit({
   display: 'swap',
 });
 
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || process.env.NEXTAUTH_URL || 'https://pulse-entertainment.com';
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.pulseetm.click';
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
+  other: {
+    'google-adsense-account': 'ca-pub-3542813933597668',
+  },
   title: {
     default: 'PULSE Entertainment | Hollywood News, Movies, TV & Pop Culture',
     template: '%s | PULSE Entertainment',
@@ -140,6 +143,8 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
+        {/* Google AdSense Account Meta Tag for alternative verification */}
+        <meta name="google-adsense-account" content="ca-pub-3542813933597668" />
         {/* 1. Raw Head Script: Guaranteed detection by Google AdSense automated crawlers in initial HTML */}
         <script
           async
