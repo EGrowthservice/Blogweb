@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Script from 'next/script';
 import { Inter, Outfit } from 'next/font/google';
 import './globals.css';
 import AuthProvider from '@/components/providers/AuthProvider';
@@ -82,7 +83,7 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const adsenseId = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID;
+  const adsenseId = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || 'ca-pub-3542813933597668';
 
   // Global Website & Solo Publisher JSON-LD Schema
   const structuredData = {
@@ -139,16 +140,21 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
-        {/* Google AdSense Verification & Auto Ads Script */}
-        {adsenseId && adsenseId.startsWith('ca-pub-') && adsenseId !== 'ca-pub-0000000000000000' && (
-          <script
-            async
-            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseId}`}
-            crossOrigin="anonymous"
-          />
-        )}
+        {/* 1. Raw Head Script: Guaranteed detection by Google AdSense automated crawlers in initial HTML */}
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3542813933597668"
+          crossOrigin="anonymous"
+        />
       </head>
       <body className="min-h-screen flex flex-col bg-neutral-950 font-sans text-neutral-100">
+        {/* 2. Next.js Managed Script: Ensures proper hydration and runtime script execution */}
+        <Script
+          id="google-adsense-script"
+          strategy="afterInteractive"
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3542813933597668"
+          crossOrigin="anonymous"
+        />
         <GoogleAnalytics />
         <AuthProvider>
           <PublicLayoutWrapper>{children}</PublicLayoutWrapper>
