@@ -139,10 +139,17 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
+        {/* Google AdSense Verification & Auto Ads Script */}
+        {adsenseId && adsenseId.startsWith('ca-pub-') && adsenseId !== 'ca-pub-0000000000000000' && (
+          <script
+            async
+            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseId}`}
+            crossOrigin="anonymous"
+          />
+        )}
       </head>
       <body className="min-h-screen flex flex-col bg-neutral-950 font-sans text-neutral-100">
         <GoogleAnalytics />
-        <AdSenseScript />
         <AuthProvider>
           <PublicLayoutWrapper>{children}</PublicLayoutWrapper>
         </AuthProvider>
