@@ -82,7 +82,7 @@ export default function PopupAdModal() {
             The Golden Age of Comedy Collection
           </h3>
           <p className="text-xs text-gray-600 leading-relaxed mb-4">
-            Relive remastered television gems, uncut outtakes, and Tim Conway's most hilarious moments in stunning digital clarity.
+            Relive remastered television gems, uncut outtakes, and Tim Conway&apos;s most hilarious moments in stunning digital clarity.
           </p>
 
           <div className="flex items-center gap-2">
