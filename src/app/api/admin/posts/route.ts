@@ -5,6 +5,8 @@ import { Article } from '@/models/Article';
 import { Category } from '@/models/Category';
 import { requireAuth, apiSuccess, apiError } from '@/lib/api-guard';
 import { PostCreateSchema } from '@/lib/validations';
+import { revalidatePath } from 'next/cache';
+import { clearArticlesCache } from '@/lib/articles';
 
 export const dynamic = 'force-dynamic';
 
@@ -149,6 +151,11 @@ export async function POST(req: NextRequest) {
       },
       publishedAt: data.status === 'published' ? new Date() : undefined,
     });
+
+    clearArticlesCache();
+    revalidatePath('/');
+    revalidatePath('/all-stories');
+    revalidatePath(`/${categoryDoc.slug}`);
 
     return apiSuccess(article);
   } catch (error: any) {

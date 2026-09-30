@@ -62,11 +62,11 @@ export function clearArticlesCache(): void {
 }
 
 /**
- * Fetch all articles with multi-layer caching:
+ * Fetch all articles with database as single source of truth:
  * 1. Process Memory Cache (sub-millisecond)
  * 2. React Request Cache (dedupes per SSR request)
- * 3. MongoDB Atlas Query
- * 4. Static Fallback Seed Data
+ * 3. MongoDB Atlas Query (real data from database, even if empty)
+ * 4. Fallback to mock data ONLY if database connection is unavailable
  */
 export const getAllArticles = cache(async (): Promise<ArticleData[]> => {
   const cacheKey = 'articles:all';
@@ -78,23 +78,27 @@ export const getAllArticles = cache(async (): Promise<ArticleData[]> => {
   try {
     const conn = await connectToDatabase();
     if (conn) {
+      // MongoDB is connected: Database is the absolute source of truth!
       const articles = await Article.find().sort({ publishedAt: -1 }).lean().exec();
-      if (articles && articles.length > 0) {
-        const formatted = articles.map(formatArticleDoc);
-        setInCache(cacheKey, formatted);
-        // Pre-warm individual slug cache
-        for (const art of formatted) {
-          setInCache(`articles:slug:${art.slug}`, art);
-        }
-        return formatted;
+      const formatted = (articles || []).map(formatArticleDoc);
+      setInCache(cacheKey, formatted);
+      // Pre-warm individual slug cache
+      for (const art of formatted) {
+        setInCache(`articles:slug:${art.slug}`, art);
       }
+      return formatted;
     }
   } catch (error) {
     console.warn('MongoDB query failed, falling back to mock articles:', error);
   }
 
-  setInCache(cacheKey, MOCK_ARTICLES, 15000);
-  return MOCK_ARTICLES;
+  // Only fall back to seed data if database is not reachable at all
+  if (!process.env.MONGODB_URI) {
+    setInCache(cacheKey, MOCK_ARTICLES, 15000);
+    return MOCK_ARTICLES;
+  }
+
+  return [];
 });
 
 export const getFeaturedArticles = cache(async (): Promise<ArticleData[]> => {
@@ -140,15 +144,20 @@ export const getArticleBySlug = cache(async (slug: string): Promise<ArticleData 
         setInCache(cacheKey, formatted);
         return formatted;
       }
+      // If connected to DB and not found, it does NOT exist! Do not return fake mock data.
+      return null;
     }
   } catch (error) {
-    console.warn('MongoDB query failed, using mock data:', error);
+    console.warn('MongoDB query failed:', error);
   }
 
-  const found = MOCK_ARTICLES.find((a) => a.slug === slug);
-  if (found) {
-    setInCache(cacheKey, found);
-    return found;
+  // Only check MOCK_ARTICLES if DB is completely offline
+  if (!process.env.MONGODB_URI) {
+    const found = MOCK_ARTICLES.find((a) => a.slug === slug);
+    if (found) {
+      setInCache(cacheKey, found);
+      return found;
+    }
   }
 
   return null;

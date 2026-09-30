@@ -7,7 +7,7 @@ import ArticleCard from '@/components/ArticleCard';
 import AdBanner from '@/components/AdBanner';
 import { ChevronRight, Newspaper } from 'lucide-react';
 
-export const revalidate = 60;
+export const revalidate = 0; // Dynamic updates
 
 export const metadata: Metadata = {
   title: 'All Stories & Archive | PULSE Entertainment',
@@ -68,15 +68,24 @@ export default async function AllStoriesPage() {
       </div>
 
       {/* Articles Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-        {articles.map((article) => (
-          <ArticleCard
-            key={article.id || article.slug}
-            article={article}
-            showCategoryInUrl={false}
-          />
-        ))}
-      </div>
+      {articles.length === 0 ? (
+        <div className="py-16 text-center bg-gray-50 border border-gray-200 rounded-lg">
+          <h3 className="text-base font-semibold text-gray-900 mb-1">No stories published yet</h3>
+          <p className="text-sm text-gray-500">
+            New stories will appear here once published from the Admin dashboard.
+          </p>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+          {articles.map((article) => (
+            <ArticleCard
+              key={article.id || article.slug}
+              article={article}
+              showCategoryInUrl={false}
+            />
+          ))}
+        </div>
+      )}
 
       {/* Bottom Ad placement */}
       <div className="mt-14 pt-8 border-t border-gray-200">

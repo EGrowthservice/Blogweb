@@ -5,6 +5,8 @@ import { Article } from '@/models/Article';
 import { Category } from '@/models/Category';
 import { requireAuth, apiSuccess, apiError } from '@/lib/api-guard';
 import { PostUpdateSchema } from '@/lib/validations';
+import { revalidatePath } from 'next/cache';
+import { clearArticlesCache } from '@/lib/articles';
 
 export const dynamic = 'force-dynamic';
 
@@ -134,6 +136,13 @@ export async function PUT(req: NextRequest, { params }: RouteParams) {
 
     await existing.save();
 
+    clearArticlesCache();
+    revalidatePath('/');
+    revalidatePath('/all-stories');
+    revalidatePath(`/${existing.category}`);
+    revalidatePath(`/${existing.slug}`);
+    revalidatePath(`/${existing.category}/${existing.slug}`);
+
     return apiSuccess(existing);
   } catch (error: any) {
     console.error('PUT /admin/posts/[id] error:', error);
@@ -157,6 +166,13 @@ export async function DELETE(req: NextRequest, { params }: RouteParams) {
     if (!post) {
       return apiError('Không tìm thấy bài viết để xóa', 404, 'NOT_FOUND');
     }
+
+    clearArticlesCache();
+    revalidatePath('/');
+    revalidatePath('/all-stories');
+    revalidatePath(`/${post.category}`);
+    revalidatePath(`/${post.slug}`);
+    revalidatePath(`/${post.category}/${post.slug}`);
 
     return apiSuccess({ message: 'Đã xóa bài viết thành công', id });
   } catch (error: any) {
