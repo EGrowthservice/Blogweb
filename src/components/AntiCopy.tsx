@@ -32,7 +32,7 @@ export default function AntiCopy() {
     const handleCopy = (e: ClipboardEvent) => {
       if (!isInputOrTextarea(e.target)) {
         e.preventDefault();
-        showToast('Nội dung được bảo vệ - không thể sao chép.');
+        showToast('Content is protected. Copying is disabled.');
       }
     };
 
@@ -50,7 +50,7 @@ export default function AntiCopy() {
       if (isCtrlOrCmd && (e.key === 'c' || e.key === 'C')) {
         if (!isInputOrTextarea(e.target)) {
           e.preventDefault();
-          showToast('Nội dung được bảo vệ - không thể sao chép.');
+          showToast('Content is protected. Copying is disabled.');
         }
       }
 

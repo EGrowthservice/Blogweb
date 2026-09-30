@@ -5,7 +5,7 @@ import { getAllArticles } from '@/lib/articles';
 import { CATEGORIES } from '@/data/mockArticles';
 import ArticleCard from '@/components/ArticleCard';
 import AdBanner from '@/components/AdBanner';
-import { Clock, ArrowRight, Sparkles } from 'lucide-react';
+import { Clock, ArrowRight } from 'lucide-react';
 
 export const revalidate = 60; // ISR
 
@@ -25,34 +25,19 @@ export default async function HomePage() {
 
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
-      {/* Top Banner Ad REMOVED as requested */}
-
-      {/* 1. Featured Articles of 3 Categories Showcase */}
+      {/* 1. 3 Categories Showcase (Without 'Featured Categories' heading or 'View All' links) */}
       <section className="mb-12 pb-10 border-b border-gray-200">
-        <div className="flex items-center gap-2 mb-6">
-          <Sparkles className="w-4 h-4 text-blue-600" />
-          <h2 className="text-xs font-bold uppercase tracking-wider text-gray-500">
-            Featured Categories
-          </h2>
-        </div>
-
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
           {categoryHighlights.map(({ category, article }) => (
             <div key={category.slug} className="flex flex-col">
-              {/* Category Header */}
-              <div className="border-b-2 border-gray-900 pb-2 mb-4 flex items-center justify-between">
+              {/* Category Header (Preserving category name, removed 'View All') */}
+              <div className="border-b-2 border-gray-900 pb-2 mb-4">
                 <h3 className="text-sm sm:text-base font-bold uppercase tracking-wider text-gray-900 flex items-center gap-2">
                   <span className="w-2 h-2 rounded-full bg-blue-600 inline-block" />
                   <Link href={`/${category.slug}`} className="hover:text-blue-600 transition">
                     {category.name}
                   </Link>
                 </h3>
-                <Link
-                  href={`/${category.slug}`}
-                  className="text-xs font-semibold text-gray-400 hover:text-blue-600 transition"
-                >
-                  View All &rarr;
-                </Link>
               </div>
 
               {/* Category Featured Article Card */}
@@ -104,7 +89,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* 2. Main 2-Column Stories Feed (kept intact, with clean direct slugs) */}
+      {/* 2. Main 2-Column Stories Feed */}
       <section className="mb-12">
         <div className="border-b border-gray-200 pb-3 mb-6 flex items-center justify-between">
           <h2 className="text-xl sm:text-2xl font-bold text-gray-900 tracking-tight">
@@ -133,14 +118,14 @@ export default async function HomePage() {
           ))}
         </div>
 
-        {/* 3. More Stories Action Button */}
+        {/* 3. More Stories Action Button (English only) */}
         <div className="mt-10 pt-4 flex justify-center">
           <Link
             href="/all-stories"
             prefetch={true}
             className="inline-flex items-center gap-2.5 px-8 py-3.5 bg-gray-900 hover:bg-blue-600 text-white font-semibold text-sm rounded-lg shadow-sm hover:shadow transition duration-200"
           >
-            <span>Xem thêm bài viết (More Stories)</span>
+            <span>More Stories</span>
             <ArrowRight className="w-4 h-4" />
           </Link>
         </div>

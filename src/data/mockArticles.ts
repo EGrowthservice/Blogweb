@@ -24,9 +24,9 @@ export interface ArticleData {
 }
 
 export const CATEGORIES = [
-  { slug: 'comedy', name: 'Comedy Classics', description: 'Timeless comedy sketches, Tonight Show appearances, and legendary Tim Conway performances.' },
-  { slug: 'vintage-moments', name: 'Vintage Moments', description: 'Unforgettable vintage television milestones, live ad-libs, and timeless variety show humor.' },
-  { slug: 'entertainment', name: 'Entertainment', description: 'Hollywood retrospectives, comedic legends, and classic variety television lore.' },
+  { slug: 'comedy', name: 'Comedy Classics', description: 'Timeless sketches, The Carol Burnett Show masterpieces, and Tim Conway’s greatest physical comedy performances.' },
+  { slug: 'vintage-moments', name: 'Vintage Moments', description: 'Legendary unscripted moments, Tonight Show chaos, and Tim Conway making Johnny Carson weep with laughter.' },
+  { slug: 'entertainment', name: 'Entertainment', description: 'Behind-the-scenes retrospectives, rehearsal antics, and the timeless television legacy of Tim Conway.' },
 ] as const;
 
 export const MOCK_ARTICLES: ArticleData[] = [
@@ -36,7 +36,7 @@ export const MOCK_ARTICLES: ArticleData[] = [
     slug: 'tim-conway-elephant-story-carol-burnett-show',
     excerpt: 'Discover the hilarious Tim Conway Elephant Story, the legendary Carol Burnett Show outtake that left Carol Burnett, Vicki Lawrence and the cast struggling to keep a straight face.',
     content: `
-<h2>The Elephant Story: A Masterpiece of Spontaneous Television</h2>
+<h2>The Elephant Story: Tim Conway's Greatest Unscripted Triumph</h2>
 <p>There are comedy moments that are carefully written, rehearsed, and performed exactly as planned. And then there are moments when something seems to happen almost by accident — when a comedian says one unexpected line, takes a joke just a little too far, or simply looks at another person and suddenly everyone in the room starts laughing.</p>
 
 <p>That was Tim Conway.</p>
@@ -64,7 +64,7 @@ export const MOCK_ARTICLES: ArticleData[] = [
       name: 'Editorial Staff',
       role: 'Staff Writer',
       avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80',
-      bio: 'Archiving classic television comedy and variety sketches.',
+      bio: 'Preserving and archiving the television legacy of Tim Conway.',
     },
     readTimeMinutes: 5,
     isFeatured: true,
@@ -79,7 +79,7 @@ export const MOCK_ARTICLES: ArticleData[] = [
     slug: 'tim-conways-slowest-sheriff-ever-the-bank-robber-couldnt-wait-any-longer',
     excerpt: 'The bank robber was ready for a showdown… then the world\'s slowest sheriff walked in. Watch how Tim Conway and Harvey Korman turned silence and tiny shuffling steps into comedy gold.',
     content: `
-<h2>The Bank Robber Was Ready for a Showdown… Then the Sheriff Walked In</h2>
+<h2>The Bank Robber Was Ready for a Showdown… Then Tim Conway Walked In</h2>
 <p>A tense Western saloon. A dangerous bank robber. Everyone is waiting to see what happens next. Then Tim Conway’s elderly sheriff walks through the swinging doors — and suddenly, the biggest problem facing the outlaw isn’t a gunfight. It’s the sheriff’s excruciatingly slow movements.</p>
 
 <p>In one of the most celebrated sketches from <em>The Carol Burnett Show</em>, Tim Conway introduced his beloved "Old Man" character in the context of a classic frontier standoff. Playing the menacing outlaw waiting to rob the town, Harvey Korman stands with pistols drawn, prepared to deliver a classic Hollywood threat. But Conway’s sheriff takes nearly five minutes just to shuffle from the entrance to the bar counter.</p>
@@ -106,7 +106,7 @@ export const MOCK_ARTICLES: ArticleData[] = [
       name: 'Editorial Staff',
       role: 'Staff Writer',
       avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80',
-      bio: 'Archiving classic television comedy and variety sketches.',
+      bio: 'Preserving and archiving the television legacy of Tim Conway.',
     },
     readTimeMinutes: 4,
     isFeatured: true,
@@ -121,7 +121,7 @@ export const MOCK_ARTICLES: ArticleData[] = [
     slug: 'the-dentist-only-got-a-c-in-tooth-extraction-then-everything-goes-completely-wrong',
     excerpt: 'What happens when your dentist needs a textbook to remember how to extract a tooth? In this legendary television sketch, Tim Conway accidentally anesthetizes his own hand and leg while Harvey Korman loses all composure.',
     content: `
-<h2>What Happens When Your Dentist Needs a Textbook to Pull a Tooth?</h2>
+<h2>What Happens When Tim Conway Needs a Textbook to Pull a Tooth?</h2>
 <p>Imagine sitting comfortably in a dentist’s chair, expecting a routine appointment. You trust the medical professional to know exactly what he is doing. Then he casually admits that he only received a "C" in tooth extraction from dental school. And somehow, that is only the beginning of your nightmare.</p>
 
 <p>First broadcast on March 3, 1969, on <em>The Carol Burnett Show</em>, "The Dentist Sketch" starring Tim Conway and Harvey Korman is widely regarded by television historians and comedic critics as one of the greatest sketches ever written for American television.</p>
@@ -148,7 +148,7 @@ export const MOCK_ARTICLES: ArticleData[] = [
       name: 'Editorial Staff',
       role: 'Staff Writer',
       avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80',
-      bio: 'Archiving classic television comedy and variety sketches.',
+      bio: 'Preserving and archiving the television legacy of Tim Conway.',
     },
     readTimeMinutes: 5,
     isFeatured: true,
@@ -159,68 +159,97 @@ export const MOCK_ARTICLES: ArticleData[] = [
   },
   {
     id: 'art-4',
-    title: 'When Johnny Carson Couldn\'t Stop Laughing: The Classic Copper Clapper Caper',
-    slug: 'when-johnny-carson-couldnt-stop-laughing-copper-clapper-caper',
-    excerpt: 'Jack Webb and Johnny Carson delivered one of the fastest, most tongue-twisting deadpan sketches in late-night history with the iconic Copper Clapper Caper.',
+    title: 'Mr. Tudball and Mrs. Wiggins: Tim Conway and Carol Burnett’s Masterclass in Office Absurdity',
+    slug: 'mr-tudball-mrs-wiggins-tim-conway-carol-burnett-office-comedy',
+    excerpt: 'With an unplaceable foreign accent and zero patience, Tim Conway’s Mr. Tudball paired with Carol Burnett’s clueless secretary Mrs. Wiggins to create one of television\'s finest recurring sketches.',
     content: `
-<h2>The Most Rapid-Fire Tongue Twister in Television History</h2>
-<p>On August 27, 1968, Jack Webb appeared on <em>The Tonight Show Starring Johnny Carson</em> in full character as Joe Friday from <em>Dragnet</em>. What followed was a masterclass in deadpan comedic delivery that left Carson clutching his sides and struggling for breath.</p>
+<h2>The Hilarious Mismatch: Mr. Tudball Meets Mrs. Wiggins</h2>
+<p>Few sketch comedy pairings achieved the comedic perfection of Tim Conway's "Mr. Tudball" and Carol Burnett's "Mrs. Wiggins." Playing a toupee-wearing, frustrated businessman whose accent seemed to change every three sentences, Conway found the ideal comedic foil in Burnett's slow-witted, skirt-shuffling secretary.</p>
 
-<p>The premise was delightfully absurd: Officer Friday and his partner are investigating a string of thefts involving a kleptomaniac who copped clean copper clappers from Claude Cooper’s closet. As Webb delivered line after line of alliterative tongue-twisters at machine-gun speed without batting an eye, Johnny Carson could barely keep from cracking up.</p>
+<p>Every time Tudball attempted to install a simple office intercom system or explain how to answer a telephone, the conversation devolved into pure linguistic chaos. Conway's exasperated facial expressions and physical commitment turned mundane office interactions into timeless comedy gold.</p>
 
-<h2>The Genius of Deadpan Contrast</h2>
-<p>Unlike slapstick comedy that relies on broad physical gestures, the Copper Clapper Caper succeeded because of its relentless seriousness. Webb never broke character for a fraction of a second, treating every ridiculous sentence as a matter of urgent criminal importance.</p>
-
-<p>Every time Carson tried to ask a follow-up question, Webb doubled down with even more complex phonetic gymnastics until both men and the studio audience were laughing uncontrollably.</p>
+<h2>Conway's Accent and Improvised Nuances</h2>
+<p>Conway initially invented the accent as a blend of Romanian, Swedish, and generic European, deliberately confusing his co-stars during live recordings. Burnett often admitted that simply hearing Conway say the words "Mrs. Uh-Wiggins" in that singular cadence was enough to make her break character into helpless laughter.</p>
 
 <blockquote>
-  "It was five minutes of pure perfection. You couldn't write that rhythm if you tried for months — it was two masters of live television operating at their absolute peak."
+  "Tim didn't just write funny dialogue; he inhabited characters from the inside out. With Mr. Tudball, the posture, the toupee, and the walk told the whole story before he even opened his mouth."
 </blockquote>
 `,
-    category: 'vintage-moments',
-    tags: ['Johnny Carson', 'Jack Webb', 'Dragnet', 'Tonight Show', 'Vintage TV'],
-    featuredImage: 'https://images.unsplash.com/photo-1594909122845-11baa439b7bf?auto=format&fit=crop&w=1200&q=80',
-    featuredImageAlt: 'Classic TV Studio Camera and Production',
+    category: 'comedy',
+    tags: ['Tim Conway', 'Carol Burnett', 'Mr Tudball', 'Mrs Wiggins', 'Office Comedy'],
+    featuredImage: 'https://images.unsplash.com/photo-1514306191717-452ec28c7814?auto=format&fit=crop&w=1200&q=80',
+    featuredImageAlt: 'Tim Conway as Mr. Tudball on The Carol Burnett Show',
     author: {
       name: 'Editorial Staff',
       role: 'Staff Writer',
       avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80',
-      bio: 'Archiving classic television comedy and variety sketches.',
+      bio: 'Preserving and archiving the television legacy of Tim Conway.',
+    },
+    readTimeMinutes: 4,
+    isFeatured: false,
+    isTrending: false,
+    viewsCount: 8900,
+    likesCount: 670,
+    publishedAt: '2026-09-26T18:00:00.000Z',
+  },
+  {
+    id: 'art-5',
+    title: 'Tim Conway Meets Johnny Carson: The Unrehearsed Tonight Show Mayhem That Left Carson in Tears',
+    slug: 'tim-conway-meets-johnny-carson-unrehearsed-talk-show-mayhem',
+    excerpt: 'Tim Conway had a secret weapon on live television: he could make Johnny Carson break character and weep with uncontrollable laughter on The Tonight Show without ever rushing a punchline.',
+    content: `
+<h2>The Comedic Chemistry That Stopped Johnny Carson in His Tracks</h2>
+<p>Whenever Tim Conway was booked as a guest on <em>The Tonight Show Starring Johnny Carson</em>, the studio crew and late-night audience knew they were in for an unpredictable evening. Unlike other celebrity guests who rehearsed their anecdotes with talk-show bookers, Conway brought pure, unfiltered spontaneity to the desk.</p>
+
+<p>Conway’s style was deceptive. He would sit down calmly, speak in a soft, understated voice, and slowly reel Johnny into an elaborate, preposterous tale. Carson, famous for having one of the best laughs in show business, would frequently have to rest his forehead on his desk, wipe tears from his eyes, and signal the orchestra for an impromptu break.</p>
+
+<h2>The Mastery of the Deadpan Pause</h2>
+<p>Conway understood that the funniest part of a comedic story is often the awkward pause right before the reveal. He allowed Johnny Carson to react, struggle for words, and break into laughter before delivering the final knockout punchline. It was a masterclass in generosity between two comedic giants.</p>
+
+<blockquote>
+  "Johnny loved Tim because Tim never tried too hard. He was completely comfortable in the quiet moments, and that is what made the laughs explosive."
+</blockquote>
+`,
+    category: 'vintage-moments',
+    tags: ['Tim Conway', 'Johnny Carson', 'The Tonight Show', 'Late Night TV', 'Unscripted Moments'],
+    featuredImage: 'https://images.unsplash.com/photo-1594909122845-11baa439b7bf?auto=format&fit=crop&w=1200&q=80',
+    featuredImageAlt: 'Tim Conway on The Tonight Show with Johnny Carson',
+    author: {
+      name: 'Editorial Staff',
+      role: 'Staff Writer',
+      avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80',
+      bio: 'Preserving and archiving the television legacy of Tim Conway.',
     },
     readTimeMinutes: 4,
     isFeatured: true,
     isTrending: true,
-    viewsCount: 9400,
-    likesCount: 710,
+    viewsCount: 13200,
+    likesCount: 1100,
     publishedAt: '2026-09-26T15:00:00.000Z',
   },
   {
-    id: 'art-5',
-    title: 'Dean Martin and Don Rickles on The Tonight Show: The Roasting That Broke Television Rules',
-    slug: 'dean-martin-and-don-rickles-the-tonight-show-roast',
-    excerpt: 'When Don Rickles surprised Johnny Carson and Dean Martin wandered onto the set with a cigarette, late-night television became completely unscripted chaos.',
+    id: 'art-6',
+    title: 'Tim Conway’s Most Outrageous Tonight Show Stunt: When Johnny Carson Lost Complete Control',
+    slug: 'tim-conway-most-outrageous-tonight-show-stunt-johnny-carson',
+    excerpt: 'From fake commercial cues to hilarious tall tales about his Midwest upbringing, Tim Conway knew exactly how to make Johnny Carson lose complete control on live television.',
     content: `
-<h2>When Hollywood Royalty Took Over Late Night</h2>
-<p>In the 1970s, late-night television was unpredictable in a way that modern productions rarely dare to be. Nowhere was that more evident than the famous night Don Rickles and Dean Martin crashed Johnny Carson's desk unannounced.</p>
+<h2>When Commercial Breaks Became Tim Conway's Playground</h2>
+<p>One of the most famous running dynamics between Tim Conway and Johnny Carson was Conway’s uncanny habit of dragging out a story right until the network commercial cue flashed in the studio. Rather than wrapping up his sentence, Conway would deliberately pause, look directly into the camera, and add one completely surreal detail.</p>
 
-<p>Dean Martin, holding his signature glass, casually strode across the NBC stage, casually kissed Carson, and invited himself to sit down. Moments later, Don Rickles sprang out of the wings, launching into a rapid-fire barrage of insults aimed squarely at Martin, Carson, and bandleader Doc Severinsen.</p>
+<p>Carson would pound the desk in mock frustration as the theme music swelled, knowing Conway had intentionally sabotaged the schedule just to get an authentic laugh. It was this fearless comedic playfulness that made Conway one of Johnny's all-time favorite guests across three decades.</p>
 
-<h2>No Rehearsals, No Script, Pure Chemistry</h2>
-<p>The segment was entirely spontaneous. Neither Carson's writers nor the control booth knew what was about to happen next. What made the moment historic was the genuine warmth beneath the insults. Carson was reduced to helpless laughter, burying his face in his desk as Martin and Rickles volleyed one-liners back and forth.</p>
-
-<blockquote>
-  "Television today is micro-managed down to the millisecond. That night with Dean and Don was pure jazz — three friends having the time of their lives on live TV."
-</blockquote>
+<h2>Decades of Television Camaraderie</h2>
+<p>Conway's appearances on <em>The Tonight Show</em> spanned the 1970s, 1980s, and into the 1990s. Even as television evolved into tighter, more produced soundbites, Conway remained a steadfast champion of authentic, old-school variety humor.</p>
 `,
     category: 'vintage-moments',
-    tags: ['Dean Martin', 'Don Rickles', 'Johnny Carson', 'Late Night TV', 'Classic Roasts'],
+    tags: ['Tim Conway', 'Johnny Carson', 'Vintage TV', 'The Tonight Show', 'Comedy Legend'],
     featuredImage: 'https://images.unsplash.com/photo-1514306191717-452ec28c7814?auto=format&fit=crop&w=1200&q=80',
-    featuredImageAlt: 'Vintage Television Variety Show Atmosphere',
+    featuredImageAlt: 'Classic Television Broadcast Studio',
     author: {
       name: 'Editorial Staff',
       role: 'Staff Writer',
       avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80',
-      bio: 'Archiving classic television comedy and variety sketches.',
+      bio: 'Preserving and archiving the television legacy of Tim Conway.',
     },
     readTimeMinutes: 4,
     isFeatured: false,
@@ -230,34 +259,32 @@ export const MOCK_ARTICLES: ArticleData[] = [
     publishedAt: '2026-09-25T14:00:00.000Z',
   },
   {
-    id: 'art-6',
-    title: 'The Golden Age of Variety Television: Why Sketches from the 70s Still Outshine Modern TV',
-    slug: 'golden-age-of-variety-television-why-70s-sketches-outshine-modern-tv',
-    excerpt: 'How fearless physical comedians, live studio audiences, and spontaneous ad-libs created an era of entertainment that today\'s scripted comedy cannot replicate.',
+    id: 'art-7',
+    title: 'The Comedic Genius of Tim Conway: Why His Unscripted Variety Show Sketches Will Live Forever',
+    slug: 'comedic-genius-tim-conway-unscripted-variety-show-sketches',
+    excerpt: 'How fearless physical comedy, impeccable timing, and spontaneous ad-libs made Tim Conway one of the most beloved comedic icons in the history of American television.',
     content: `
-<h2>The Lost Art of Prime-Time Variety Entertainment</h2>
-<p>During the 1960s and 1970s, the variety show was the crown jewel of American television network programming. Families gathered every week to watch programs like <em>The Carol Burnett Show</em>, <em>The Flip Wilson Show</em>, and <em>Rowan & Martin’s Laugh-In</em>.</p>
+<h2>The Unmatched Artistry of Tim Conway</h2>
+<p>During the golden age of American television variety shows, no performer commanded physical comedy quite like Tim Conway. Whether playing a doddering elderly man shuffling across a room, a bumbling dentist numbing his own limbs, or an eccentric small-business boss, Conway possessed a rare theatrical instinct that transcended traditional comedy writing.</p>
 
-<p>Unlike today's single-camera sitcoms or heavily edited digital sketches, variety comedy was rooted in vaudeville and live theater. Performers had to deliver long, continuous physical comedy routines before a live theater audience without the benefit of second takes or digital touch-ups.</p>
+<p>Unlike modern scripted sitcoms that rely heavily on punchlines delivered by a room of writers, Conway’s humor was visual, kinetic, and profoundly human. He utilized his entire body — a slight twitch of the eyebrow, an accidental stumble, or a prolonged silence — to build moments of tension that exploded into genuine joy.</p>
 
-<h2>The Power of Breaking Character</h2>
-<p>In modern television, an actor breaking character is an outtake relegated to a DVD bonus feature or TikTok reel. In the 1970s variety format, corpsing — when an actor couldn't hold back genuine laughter — was an essential part of the broadcast charm.</p>
-
-<p>Viewers felt like co-conspirators in the prank. When Tim Conway made Harvey Korman laugh until he cried, millions of Americans were sharing the exact same visceral joy in their living rooms.</p>
+<h2>The Legend of the Carol Burnett Stage</h2>
+<p>Joining <em>The Carol Burnett Show</em> as a permanent cast member in 1975 after years of guest appearances, Conway elevated an already legendary ensemble into comedy royalty. His six Emmy Awards and Golden Globe honors stand as a testament to his transformative impact on prime-time entertainment.</p>
 
 <blockquote>
-  "Variety television was electric because the audience knew anything could happen. It was high-wire entertainment performed by absolute virtuosos."
+  "Tim Conway proved that true comedy does not age. It doesn't rely on pop-culture references or cynical satire. It relies on the simple, joyous beauty of making human beings laugh until they cry."
 </blockquote>
 `,
     category: 'entertainment',
-    tags: ['Variety Shows', 'Television History', 'Carol Burnett', '70s Comedy', 'Entertainment Lore'],
+    tags: ['Tim Conway', 'Carol Burnett Show', 'Television History', 'Physical Comedy', 'Comedy Genius'],
     featuredImage: 'https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=1200&q=80',
-    featuredImageAlt: 'Classic Film and Television Production Camera',
+    featuredImageAlt: 'Vintage Cinema and Television Production Camera',
     author: {
       name: 'Editorial Staff',
       role: 'Staff Writer',
       avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80',
-      bio: 'Archiving classic television comedy and variety sketches.',
+      bio: 'Preserving and archiving the television legacy of Tim Conway.',
     },
     readTimeMinutes: 5,
     isFeatured: true,
@@ -267,10 +294,10 @@ export const MOCK_ARTICLES: ArticleData[] = [
     publishedAt: '2026-09-24T12:00:00.000Z',
   },
   {
-    id: 'art-7',
-    title: 'Behind the Curtain: How Tim Conway and Harvey Korman Turned Rehearsals into Pranks',
+    id: 'art-8',
+    title: 'Behind the Curtain: How Tim Conway Turned Every Carol Burnett Rehearsal into a Trap for Harvey Korman',
     slug: 'behind-the-curtain-tim-conway-harvey-korman-rehearsal-pranks',
-    excerpt: 'Tim Conway made it his personal mission to never tell Harvey Korman what he was going to do until the live studio audience was watching.',
+    excerpt: 'Tim Conway made it his personal mission to never tell Harvey Korman what he was going to do until the live studio audience was watching and the cameras were rolling.',
     content: `
 <h2>The Unwritten Rule Between Two Comedic Legends</h2>
 <p>For more than a decade, Tim Conway and Harvey Korman formed one of the most beloved comedic partnerships in show business history. But behind the scenes, their working relationship was governed by a playful game of comedic cat-and-mouse.</p>
@@ -294,7 +321,7 @@ export const MOCK_ARTICLES: ArticleData[] = [
       name: 'Editorial Staff',
       role: 'Staff Writer',
       avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80',
-      bio: 'Archiving classic television comedy and variety sketches.',
+      bio: 'Preserving and archiving the television legacy of Tim Conway.',
     },
     readTimeMinutes: 4,
     isFeatured: false,
