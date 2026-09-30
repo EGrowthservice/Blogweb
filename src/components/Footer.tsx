@@ -1,144 +1,128 @@
 import React from 'react';
 import Link from 'next/link';
-import { ShieldCheck, Mail, Globe, Sparkles } from 'lucide-react';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-neutral-950 text-neutral-400 border-t border-neutral-800/80 pt-14 pb-10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
+    <footer className="bg-gray-50 border-t border-gray-200 text-gray-600 pt-12 pb-8 mt-16">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
           {/* Col 1: Brand Info */}
-          <div className="lg:col-span-2 space-y-4">
-            <Link href="/" className="inline-flex items-center gap-2">
-              <span className="text-2xl font-black font-display tracking-tighter text-white">
-                PULSE
-              </span>
-              <span className="text-[10px] font-semibold tracking-[0.25em] text-brand-500 uppercase">
-                ENTERTAINMENT
+          <div className="space-y-3">
+            <Link href="/" className="inline-flex items-center gap-1.5">
+              <span className="text-xl font-black tracking-tight text-gray-900 font-display">
+                CENTRAL<span className="text-blue-600 font-bold">LIVE</span>
               </span>
             </Link>
-            <p className="text-sm text-neutral-400 leading-relaxed max-w-sm">
-              The definitive cultural compass for Hollywood cinema, prestige television, celebrity spotlights, music retrospectives, and next-gen gaming. Founded and published by Hieu Truong.
+            <p className="text-xs sm:text-sm text-gray-500 leading-relaxed">
+              Your destination for timeless comedy sketches, classic television retrospectives, and iconic Tim Conway moments.
             </p>
-            <div className="flex items-center gap-2 text-xs text-neutral-500 pt-2">
-              <ShieldCheck className="w-4 h-4 text-brand-500" />
-              <span>Independent Cultural Journalism & Fact-Checked Reporting</span>
-            </div>
           </div>
 
-          {/* Col 2: Categories */}
+          {/* Col 2: Explore */}
           <div>
-            <h4 className="text-white font-semibold text-xs uppercase tracking-wider mb-4">
-              Coverage
+            <h4 className="text-gray-900 font-bold text-xs uppercase tracking-wider mb-3">
+              Explore
             </h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="/movies" className="hover:text-brand-400 transition">
-                  Movies & Box Office
+                <Link href="/" className="hover:text-blue-600 transition">
+                  Home
                 </Link>
               </li>
               <li>
-                <Link href="/tv-shows" className="hover:text-brand-400 transition">
-                  TV & Streaming Hits
+                <Link href="/comedy" className="hover:text-blue-600 transition">
+                  Comedy Classics
                 </Link>
               </li>
               <li>
-                <Link href="/celebrities" className="hover:text-brand-400 transition">
-                  Celebrity & Red Carpet
+                <Link href="/vintage-moments" className="hover:text-blue-600 transition">
+                  Vintage Moments
                 </Link>
               </li>
               <li>
-                <Link href="/music" className="hover:text-brand-400 transition">
-                  Music & Soundtracks
-                </Link>
-              </li>
-              <li>
-                <Link href="/gaming" className="hover:text-brand-400 transition">
-                  Gaming & Esports
+                <Link href="/entertainment" className="hover:text-blue-600 transition">
+                  Entertainment
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Col 3: Legal & AdSense Compliance (Crucial for AdSense) */}
+          {/* Col 3: Resources */}
           <div>
-            <h4 className="text-white font-semibold text-xs uppercase tracking-wider mb-4">
-              Legal & Transparency
+            <h4 className="text-gray-900 font-bold text-xs uppercase tracking-wider mb-3">
+              Topics
             </h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="/privacy-policy" className="hover:text-brand-400 transition">
-                  Privacy Policy & CCPA
+                <Link href="/comedy" className="hover:text-blue-600 transition">
+                  Tim Conway Sketches
                 </Link>
               </li>
               <li>
-                <Link href="/terms-of-service" className="hover:text-brand-400 transition">
+                <Link href="/comedy" className="hover:text-blue-600 transition">
+                  The Tonight Show Moments
+                </Link>
+              </li>
+              <li>
+                <Link href="/vintage-moments" className="hover:text-blue-600 transition">
+                  The Carol Burnett Show
+                </Link>
+              </li>
+              <li>
+                <Link href="/about" className="hover:text-blue-600 transition">
+                  About Editorial
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Col 4: Website / Legal */}
+          <div>
+            <h4 className="text-gray-900 font-bold text-xs uppercase tracking-wider mb-3">
+              Website
+            </h4>
+            <ul className="space-y-2 text-sm">
+              <li>
+                <Link href="/terms-of-service" className="hover:text-blue-600 transition">
                   Terms of Service
                 </Link>
               </li>
               <li>
-                <Link href="/disclaimer" className="hover:text-brand-400 transition">
-                  Disclaimer & DMCA
+                <Link href="/privacy-policy" className="hover:text-blue-600 transition">
+                  Privacy Policy
                 </Link>
               </li>
               <li>
-                <Link href="/sitemap.xml" className="hover:text-brand-400 transition">
-                  XML Sitemap
+                <Link href="/contact" className="hover:text-blue-600 transition">
+                  Contact
+                </Link>
+              </li>
+              <li>
+                <Link href="/disclaimer" className="hover:text-blue-600 transition">
+                  Disclaimer
                 </Link>
               </li>
             </ul>
           </div>
-
-          {/* Col 4: Editorial & Contact */}
-          <div>
-            <h4 className="text-white font-semibold text-xs uppercase tracking-wider mb-4">
-              Editorial Desk
-            </h4>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <Link href="/about" className="hover:text-brand-400 transition">
-                  About the Publisher
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="hover:text-brand-400 transition">
-                  Contact Editorial Desk
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact#press" className="hover:text-brand-400 transition">
-                  Press Inquiries
-                </Link>
-              </li>
-              <li>
-                <Link href="/bookmarks" className="hover:text-brand-400 transition">
-                  My Reading List
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        {/* AdSense & CCPA Consumer Notice */}
-        <div className="py-6 border-t border-neutral-900 text-xs text-neutral-500 leading-relaxed space-y-2">
-          <p>
-            <strong>AdSense & Third-Party Disclosure:</strong> PULSE Entertainment participates in digital advertising programs, including Google AdSense. Google and third-party vendors use cookies to serve ads based on a user&apos;s prior visits to this website or other websites. You may opt out of personalized advertising by visiting Google Ads Settings. California residents can exercise their privacy rights under the California Consumer Privacy Act (CCPA) via our{' '}
-            <Link href="/privacy-policy" className="underline hover:text-neutral-300">
-              Privacy Policy
-            </Link>.
-          </p>
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-6 border-t border-neutral-900 flex flex-col sm:flex-row items-center justify-between text-xs text-neutral-500 gap-4">
-          <p>© {currentYear} PULSE Entertainment. Published by Hieu Truong. All rights reserved.</p>
-          <div className="flex items-center gap-6">
-            <span className="flex items-center gap-1">
-              <Globe className="w-3.5 h-3.5" /> English (United States)
-            </span>
-            <span>Independent Digital Publication</span>
+        <div className="pt-6 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500 gap-2">
+          <p>© {currentYear} Central Live. All rights reserved.</p>
+          <div className="flex items-center gap-4">
+            <Link href="/privacy-policy" className="hover:text-gray-800">
+              Privacy
+            </Link>
+            <span>•</span>
+            <Link href="/terms-of-service" className="hover:text-gray-800">
+              Terms
+            </Link>
+            <span>•</span>
+            <Link href="/contact" className="hover:text-gray-800">
+              Contact Us
+            </Link>
           </div>
         </div>
       </div>

@@ -4,81 +4,72 @@
 
 @layer base {
   :root {
-    --background: 11 15 23;
-    --foreground: 243 244 246;
+    --background: 255 255 255;
+    --foreground: 17 24 39;
   }
 
   body {
-    @apply bg-neutral-950 text-neutral-100 antialiased selection:bg-rose-600 selection:text-white;
+    @apply bg-white text-gray-900 antialiased;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
 
-  /* Rich typography for article body */
+  /* Clean typography for article body */
   .article-prose {
-    @apply text-neutral-200 text-lg leading-relaxed max-w-none;
+    @apply text-gray-800 text-lg leading-relaxed max-w-none;
   }
   .article-prose h2 {
-    @apply text-2xl sm:text-3xl font-bold font-display text-white mt-10 mb-4 tracking-tight;
+    @apply text-2xl sm:text-3xl font-bold text-gray-900 mt-10 mb-4 tracking-tight;
   }
   .article-prose h3 {
-    @apply text-xl sm:text-2xl font-semibold font-display text-white mt-8 mb-3 tracking-tight;
+    @apply text-xl sm:text-2xl font-semibold text-gray-900 mt-8 mb-3 tracking-tight;
   }
   .article-prose p {
-    @apply mb-6 text-neutral-300 leading-8 text-[17px];
+    @apply mb-6 text-gray-700 leading-8 text-[17px];
   }
   .article-prose blockquote {
-    @apply border-l-4 border-rose-500 pl-6 py-2 my-8 italic text-xl text-neutral-200 font-serif bg-neutral-900/40 rounded-r-xl;
+    @apply border-l-4 border-gray-400 pl-5 py-3 my-6 italic text-lg text-gray-700 bg-gray-50 rounded-r-md;
   }
   .article-prose ul {
-    @apply list-disc list-inside mb-6 space-y-2 text-neutral-300;
+    @apply list-disc list-inside mb-6 space-y-2 text-gray-700;
   }
   .article-prose ol {
-    @apply list-decimal list-inside mb-6 space-y-2 text-neutral-300;
+    @apply list-decimal list-inside mb-6 space-y-2 text-gray-700;
   }
   .article-prose strong {
-    @apply text-white font-semibold;
+    @apply text-gray-900 font-semibold;
   }
   .article-prose em {
-    @apply text-neutral-200;
+    @apply text-gray-800;
+  }
+  .article-prose iframe {
+    @apply w-full aspect-video rounded-lg my-6 shadow-sm;
+  }
+  .article-prose img {
+    @apply rounded-lg my-6 max-w-full h-auto;
   }
 }
 
-/* Custom scrollbar */
+/* Custom subtle scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #0b0f17;
+  background: #f1f1f1;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1f2937;
-  border-radius: 4px;
+  background: #ccc;
+  border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #374151;
+  background: #999;
 }
 
-/* Hide scrollbar for tabs */
+/* Hide scrollbar for horizontal tabs */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(6px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-fade-in {
-  animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }

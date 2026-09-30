@@ -18,11 +18,9 @@ export default function PublicLayoutWrapper({ children }: { children: React.Reac
 
   return (
     <>
-      <ReadingProgressBar />
       <Header />
       <main className="flex-1">{children}</main>
       <Footer />
-      <MobileBottomNav />
       <BackToTop />
     </>
   );

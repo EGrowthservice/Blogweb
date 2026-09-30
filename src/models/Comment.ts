@@ -3,7 +3,7 @@ import mongoose, { Schema, Document, Model } from 'mongoose';
 export interface IComment extends Document {
   articleSlug: string;
   userName: string;
-  userEmail: string;
+  userEmail?: string;
   userImage?: string;
   content: string;
   createdAt: Date;
@@ -12,8 +12,8 @@ export interface IComment extends Document {
 const CommentSchema = new Schema<IComment>(
   {
     articleSlug: { type: String, required: true, index: true },
-    userName: { type: String, required: true },
-    userEmail: { type: String, required: true },
+    userName: { type: String, required: true, default: 'Guest' },
+    userEmail: { type: String, required: false },
     userImage: { type: String },
     content: { type: String, required: true, maxlength: 1000 },
   },

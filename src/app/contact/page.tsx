@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Mail, MapPin, Send, MessageSquare, CheckCircle, Shield } from 'lucide-react';
+import { Mail, Send, CheckCircle } from 'lucide-react';
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
@@ -13,179 +13,114 @@ export default function ContactPage() {
     setTimeout(() => {
       setLoading(false);
       setSubmitted(true);
-    }, 800);
+    }, 600);
   };
 
   return (
-    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <div className="text-center max-w-2xl mx-auto mb-12">
-        <span className="text-xs font-bold text-brand-500 uppercase tracking-widest">
-          Get in Touch
-        </span>
-        <h1 className="text-3xl sm:text-5xl font-black font-display text-white tracking-tight mt-2">
-          Contact the Newsroom
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <div className="mb-10 pb-6 border-b border-gray-200">
+        <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 tracking-tight">
+          Contact Us
         </h1>
-        <p className="mt-3 text-sm sm:text-base text-neutral-300">
-          Have a news tip, screening invitation, press release, or advertising inquiry? Reach our editorial desk directly.
+        <p className="mt-2 text-base text-gray-600">
+          Have a question, feedback, or comedy archive suggestion? We would love to hear from you.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
-        {/* Contact Information (5 cols) */}
-        <div className="lg:col-span-5 space-y-6">
-          <div className="p-6 rounded-2xl bg-neutral-900/60 border border-neutral-800 space-y-4">
-            <h3 className="text-base font-bold text-white flex items-center gap-2">
-              <Mail className="w-5 h-5 text-brand-500" />
-              Direct Editorial Inquiries
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
+        {/* Contact Info (5 cols) */}
+        <div className="md:col-span-5 space-y-4">
+          <div className="p-6 rounded-lg bg-gray-50 border border-gray-200 space-y-4">
+            <h3 className="text-sm font-bold text-gray-900 flex items-center gap-2">
+              <Mail className="w-4 h-4 text-blue-600" />
+              Editorial Inquiries
             </h3>
-            <div className="space-y-3 text-xs text-neutral-300">
+            <div className="space-y-3 text-xs text-gray-600">
               <div>
-                <p className="font-semibold text-white">General Inquiries:</p>
-                <a href="mailto:contact@pulseetm.click" className="text-brand-400 hover:underline">
-                  contact@pulseetm.click
-                </a>
+                <p className="font-semibold text-gray-900">General Questions:</p>
+                <p className="text-blue-600">contact@centralnewlive.cfx.bz</p>
               </div>
               <div>
-                <p className="font-semibold text-white">News Tips & Leaks:</p>
-                <a href="mailto:tips@pulseetm.click" className="text-brand-400 hover:underline">
-                  tips@pulseetm.click
-                </a>
+                <p className="font-semibold text-gray-900">Archive Suggestions:</p>
+                <p className="text-blue-600">tips@centralnewlive.cfx.bz</p>
               </div>
               <div>
-                <p className="font-semibold text-white">Press & Studio Screeners:</p>
-                <a href="mailto:press@pulseetm.click" className="text-brand-400 hover:underline">
-                  press@pulseetm.click
-                </a>
-              </div>
-              <div>
-                <p className="font-semibold text-white">Advertising & Sponsorships:</p>
-                <a href="mailto:ads@pulseetm.click" className="text-brand-400 hover:underline">
-                  ads@pulseetm.click
-                </a>
+                <p className="font-semibold text-gray-900">Corrections & Feedback:</p>
+                <p className="text-blue-600">corrections@centralnewlive.cfx.bz</p>
               </div>
             </div>
           </div>
 
-          <div className="p-6 rounded-2xl bg-neutral-900/60 border border-neutral-800 space-y-4">
-            <h3 className="text-base font-bold text-white flex items-center gap-2">
-              <Shield className="w-5 h-5 text-brand-500" />
-              Publisher & Editorial Operations
-            </h3>
-            <div className="space-y-3 text-xs text-neutral-300">
-              <div>
-                <p className="font-semibold text-white">Publisher / Editor-in-Chief:</p>
-                <p className="text-neutral-400">Hieu Truong (Trương Hiếu)</p>
-              </div>
-              <div>
-                <p className="font-semibold text-white">Operating Model:</p>
-                <p className="text-neutral-400">Independent Digital Publication</p>
-                <p className="text-neutral-400">Remote Editorial Desk & Media Research</p>
-              </div>
-              <div>
-                <p className="font-semibold text-white">Correction & Fact-Check Response:</p>
-                <p className="text-neutral-400">Guaranteed review within 24–48 business hours</p>
-              </div>
-            </div>
+          <div className="p-4 rounded-lg bg-gray-50 border border-gray-200 text-xs text-gray-500 leading-relaxed">
+            Our editorial desk responds to legitimate reader inquiries and suggestions within 24 to 48 business hours.
           </div>
         </div>
 
         {/* Contact Form (7 cols) */}
-        <div className="lg:col-span-7">
-          <div className="p-8 rounded-3xl bg-neutral-900 border border-neutral-800">
+        <div className="md:col-span-7">
+          <div className="p-6 rounded-lg bg-white border border-gray-200 shadow-sm">
             {submitted ? (
-              <div className="py-12 text-center space-y-4">
-                <div className="w-14 h-14 rounded-full bg-emerald-500/10 text-emerald-400 flex items-center justify-center mx-auto">
-                  <CheckCircle className="w-8 h-8" />
-                </div>
-                <h3 className="text-xl font-bold text-white">Message Dispatched</h3>
-                <p className="text-xs text-neutral-300 max-w-sm mx-auto leading-relaxed">
-                  Thank you for reaching out. A member of our editorial staff will review your message and respond within 24–48 business hours.
+              <div className="text-center py-8 space-y-3">
+                <CheckCircle className="w-12 h-12 text-emerald-500 mx-auto" />
+                <h3 className="text-lg font-bold text-gray-900">Message Received</h3>
+                <p className="text-xs text-gray-600 max-w-sm mx-auto">
+                  Thank you for reaching out. We have received your inquiry and our editorial team will review it promptly.
                 </p>
                 <button
                   onClick={() => setSubmitted(false)}
-                  className="mt-4 px-5 py-2.5 bg-neutral-800 hover:bg-neutral-700 text-white text-xs font-semibold rounded-xl transition"
+                  className="mt-4 px-4 py-1.5 text-xs text-blue-600 border border-blue-200 rounded-md hover:bg-blue-50"
                 >
-                  Send Another Message
+                  Send another message
                 </button>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
-                <h3 className="text-xl font-bold font-display text-white mb-2">
-                  Send a Message to Our Editors
-                </h3>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-xs font-medium text-neutral-300 mb-1">
-                      Full Name *
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      placeholder="Jane Doe"
-                      className="w-full bg-neutral-950 border border-neutral-700 rounded-xl px-4 py-2.5 text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-brand-500"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-medium text-neutral-300 mb-1">
-                      Email Address *
-                    </label>
-                    <input
-                      type="email"
-                      required
-                      placeholder="jane@example.com"
-                      className="w-full bg-neutral-950 border border-neutral-700 rounded-xl px-4 py-2.5 text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-brand-500"
-                    />
-                  </div>
-                </div>
-
                 <div>
-                  <label className="block text-xs font-medium text-neutral-300 mb-1">
-                    Department / Topic *
-                  </label>
-                  <select
-                    className="w-full bg-neutral-950 border border-neutral-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-brand-500"
-                  >
-                    <option>Editorial Tip / Breaking News</option>
-                    <option>Film & Television Review Request</option>
-                    <option>Fact-Checking / Correction</option>
-                    <option>Press Screener / Screening Invitation</option>
-                    <option>Advertising / Sponsorship</option>
-                    <option>General Feedback</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-medium text-neutral-300 mb-1">
-                    Subject *
+                  <label htmlFor="name" className="block text-xs font-semibold text-gray-700 mb-1">
+                    Your Name
                   </label>
                   <input
                     type="text"
+                    id="name"
                     required
-                    placeholder="Brief headline or topic..."
-                    className="w-full bg-neutral-950 border border-neutral-700 rounded-xl px-4 py-2.5 text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-brand-500"
+                    placeholder="Enter your name"
+                    className="w-full px-3 py-2 text-sm bg-white border border-gray-300 rounded-md text-gray-900 focus:outline-none focus:border-blue-500"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-medium text-neutral-300 mb-1">
-                    Message Details *
+                  <label htmlFor="email" className="block text-xs font-semibold text-gray-700 mb-1">
+                    Email Address
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    required
+                    placeholder="your.email@example.com"
+                    className="w-full px-3 py-2 text-sm bg-white border border-gray-300 rounded-md text-gray-900 focus:outline-none focus:border-blue-500"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="message" className="block text-xs font-semibold text-gray-700 mb-1">
+                    Message
                   </label>
                   <textarea
-                    rows={5}
+                    id="message"
                     required
-                    placeholder="Provide full context, embargo dates, or details..."
-                    className="w-full bg-neutral-950 border border-neutral-700 rounded-xl p-3.5 text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-brand-500 resize-none"
+                    rows={4}
+                    placeholder="How can we help you?"
+                    className="w-full px-3 py-2 text-sm bg-white border border-gray-300 rounded-md text-gray-900 focus:outline-none focus:border-blue-500 resize-y"
                   />
                 </div>
 
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full inline-flex items-center justify-center gap-2 py-3 bg-brand-600 hover:bg-brand-500 text-white text-sm font-semibold rounded-xl shadow-lg transition"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-gray-900 hover:bg-gray-800 disabled:opacity-50 text-white text-xs font-semibold rounded-md shadow-sm transition"
                 >
-                  <Send className="w-4 h-4" />
-                  <span>{loading ? 'Transmitting...' : 'Send Message'}</span>
+                  <Send className="w-3.5 h-3.5" />
+                  <span>{loading ? 'Sending...' : 'Send Message'}</span>
                 </button>
               </form>
             )}

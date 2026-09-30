@@ -101,9 +101,9 @@ export default function AdSenseAd({
 
   return (
     <div
-      className={`ad-container flex flex-col items-center justify-center overflow-hidden rounded-xl border border-neutral-800/60 bg-neutral-950/40 p-2 text-center transition-all ${getContainerStyle()} ${className}`}
+      className={`ad-container flex flex-col items-center justify-center overflow-hidden rounded-md border border-gray-200 bg-gray-50 p-2 text-center transition-all ${getContainerStyle()} ${className}`}
     >
-      <span className="text-[10px] uppercase tracking-widest text-neutral-500 mb-1 select-none font-medium">
+      <span className="text-[10px] uppercase tracking-widest text-gray-400 mb-1 select-none font-medium">
         ADVERTISEMENT
       </span>
 

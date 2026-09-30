@@ -3,11 +3,10 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { CATEGORIES } from '@/data/mockArticles';
-import { getArticlesByCategory, getTrendingArticles } from '@/lib/articles';
+import { getArticlesByCategory, getAllArticles } from '@/lib/articles';
 import ArticleCard from '@/components/ArticleCard';
-import CategoryArticleList from '@/components/CategoryArticleList';
 import AdBanner from '@/components/AdBanner';
-import { ChevronRight, Flame } from 'lucide-react';
+import { ChevronRight } from 'lucide-react';
 
 interface CategoryPageProps {
   params: {
@@ -21,14 +20,14 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
     return { title: 'Category Not Found' };
   }
 
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.pulseetm.click';
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://centralnewlive.cfx.bz';
   const categoryUrl = `${baseUrl}/${cat.slug}`;
 
   return {
-    title: `${cat.name} News & Reviews | PULSE Entertainment`,
+    title: `${cat.name} | Central Live`,
     description: cat.description,
     openGraph: {
-      title: `${cat.name} | PULSE Entertainment`,
+      title: `${cat.name} | Central Live`,
       description: cat.description,
       url: categoryUrl,
     },
@@ -44,58 +43,30 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
     notFound();
   }
 
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.pulseetm.click';
-  const categoryUrl = `${baseUrl}/${cat.slug}`;
-
-  const [articles, trending] = await Promise.all([
+  const [articles, allArticles] = await Promise.all([
     getArticlesByCategory(params.category),
-    getTrendingArticles(),
+    getAllArticles(),
   ]);
 
-  const breadcrumbSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      {
-        '@type': 'ListItem',
-        position: 1,
-        name: 'Home',
-        item: baseUrl,
-      },
-      {
-        '@type': 'ListItem',
-        position: 2,
-        name: cat.name,
-        item: categoryUrl,
-      },
-    ],
-  };
+  const recommended = allArticles.filter((a) => a.category !== params.category);
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      {/* Category Breadcrumb Schema */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-      />
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
       {/* Breadcrumbs */}
-      <nav className="flex items-center gap-2 text-xs text-neutral-400 mb-6">
-        <Link href="/" className="hover:text-white transition">
+      <nav className="flex items-center gap-2 text-xs text-gray-400 mb-6">
+        <Link href="/" className="hover:text-gray-700 transition">
           Home
         </Link>
-        <ChevronRight className="w-3.5 h-3.5 text-neutral-600" />
-        <span className="text-white font-medium capitalize">{cat.name}</span>
+        <ChevronRight className="w-3.5 h-3.5 text-gray-400" />
+        <span className="text-gray-900 font-medium">{cat.name}</span>
       </nav>
 
       {/* Category Header */}
-      <div className="mb-10 pb-6 border-b border-neutral-800">
-        <span className="text-xs font-bold text-brand-500 uppercase tracking-widest">
-          Category Hub
-        </span>
-        <h1 className="text-3xl sm:text-5xl font-black font-display text-white tracking-tight mt-1">
+      <div className="mb-8 pb-4 border-b border-gray-200">
+        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight">
           {cat.name}
         </h1>
-        <p className="mt-3 text-base text-neutral-400 max-w-2xl leading-relaxed">
+        <p className="mt-2 text-sm text-gray-600 max-w-2xl leading-relaxed">
           {cat.description}
         </p>
       </div>
@@ -103,41 +74,40 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         {/* Articles List (8 cols) */}
         <div className="lg:col-span-8">
-          <CategoryArticleList articles={articles} categoryName={cat.name} />
+          {articles.length === 0 ? (
+            <div className="py-12 text-center text-gray-500 bg-gray-50 rounded-lg border border-gray-200">
+              No stories found in this category yet.
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              {articles.map((art) => (
+                <ArticleCard key={art.id || art.slug} article={art} />
+              ))}
+            </div>
+          )}
         </div>
 
         {/* Sidebar (4 cols) */}
-        <div className="lg:col-span-4 space-y-8">
-          {/* Sticky Ad Banner */}
-          <AdBanner variant="sidebar" slot="3847291056" />
-
-          {/* Trending Box */}
-          <div className="rounded-2xl bg-neutral-900/80 border border-neutral-800 p-6">
-            <h3 className="flex items-center gap-2 text-base font-bold font-display text-white mb-4 pb-3 border-b border-neutral-800">
-              <Flame className="w-4 h-4 text-brand-500" />
-              Most Read Today
+        <aside className="lg:col-span-4 space-y-6">
+          <div className="bg-gray-50 border border-gray-200 rounded-lg p-5">
+            <h3 className="text-sm font-bold text-gray-900 pb-3 mb-4 border-b border-gray-200">
+              Explore More
             </h3>
-            <div className="space-y-4">
-              {trending.slice(0, 4).map((art, idx) => (
-                <div key={art.id} className="group flex items-start gap-3">
-                  <span className="text-xl font-bold font-display text-neutral-600 group-hover:text-brand-500 transition">
-                    #{idx + 1}
-                  </span>
-                  <div className="flex-1">
-                    <h4 className="text-xs font-semibold text-white group-hover:text-brand-300 transition line-clamp-2 leading-snug">
-                      <Link href={`/${art.category}/${art.slug}`}>
-                        {art.title}
-                      </Link>
-                    </h4>
-                    <span className="text-[10px] text-neutral-500 mt-1 block">
-                      {art.readTimeMinutes} min read
-                    </span>
-                  </div>
-                </div>
+            <div className="space-y-3">
+              {CATEGORIES.map((c) => (
+                <Link
+                  key={c.slug}
+                  href={`/${c.slug}`}
+                  className="block text-sm text-gray-700 hover:text-blue-600 py-1 transition font-medium"
+                >
+                  {c.name}
+                </Link>
               ))}
             </div>
           </div>
-        </div>
+
+          <AdBanner variant="sidebar" slot="3847291056" />
+        </aside>
       </div>
     </div>
   );

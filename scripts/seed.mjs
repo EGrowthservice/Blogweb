@@ -6,19 +6,21 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Read .env.local manually without external dotenv dependency
-const envPath = path.resolve(__dirname, '../.env.local');
-if (fs.existsSync(envPath)) {
-  const envContent = fs.readFileSync(envPath, 'utf8');
-  for (const line of envContent.split('\n')) {
-    const trimmed = line.trim();
-    if (trimmed && !trimmed.startsWith('#')) {
-      const idx = trimmed.indexOf('=');
-      if (idx !== -1) {
-        const key = trimmed.substring(0, idx).trim();
-        const value = trimmed.substring(idx + 1).trim();
-        if (!process.env[key]) {
-          process.env[key] = value;
+// Read .env and .env.local manually without external dotenv dependency
+for (const envFile of ['.env', '.env.local']) {
+  const envPath = path.resolve(__dirname, `../${envFile}`);
+  if (fs.existsSync(envPath)) {
+    const envContent = fs.readFileSync(envPath, 'utf8');
+    for (const line of envContent.split('\n')) {
+      const trimmed = line.trim();
+      if (trimmed && !trimmed.startsWith('#')) {
+        const idx = trimmed.indexOf('=');
+        if (idx !== -1) {
+          const key = trimmed.substring(0, idx).trim();
+          const value = trimmed.substring(idx + 1).trim();
+          if (!process.env[key]) {
+            process.env[key] = value;
+          }
         }
       }
     }

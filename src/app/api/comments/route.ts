@@ -39,19 +39,17 @@ export async function GET(req: NextRequest) {
 }
 
 export async function POST(req: NextRequest) {
-  const session = await getServerSession(authOptions);
-  if (!session?.user?.email) {
-    return NextResponse.json(
-      { error: 'Please sign in with Google to join the conversation.' },
-      { status: 401 }
-    );
-  }
-
   try {
-    const { articleSlug, content } = await req.json();
+    const session = await getServerSession(authOptions).catch(() => null);
+    const { articleSlug, content, userName } = await req.json();
+
     if (!articleSlug || !content || content.trim().length === 0) {
       return NextResponse.json({ error: 'Content is required' }, { status: 400 });
     }
+
+    const commenterName = session?.user?.name || (userName && userName.trim()) || 'Guest';
+    const commenterEmail = session?.user?.email || 'guest@visitor.local';
+    const commenterImage = session?.user?.image || undefined;
 
     const conn = await connectToDatabase();
     let newComment;
@@ -59,18 +57,18 @@ export async function POST(req: NextRequest) {
     if (conn) {
       newComment = await Comment.create({
         articleSlug,
-        userName: session.user.name || 'Entertainment Enthusiast',
-        userEmail: session.user.email,
-        userImage: session.user.image,
+        userName: commenterName,
+        userEmail: commenterEmail,
+        userImage: commenterImage,
         content: content.trim(),
       });
     } else {
       newComment = {
         _id: `c-${Date.now()}`,
         articleSlug,
-        userName: session.user.name || 'Entertainment Enthusiast',
-        userEmail: session.user.email,
-        userImage: session.user.image,
+        userName: commenterName,
+        userEmail: commenterEmail,
+        userImage: commenterImage,
         content: content.trim(),
         createdAt: new Date().toISOString(),
       };

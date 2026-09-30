@@ -2,13 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Clock } from 'lucide-react';
-import dynamic from 'next/dynamic';
 import { ArticleData } from '@/data/mockArticles';
-
-const BookmarkButton = dynamic(() => import('./BookmarkButton'), {
-  ssr: false,
-  loading: () => <span className="inline-block w-8 h-8 rounded-full bg-neutral-800/40" />,
-});
 
 interface ArticleCardProps {
   article: ArticleData;
@@ -16,147 +10,102 @@ interface ArticleCardProps {
 }
 
 export default function ArticleCard({ article, layout = 'standard' }: ArticleCardProps) {
-  const categoryLabels: Record<string, string> = {
-    'movies': 'Movies',
-    'tv-shows': 'TV & Streaming',
-    'celebrities': 'Celebrities',
-    'music': 'Music',
-    'gaming': 'Gaming',
-  };
-
   const formattedDate = new Date(article.publishedAt).toLocaleDateString('en-US', {
-    month: 'short',
+    month: 'long',
     day: 'numeric',
     year: 'numeric',
   });
 
-  if (layout === 'horizontal') {
+  const articleUrl = `/${article.category}/${article.slug}`;
+
+  if (layout === 'compact') {
     return (
-      <article className="group flex flex-col sm:flex-row gap-5 p-4 rounded-2xl bg-neutral-900/60 border border-neutral-800/80 hover:border-neutral-700 transition">
-        <div className="relative w-full sm:w-60 h-44 shrink-0 rounded-xl overflow-hidden bg-neutral-950">
+      <article className="group flex gap-3 items-center py-2.5 border-b border-gray-100 last:border-b-0">
+        <div className="relative w-20 h-20 shrink-0 rounded-md overflow-hidden bg-gray-100">
           <Image
             src={article.featuredImage}
-            alt={article.featuredImageAlt}
+            alt={article.featuredImageAlt || article.title}
             fill
-            sizes="(max-width: 640px) 100vw, 240px"
-            className="object-cover group-hover:scale-105 transition duration-500"
+            sizes="80px"
+            className="object-cover group-hover:scale-105 transition duration-300"
           />
-          <span className="absolute top-2.5 left-2.5 px-2.5 py-1 rounded-md text-[11px] font-bold uppercase tracking-wider bg-neutral-900/90 text-brand-400 backdrop-blur-md">
-            {categoryLabels[article.category] || article.category}
-          </span>
         </div>
-
-        <div className="flex flex-col justify-between flex-1">
-          <div>
-            <div className="flex items-center gap-3 text-xs text-neutral-400 mb-2">
-              <span className="flex items-center gap-1">
-                <Clock className="w-3.5 h-3.5 text-neutral-500" />
-                {article.readTimeMinutes} min read
-              </span>
-              <span>•</span>
-              <span>{formattedDate}</span>
-            </div>
-
-            <h3 className="text-lg sm:text-xl font-bold font-display text-white group-hover:text-brand-400 transition leading-snug line-clamp-2">
-              <Link href={`/${article.category}/${article.slug}`}>
-                {article.title}
-              </Link>
-            </h3>
-
-            <p className="mt-2 text-sm text-neutral-400 line-clamp-2 leading-relaxed">
-              {article.excerpt}
-            </p>
-          </div>
-
-          <div className="flex items-center justify-between mt-4 pt-3 border-t border-neutral-800/60">
-            <div className="flex items-center gap-2">
-              <div className="relative w-6 h-6 rounded-full overflow-hidden">
-                <Image
-                  src={article.author.avatar}
-                  alt={article.author.name}
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <span className="text-xs text-neutral-300 font-medium">
-                {article.author.name}
-              </span>
-            </div>
-
-            <BookmarkButton
-              articleSlug={article.slug}
-              articleTitle={article.title}
-            />
+        <div className="flex-1 min-w-0">
+          <h4 className="text-sm font-semibold text-gray-900 group-hover:text-blue-600 transition line-clamp-2 leading-snug">
+            <Link href={articleUrl}>{article.title}</Link>
+          </h4>
+          <div className="flex items-center gap-1 text-[11px] text-gray-500 mt-1">
+            <Clock className="w-3 h-3 text-gray-400" />
+            <span>Posted {formattedDate}</span>
           </div>
         </div>
       </article>
     );
   }
 
-  // Standard vertical card
-  return (
-    <article className="group flex flex-col rounded-2xl bg-neutral-900/60 border border-neutral-800/80 hover:border-neutral-700 overflow-hidden transition duration-200">
-      <div className="relative w-full h-48 sm:h-52 bg-neutral-950 overflow-hidden">
-        <Image
-          src={article.featuredImage}
-          alt={article.featuredImageAlt}
-          fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          className="object-cover group-hover:scale-105 transition duration-500"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/80 via-transparent to-transparent opacity-60" />
-        <span className="absolute top-3 left-3 px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wider bg-neutral-900/90 text-brand-400 backdrop-blur-md">
-          {categoryLabels[article.category] || article.category}
-        </span>
-        <div className="absolute top-2.5 right-2.5">
-          <BookmarkButton
-            articleSlug={article.slug}
-            articleTitle={article.title}
-            className="bg-neutral-900/80 backdrop-blur-md hover:bg-neutral-800"
-          />
+  if (layout === 'horizontal') {
+    return (
+      <article className="group flex flex-col sm:flex-row gap-5 p-4 rounded-lg bg-white border border-gray-200 hover:shadow-sm transition">
+        <div className="relative w-full sm:w-64 h-48 sm:h-auto shrink-0 rounded-md overflow-hidden bg-gray-100">
+          <Link href={articleUrl}>
+            <Image
+              src={article.featuredImage}
+              alt={article.featuredImageAlt || article.title}
+              fill
+              sizes="(max-width: 640px) 100vw, 256px"
+              className="object-cover group-hover:scale-105 transition duration-300"
+            />
+          </Link>
         </div>
+
+        <div className="flex flex-col justify-between flex-1 py-1">
+          <div>
+            <h3 className="text-lg sm:text-xl font-bold text-gray-900 group-hover:text-blue-600 transition leading-snug">
+              <Link href={articleUrl}>{article.title}</Link>
+            </h3>
+
+            <div className="flex items-center gap-1 text-xs text-gray-500 mt-2 mb-2">
+              <Clock className="w-3.5 h-3.5 text-gray-400" />
+              <span>Posted {formattedDate}</span>
+            </div>
+
+            <p className="text-sm text-gray-600 line-clamp-3 leading-relaxed">
+              {article.excerpt}
+            </p>
+          </div>
+        </div>
+      </article>
+    );
+  }
+
+  // Standard vertical card matching reference site: module-list-new__item module-card
+  return (
+    <article className="group flex flex-col bg-white rounded-lg overflow-hidden border border-gray-200 hover:shadow-md transition duration-200">
+      <div className="relative w-full aspect-[16/10] bg-gray-100 overflow-hidden">
+        <Link href={articleUrl} tabIndex={-1}>
+          <Image
+            src={article.featuredImage}
+            alt={article.featuredImageAlt || article.title}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            className="object-cover group-hover:scale-105 transition duration-300"
+          />
+        </Link>
       </div>
 
-      <div className="flex flex-col flex-1 p-5 justify-between">
-        <div>
-          <div className="flex items-center gap-2 text-[11px] text-neutral-400 mb-2.5">
-            <span className="flex items-center gap-1">
-              <Clock className="w-3 h-3 text-neutral-500" />
-              {article.readTimeMinutes} min read
-            </span>
-            <span>•</span>
-            <span>{formattedDate}</span>
-          </div>
+      <div className="p-4 sm:p-5 flex flex-col flex-1">
+        <h3 className="text-lg sm:text-xl font-bold text-gray-900 group-hover:text-blue-600 transition leading-snug line-clamp-2">
+          <Link href={articleUrl}>{article.title}</Link>
+        </h3>
 
-          <h3 className="text-lg font-bold font-display text-white group-hover:text-brand-400 transition leading-snug line-clamp-2">
-            <Link href={`/${article.category}/${article.slug}`}>
-              {article.title}
-            </Link>
-          </h3>
-
-          <p className="mt-2 text-sm text-neutral-400 line-clamp-2 leading-relaxed">
-            {article.excerpt}
-          </p>
+        <div className="flex items-center gap-1.5 text-xs text-gray-500 mt-2 mb-3">
+          <Clock className="w-3.5 h-3.5 text-gray-400" />
+          <span>Posted {formattedDate}</span>
         </div>
 
-        <div className="flex items-center gap-2.5 mt-5 pt-3.5 border-t border-neutral-800/60">
-          <div className="relative w-6 h-6 rounded-full overflow-hidden ring-1 ring-neutral-700">
-            <Image
-              src={article.author.avatar}
-              alt={article.author.name}
-              fill
-              className="object-cover"
-            />
-          </div>
-          <div className="flex flex-col">
-            <span className="text-xs text-neutral-200 font-medium">
-              {article.author.name}
-            </span>
-            <span className="text-[10px] text-neutral-500">
-              {article.author.role.split('&')[0]}
-            </span>
-          </div>
-        </div>
+        <p className="text-sm text-gray-600 line-clamp-3 leading-relaxed">
+          {article.excerpt}
+        </p>
       </div>
     </article>
   );

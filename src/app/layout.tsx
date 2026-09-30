@@ -35,26 +35,21 @@ export const metadata: Metadata = {
     canonical: './',
   },
   title: {
-    default: 'PULSE Entertainment | Hollywood News, Movies, TV & Pop Culture',
-    template: '%s | PULSE Entertainment',
+    default: 'Central Live | Comedy Classics & Tim Conway TV Moments',
+    template: '%s | Central Live',
   },
   description:
-    'Your definitive cultural compass for Hollywood cinema, prestige television, celebrity spotlights, music retrospectives, and next-gen gaming. Founded and edited by Hieu Truong.',
+    'Explore timeless comedy sketches, legendary Tonight Show moments, and Tim Conway television classics.',
   keywords: [
-    'Hollywood News',
-    'Movie Reviews',
-    'TV Shows',
-    'Streaming',
-    'Celebrity Fashion',
-    'Met Gala',
-    'Music News',
-    'Gaming Reviews',
-    'Oscars',
-    'Pop Culture',
+    'Comedy Classics',
+    'Tim Conway',
+    'The Carol Burnett Show',
+    'Johnny Carson',
+    'Tonight Show',
+    'Vintage Television',
+    'Harvey Korman',
+    'Comedy Sketches',
   ],
-  authors: [{ name: 'Hieu Truong (Trương Hiếu)', url: `${baseUrl}/about` }],
-  creator: 'Hieu Truong',
-  publisher: 'PULSE Entertainment',
   robots: {
     index: true,
     follow: true,
@@ -70,17 +65,16 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: baseUrl,
-    siteName: 'PULSE Entertainment',
-    title: 'PULSE Entertainment | Hollywood News, Movies, TV & Pop Culture',
+    siteName: 'Central Live',
+    title: 'Central Live | Comedy Classics & Tim Conway TV Moments',
     description:
-      'The definitive source for Hollywood cinema, prestige television, celebrity culture, music, and gaming reviews.',
+      'Explore timeless comedy sketches, legendary Tonight Show moments, and Tim Conway television classics.',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'PULSE Entertainment | Hollywood News, Movies, TV & Pop Culture',
+    title: 'Central Live | Comedy Classics & Tim Conway TV Moments',
     description:
-      'The definitive source for Hollywood cinema, prestige television, celebrity culture, music, and gaming reviews.',
-    creator: '@pulse_ent',
+      'Explore timeless comedy sketches, legendary Tonight Show moments, and Tim Conway television classics.',
   },
 };
 
@@ -91,41 +85,21 @@ export default function RootLayout({
 }) {
   const adsenseId = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || 'ca-pub-3542813933597668';
 
-  // Global Website & Solo Publisher JSON-LD Schema
+  // Global Website Schema
   const structuredData = {
     '@context': 'https://schema.org',
     '@graph': [
       {
-        '@type': 'Person',
-        '@id': `${baseUrl}/#publisher-person`,
-        name: 'Hieu Truong (Trương Hiếu)',
-        jobTitle: 'Founder, Solo Publisher & Editor-in-Chief',
-        url: `${baseUrl}/about`,
-        image: 'https://lh3.googleusercontent.com/a/ACg8ocJSndp72J434Ex43jha0qklWhM3b8duc60X4ma-NSz3SQjDzg=s192-c',
-        description: 'Independent cultural journalist and media analyst founded PULSE Entertainment to deliver fact-checked cinema reviews, streaming television analysis, and gaming retrospectives.',
-      },
-      {
         '@type': 'Organization',
         '@id': `${baseUrl}/#organization`,
-        name: 'PULSE Entertainment',
+        name: 'Central Live',
         url: baseUrl,
-        founder: {
-          '@id': `${baseUrl}/#publisher-person`,
-        },
-        logo: {
-          '@type': 'ImageObject',
-          url: `${baseUrl}/logo.png`,
-        },
-        sameAs: [
-          'https://twitter.com/pulse_ent',
-          'https://facebook.com/pulseentertainment',
-        ],
       },
       {
         '@type': 'WebSite',
         '@id': `${baseUrl}/#website`,
         url: baseUrl,
-        name: 'PULSE Entertainment',
+        name: 'Central Live',
         publisher: {
           '@id': `${baseUrl}/#organization`,
         },
@@ -139,24 +113,22 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en" className={`${inter.variable} ${outfit.variable} dark`}>
+    <html lang="en" className={`${inter.variable} ${outfit.variable}`}>
       <head>
         {/* Organization & WebSite JSON-LD Schema */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
-        {/* Google AdSense Account Meta Tag for alternative verification */}
+        {/* Google AdSense Account Meta Tag */}
         <meta name="google-adsense-account" content="ca-pub-3542813933597668" />
-        {/* 1. Raw Head Script: Guaranteed detection by Google AdSense automated crawlers in initial HTML */}
         <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3542813933597668"
           crossOrigin="anonymous"
         />
       </head>
-      <body className="min-h-screen flex flex-col bg-neutral-950 font-sans text-neutral-100">
-        {/* 2. Next.js Managed Script: Ensures proper hydration and runtime script execution */}
+      <body className="min-h-screen flex flex-col bg-white font-sans text-gray-900">
         <Script
           id="google-adsense-script"
           strategy="afterInteractive"
