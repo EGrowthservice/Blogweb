@@ -20,14 +20,14 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
     return { title: 'Category Not Found' };
   }
 
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://centralnewlive.cfx.bz';
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.pulseetm.click';
   const categoryUrl = `${baseUrl}/${cat.slug}`;
 
   return {
-    title: `${cat.name} | Central Live`,
+    title: `${cat.name} | PULSE Entertainment`,
     description: cat.description,
     openGraph: {
-      title: `${cat.name} | Central Live`,
+      title: `${cat.name} | PULSE Entertainment`,
       description: cat.description,
       url: categoryUrl,
     },

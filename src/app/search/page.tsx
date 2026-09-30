@@ -15,7 +15,7 @@ interface SearchPageProps {
 export async function generateMetadata({ searchParams }: SearchPageProps): Promise<Metadata> {
   const query = searchParams.q || '';
   return {
-    title: query ? `Search results for "${query}" | Central Live` : 'Search Stories | Central Live',
+    title: query ? `Search results for "${query}" | PULSE Entertainment` : 'Search Stories | PULSE Entertainment',
     description: `Browse comedy stories and television sketches matching "${query}".`,
     robots: {
       index: false,

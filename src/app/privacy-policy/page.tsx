@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import { Shield, Lock, Eye, Cookie, FileText } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy | Central Live',
+  title: 'Privacy Policy | PULSE Entertainment',
   description:
     'Our Privacy Policy detailing cookie usage, Google AdSense disclosures, CCPA compliance, and reader data practices.',
 };
@@ -28,7 +28,7 @@ export default function PrivacyPolicyPage() {
           <span>Commitment to Reader Privacy</span>
         </div>
         <p className="text-xs text-gray-600">
-          Central Live values your privacy. This policy outlines the types of information we collect when you visit our website, how we use and protect that information, and your legal rights under applicable privacy statutes.
+          PULSE Entertainment values your privacy. This policy outlines the types of information we collect when you visit our website, how we use and protect that information, and your legal rights under applicable privacy statutes.
         </p>
       </div>
 
@@ -71,7 +71,7 @@ export default function PrivacyPolicyPage() {
         </h2>
         <div className="space-y-3 text-sm text-gray-600">
           <p>
-            You can read all comedy articles and content on Central Live without creating an account. When posting comments, you may optionally provide a display name.
+            You can read all comedy articles and content on PULSE Entertainment without creating an account. When posting comments, you may optionally provide a display name.
           </p>
           <p>
             Like standard web servers, we automatically collect basic log files (IP addresses, browser type, referring pages, date/time stamps) through Google Analytics to analyze site performance and readership trends.
@@ -88,8 +88,8 @@ export default function PrivacyPolicyPage() {
           For any privacy questions or requests regarding your data, please contact our team at:
         </p>
         <div className="p-4 rounded-md bg-gray-50 border border-gray-200 text-xs space-y-1 text-gray-700">
-          <p className="font-bold text-gray-900">Central Live</p>
-          <p>Email: contact@centralnewlive.cfx.bz</p>
+          <p className="font-bold text-gray-900">PULSE Entertainment</p>
+          <p>Email: <a href="mailto:hieucv2004@gmail.com" className="text-blue-600 hover:underline">hieucv2004@gmail.com</a></p>
         </div>
       </section>
     </div>

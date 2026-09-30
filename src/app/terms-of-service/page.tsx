@@ -3,9 +3,9 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Terms of Service | Central Live',
+  title: 'Terms of Service | PULSE Entertainment',
   description:
-    'Terms of Service, intellectual property policies, DMCA notice, and conditions of use for Central Live.',
+    'Terms of Service, intellectual property policies, DMCA notice, and conditions of use for PULSE Entertainment.',
 };
 
 export default function TermsOfServicePage() {
@@ -23,14 +23,14 @@ export default function TermsOfServicePage() {
       <section className="space-y-3">
         <h2 className="text-xl font-bold text-gray-900">1. Acceptance of Terms</h2>
         <p className="text-sm text-gray-600">
-          By accessing or using Central Live (&quot;the Service&quot;), whether as a guest or visitor, you agree to be bound by these Terms of Service and all applicable laws and regulations. If you do not agree with any of these terms, you should discontinue use of the site.
+          By accessing or using PULSE Entertainment (&quot;the Service&quot;), whether as a guest or visitor, you agree to be bound by these Terms of Service and all applicable laws and regulations. If you do not agree with any of these terms, you should discontinue use of the site.
         </p>
       </section>
 
       <section className="space-y-3 pt-4 border-t border-gray-200">
         <h2 className="text-xl font-bold text-gray-900">2. Intellectual Property & Fair Use</h2>
         <p className="text-sm text-gray-600">
-          Original editorial articles, commentary, and analysis on Central Live are protected by copyright and intellectual property laws.
+          Original editorial articles, commentary, and analysis on PULSE Entertainment are protected by copyright and intellectual property laws.
         </p>
         <p className="text-sm text-gray-600">
           Photographs, classic television stills, and embedded video clips referenced on this website are utilized in accordance with the <strong>Fair Use Doctrine</strong> (17 U.S. Code § 107) for transformative purposes of criticism, cultural commentary, educational historical archiving, and reporting.
@@ -40,7 +40,7 @@ export default function TermsOfServicePage() {
       <section className="space-y-3 pt-4 border-t border-gray-200">
         <h2 className="text-xl font-bold text-gray-900">3. Digital Millennium Copyright Act (DMCA)</h2>
         <p className="text-sm text-gray-600">
-          We respect intellectual property rights. If you believe your copyrighted material is displayed without authorization, please contact us with the URL and details at <span className="font-semibold text-gray-900">dmca@centralnewlive.cfx.bz</span>.
+          We respect intellectual property rights. If you believe your copyrighted material is displayed without authorization, please contact us with the URL and details at <a href="mailto:hieucv2004@gmail.com" className="font-semibold text-blue-600 underline">hieucv2004@gmail.com</a>.
         </p>
       </section>
 

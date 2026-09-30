@@ -37,16 +37,22 @@ export default function ContactPage() {
             </h3>
             <div className="space-y-3 text-xs text-gray-600">
               <div>
-                <p className="font-semibold text-gray-900">General Questions:</p>
-                <p className="text-blue-600">contact@centralnewlive.cfx.bz</p>
+                <p className="font-semibold text-gray-900">Direct Email:</p>
+                <a href="mailto:hieucv2004@gmail.com" className="text-blue-600 hover:underline font-medium">
+                  hieucv2004@gmail.com
+                </a>
               </div>
               <div>
-                <p className="font-semibold text-gray-900">Archive Suggestions:</p>
-                <p className="text-blue-600">tips@centralnewlive.cfx.bz</p>
+                <p className="font-semibold text-gray-900">Editorial Desk:</p>
+                <a href="mailto:hieucv2004@gmail.com" className="text-blue-600 hover:underline">
+                  hieucv2004@gmail.com
+                </a>
               </div>
               <div>
                 <p className="font-semibold text-gray-900">Corrections & Feedback:</p>
-                <p className="text-blue-600">corrections@centralnewlive.cfx.bz</p>
+                <a href="mailto:hieucv2004@gmail.com" className="text-blue-600 hover:underline">
+                  hieucv2004@gmail.com
+                </a>
               </div>
             </div>
           </div>

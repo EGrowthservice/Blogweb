@@ -35,12 +35,13 @@ export const metadata: Metadata = {
     canonical: './',
   },
   title: {
-    default: 'Central Live | Comedy Classics & Tim Conway TV Moments',
-    template: '%s | Central Live',
+    default: 'PULSE Entertainment | Comedy Classics & Tim Conway TV Moments',
+    template: '%s | PULSE Entertainment',
   },
   description:
     'Explore timeless comedy sketches, legendary Tonight Show moments, and Tim Conway television classics.',
   keywords: [
+    'PULSE Entertainment',
     'Comedy Classics',
     'Tim Conway',
     'The Carol Burnett Show',
@@ -65,14 +66,14 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: baseUrl,
-    siteName: 'Central Live',
-    title: 'Central Live | Comedy Classics & Tim Conway TV Moments',
+    siteName: 'PULSE Entertainment',
+    title: 'PULSE Entertainment | Comedy Classics & Tim Conway TV Moments',
     description:
       'Explore timeless comedy sketches, legendary Tonight Show moments, and Tim Conway television classics.',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Central Live | Comedy Classics & Tim Conway TV Moments',
+    title: 'PULSE Entertainment | Comedy Classics & Tim Conway TV Moments',
     description:
       'Explore timeless comedy sketches, legendary Tonight Show moments, and Tim Conway television classics.',
   },
@@ -92,14 +93,14 @@ export default function RootLayout({
       {
         '@type': 'Organization',
         '@id': `${baseUrl}/#organization`,
-        name: 'Central Live',
+        name: 'PULSE Entertainment',
         url: baseUrl,
       },
       {
         '@type': 'WebSite',
         '@id': `${baseUrl}/#website`,
         url: baseUrl,
-        name: 'Central Live',
+        name: 'PULSE Entertainment',
         publisher: {
           '@id': `${baseUrl}/#organization`,
         },

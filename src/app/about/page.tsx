@@ -4,9 +4,9 @@ import Link from 'next/link';
 import { Award, FileCheck, Mail, Globe, Sparkles } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'About Central Live & Editorial Standards',
+  title: 'About PULSE Entertainment & Editorial Standards',
   description:
-    'About Central Live: Dedicated to preserving and celebrating classic television comedy, Tim Conway sketches, and vintage variety entertainment.',
+    'About PULSE Entertainment: Dedicated to preserving and celebrating classic television comedy, Tim Conway sketches, and vintage variety entertainment.',
 };
 
 export default function AboutPage() {
@@ -15,7 +15,7 @@ export default function AboutPage() {
       {/* Header */}
       <div className="mb-10 pb-6 border-b border-gray-200">
         <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 tracking-tight">
-          About Central Live
+          About PULSE Entertainment
         </h1>
         <p className="mt-3 text-base text-gray-600 leading-relaxed">
           Dedicated to celebrating, documenting, and analyzing the golden age of American television comedy, legendary variety sketches, and the comedic brilliance of icons like <strong>Tim Conway</strong>.
@@ -31,7 +31,7 @@ export default function AboutPage() {
           </h2>
         </div>
         <p className="text-gray-700 leading-relaxed text-sm sm:text-base">
-          Central Live operates to serve classic entertainment fans with accurate context, deep sketch retrospectives, and timeless comedic moments:
+          PULSE Entertainment operates to serve classic entertainment fans with accurate context, deep sketch retrospectives, and timeless comedic moments:
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-4 border-t border-gray-200 text-sm">
           <div>
@@ -85,7 +85,11 @@ export default function AboutPage() {
       <section className="p-6 rounded-lg bg-gray-50 border border-gray-200 text-center">
         <h3 className="text-base font-bold text-gray-900 mb-1">Contact the Editorial Team</h3>
         <p className="text-xs text-gray-600 max-w-md mx-auto leading-relaxed">
-          Have an inquiry, classic TV tip, or correction? Visit our{' '}
+          Have an inquiry, classic TV tip, or correction? Reach out directly to{' '}
+          <a href="mailto:hieucv2004@gmail.com" className="text-blue-600 underline font-medium hover:text-blue-800">
+            hieucv2004@gmail.com
+          </a>{' '}
+          or visit our{' '}
           <Link href="/contact" className="text-blue-600 underline hover:text-blue-800">
             Contact Page
           </Link>.

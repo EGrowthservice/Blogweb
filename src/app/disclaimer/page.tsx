@@ -2,9 +2,9 @@ import React from 'react';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Disclaimer & Fair Use Notice | Central Live',
+  title: 'Disclaimer & Fair Use Notice | PULSE Entertainment',
   description:
-    'Editorial disclaimer, Fair Use notice under 17 U.S. Code § 107, and advertising disclosures for Central Live.',
+    'Editorial disclaimer, Fair Use notice under 17 U.S. Code § 107, and advertising disclosures for PULSE Entertainment.',
 };
 
 export default function DisclaimerPage() {
@@ -22,7 +22,7 @@ export default function DisclaimerPage() {
       <section className="space-y-3">
         <h2 className="text-xl font-bold text-gray-900">1. Commentary & Archival Purpose</h2>
         <p className="text-sm text-gray-600">
-          The retrospective articles and commentary published on Central Live are intended for historical, educational, and entertainment purposes. We strive to provide accurate dates, background lore, and context for classic television comedy.
+          The retrospective articles and commentary published on PULSE Entertainment are intended for historical, educational, and entertainment purposes. We strive to provide accurate dates, background lore, and context for classic television comedy.
         </p>
       </section>
 
@@ -36,14 +36,14 @@ export default function DisclaimerPage() {
       <section className="space-y-3 pt-4 border-t border-gray-200">
         <h2 className="text-xl font-bold text-gray-900">3. Advertising Disclosures (Google AdSense)</h2>
         <p className="text-sm text-gray-600">
-          Central Live displays programmatic digital advertisements served by third-party ad networks including Google AdSense. We do not personally endorse the third-party products or services featured in automated advertising units.
+          PULSE Entertainment displays programmatic digital advertisements served by third-party ad networks including Google AdSense. We do not personally endorse the third-party products or services featured in automated advertising units.
         </p>
       </section>
 
       <section className="space-y-3 pt-4 border-t border-gray-200">
         <h2 className="text-xl font-bold text-gray-900">4. External Embeds & Links</h2>
         <p className="text-sm text-gray-600">
-          Central Live contains links and embedded video players from third-party platforms (such as YouTube). We do not control or take responsibility for the uptime or policies of third-party platforms.
+          PULSE Entertainment contains links and embedded video players from third-party platforms (such as YouTube). We do not control or take responsibility for the uptime or policies of third-party platforms.
         </p>
       </section>
     </div>

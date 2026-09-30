@@ -10,8 +10,6 @@ const NAV_LINKS = [
   { name: 'Comedy Classics', href: '/comedy' },
   { name: 'Vintage Moments', href: '/vintage-moments' },
   { name: 'Entertainment', href: '/entertainment' },
-  { name: 'About', href: '/about' },
-  { name: 'Contact', href: '/contact' },
 ];
 
 export default function Header() {
@@ -40,9 +38,15 @@ export default function Header() {
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
 
-            <Link href="/" className="flex items-center gap-2">
-              <span className="text-xl sm:text-2xl font-black tracking-tight text-gray-900 font-display">
-                CENTRAL<span className="text-blue-600 font-bold">LIVE</span>
+            <Link href="/" className="group flex flex-col justify-center">
+              <div className="flex items-center gap-1.5">
+                <span className="text-2xl sm:text-3xl font-black font-display tracking-tighter text-gray-900 group-hover:text-blue-600 transition leading-none">
+                  PULSE
+                </span>
+                <span className="w-2 h-2 rounded-full bg-blue-600 animate-pulse"></span>
+              </div>
+              <span className="text-[9px] sm:text-[10px] font-semibold tracking-[0.22em] text-gray-500 uppercase mt-0.5">
+                ENTERTAINMENT
               </span>
             </Link>
           </div>

@@ -22,12 +22,12 @@ export async function generateMetadata({ params }: ArticlePageProps): Promise<Me
     return { title: 'Article Not Found' };
   }
 
-  const siteBase = process.env.NEXT_PUBLIC_SITE_URL || 'https://centralnewlive.cfx.bz';
+  const siteBase = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.pulseetm.click';
   const url = `${siteBase}/${article.category}/${article.slug}`;
   const publishedIso = typeof article.publishedAt === 'string' ? article.publishedAt : new Date(article.publishedAt).toISOString();
 
   return {
-    title: `${article.title} | Central Live`,
+    title: `${article.title} | PULSE Entertainment`,
     description: article.excerpt,
     alternates: {
       canonical: url,
@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: ArticlePageProps): Promise<Me
       title: article.title,
       description: article.excerpt,
       url,
-      siteName: 'Central Live',
+      siteName: 'PULSE Entertainment',
       type: 'article',
       publishedTime: publishedIso,
       images: [
@@ -67,7 +67,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
     notFound();
   }
 
-  const siteBase = process.env.NEXT_PUBLIC_SITE_URL || 'https://centralnewlive.cfx.bz';
+  const siteBase = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.pulseetm.click';
   const categoryInfo = CATEGORIES.find((c) => c.slug === article.category);
   const recommendedArticles = allArticles.filter((a) => a.slug !== article.slug);
 
@@ -94,7 +94,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
     dateModified: publishedIso,
     publisher: {
       '@type': 'Organization',
-      name: 'Central Live',
+      name: 'PULSE Entertainment',
     },
   };
 
