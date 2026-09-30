@@ -2,18 +2,21 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { getAllArticles } from '@/lib/articles';
-import { CATEGORIES } from '@/data/mockArticles';
+import { getAllCategories } from '@/lib/categories';
 import ArticleCard from '@/components/ArticleCard';
 import AdBanner from '@/components/AdBanner';
 import { Clock, ArrowRight } from 'lucide-react';
 
-export const revalidate = 0; // Dynamic updates
+export const revalidate = 0; // Dynamic database updates
 
 export default async function HomePage() {
-  const articles = await getAllArticles();
+  const [categories, articles] = await Promise.all([
+    getAllCategories(),
+    getAllArticles(),
+  ]);
 
-  // Find top featured article for each of the 3 primary categories
-  const categoryHighlights = CATEGORIES.map((cat) => {
+  // Find top featured article for each dynamic category from database
+  const categoryHighlights = categories.map((cat) => {
     const featured =
       articles.find((a) => a.category === cat.slug && a.isFeatured) ||
       articles.find((a) => a.category === cat.slug);
@@ -27,7 +30,7 @@ export default async function HomePage() {
 
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
-      {/* 1. 3 Categories Showcase (Show only when articles exist) */}
+      {/* 1. Dynamic Categories Showcase (Show only when articles exist) */}
       {hasAnyCategoryArticles && (
         <section className="mb-12 pb-10 border-b border-gray-200">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
@@ -100,7 +103,7 @@ export default async function HomePage() {
             Latest Stories
           </h2>
           <div className="flex items-center gap-3 text-xs text-gray-500">
-            {CATEGORIES.map((cat, idx) => (
+            {categories.map((cat, idx) => (
               <React.Fragment key={cat.slug}>
                 {idx > 0 && <span>•</span>}
                 <Link href={`/${cat.slug}`} className="hover:text-blue-600 transition">

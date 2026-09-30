@@ -4,18 +4,22 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Search, Menu, X } from 'lucide-react';
+import { CategoryData } from '@/lib/categories';
 
-const NAV_LINKS = [
-  { name: 'Home', href: '/' },
-  { name: 'Comedy Classics', href: '/comedy' },
-  { name: 'Vintage Moments', href: '/vintage-moments' },
-  { name: 'Entertainment', href: '/entertainment' },
-];
+interface HeaderProps {
+  categories?: CategoryData[];
+}
 
-export default function Header() {
+export default function Header({ categories = [] }: HeaderProps) {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+
+  // Dynamically build navigation from database categories
+  const navLinks = [
+    { name: 'Home', href: '/' },
+    ...categories.map((c) => ({ name: c.name, href: `/${c.slug}` })),
+  ];
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -51,9 +55,9 @@ export default function Header() {
             </Link>
           </div>
 
-          {/* Center: Desktop Navigation Links */}
+          {/* Center: Dynamic Desktop Navigation Links */}
           <nav className="hidden lg:flex items-center gap-6">
-            {NAV_LINKS.map((link) => {
+            {navLinks.map((link) => {
               const isActive = pathname === link.href;
               return (
                 <Link
@@ -113,10 +117,10 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Mobile Drawer Menu */}
+      {/* Dynamic Mobile Drawer Menu */}
       {mobileMenuOpen && (
         <div className="lg:hidden bg-white border-t border-gray-200 px-4 pt-2 pb-4 space-y-1">
-          {NAV_LINKS.map((link) => {
+          {navLinks.map((link) => {
             const isActive = pathname === link.href;
             return (
               <Link

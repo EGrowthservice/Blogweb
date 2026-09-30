@@ -5,6 +5,8 @@ import { Category } from '@/models/Category';
 import { Article } from '@/models/Article';
 import { requireAuth, apiSuccess, apiError } from '@/lib/api-guard';
 import { CategoryUpdateSchema } from '@/lib/validations';
+import { revalidatePath } from 'next/cache';
+import { clearCategoriesCache } from '@/lib/categories';
 
 export const dynamic = 'force-dynamic';
 
@@ -80,6 +82,9 @@ export async function PUT(req: NextRequest, { params }: RouteParams) {
 
     await existing.save();
 
+    clearCategoriesCache();
+    revalidatePath('/', 'layout');
+
     return apiSuccess(existing);
   } catch (error: any) {
     console.error('PUT /admin/categories/[id] error:', error);
@@ -118,6 +123,9 @@ export async function DELETE(req: NextRequest, { params }: RouteParams) {
     }
 
     await Category.findByIdAndDelete(id);
+
+    clearCategoriesCache();
+    revalidatePath('/', 'layout');
 
     return apiSuccess({ message: 'Đã xóa danh mục thành công', id });
   } catch (error: any) {

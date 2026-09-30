@@ -2,12 +2,12 @@ import React from 'react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { getAllArticles } from '@/lib/articles';
-import { CATEGORIES } from '@/data/mockArticles';
+import { getAllCategories } from '@/lib/categories';
 import ArticleCard from '@/components/ArticleCard';
 import AdBanner from '@/components/AdBanner';
 import { ChevronRight, Newspaper } from 'lucide-react';
 
-export const revalidate = 0; // Dynamic updates
+export const revalidate = 0; // Dynamic database updates
 
 export const metadata: Metadata = {
   title: 'All Stories & Archive | PULSE Entertainment',
@@ -19,7 +19,10 @@ export const metadata: Metadata = {
 };
 
 export default async function AllStoriesPage() {
-  const articles = await getAllArticles();
+  const [categories, articles] = await Promise.all([
+    getAllCategories(),
+    getAllArticles(),
+  ]);
 
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
@@ -47,7 +50,7 @@ export default async function AllStoriesPage() {
           </p>
         </div>
 
-        {/* Category Filter Pills */}
+        {/* Dynamic Category Filter Pills */}
         <div className="flex flex-wrap gap-2">
           <Link
             href="/all-stories"
@@ -55,7 +58,7 @@ export default async function AllStoriesPage() {
           >
             All Stories
           </Link>
-          {CATEGORIES.map((cat) => (
+          {categories.map((cat) => (
             <Link
               key={cat.slug}
               href={`/${cat.slug}`}

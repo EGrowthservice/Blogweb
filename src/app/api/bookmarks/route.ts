@@ -4,7 +4,6 @@ import { authOptions } from '@/lib/auth';
 import { connectToDatabase } from '@/lib/db';
 import { Bookmark } from '@/models/Bookmark';
 import { Article } from '@/models/Article';
-import { MOCK_ARTICLES } from '@/data/mockArticles';
 import mongoose from 'mongoose';
 
 export async function GET(req: NextRequest) {
@@ -58,26 +57,16 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ bookmarked: false, message: 'Article removed from bookmarks' });
     }
 
-    // Find article details
-    let article = await Article.findOne({ slug: articleSlug });
-    let articleId = article?._id;
-    let articleTitle = article?.title;
-    let articleCategory = article?.category;
-    let articleImage = article?.featuredImage;
-
+    // Find article details from database
+    const article = await Article.findOne({ slug: articleSlug });
     if (!article) {
-      const mock = MOCK_ARTICLES.find((a) => a.slug === articleSlug);
-      if (mock) {
-        articleId = new mongoose.Types.ObjectId();
-        articleTitle = mock.title;
-        articleCategory = mock.category;
-        articleImage = mock.featuredImage;
-      }
-    }
-
-    if (!articleTitle) {
       return NextResponse.json({ error: 'Article not found' }, { status: 404 });
     }
+
+    const articleId = article._id;
+    const articleTitle = article.title;
+    const articleCategory = article.category;
+    const articleImage = article.featuredImage;
 
     const newBookmark = await Bookmark.create({
       userEmail: session.user.email,

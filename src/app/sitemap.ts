@@ -1,6 +1,6 @@
 import { MetadataRoute } from 'next';
 import { getAllArticles } from '@/lib/articles';
-import { CATEGORIES } from '@/data/mockArticles';
+import { getAllCategories } from '@/lib/categories';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.pulseetm.click';
@@ -51,16 +51,20 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ];
 
-  // 2. Category Hubs
-  const categoryPages: MetadataRoute.Sitemap = CATEGORIES.map((cat) => ({
+  // 2. Dynamic Categories from MongoDB
+  const [categories, articles] = await Promise.all([
+    getAllCategories(),
+    getAllArticles(),
+  ]);
+
+  const categoryPages: MetadataRoute.Sitemap = categories.map((cat) => ({
     url: `${baseUrl}/${cat.slug}`,
     lastModified: new Date(),
     changeFrequency: 'hourly',
     priority: 0.9,
   }));
 
-  // 3. Articles (Dynamic from MongoDB / Cache)
-  const articles = await getAllArticles();
+  // 3. Dynamic Articles from MongoDB
   const articlePages: MetadataRoute.Sitemap = articles.map((article) => ({
     url: `${baseUrl}/${article.category}/${article.slug}`,
     lastModified: new Date(article.publishedAt),

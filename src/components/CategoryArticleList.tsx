@@ -4,7 +4,7 @@ import React, { useState, useMemo, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Clock, Search, Sparkles, ChevronLeft, ChevronRight, SlidersHorizontal } from 'lucide-react';
-import { ArticleData } from '@/data/mockArticles';
+import { ArticleData } from '@/types/article';
 import ArticleCard from '@/components/ArticleCard';
 
 interface CategoryArticleListProps {

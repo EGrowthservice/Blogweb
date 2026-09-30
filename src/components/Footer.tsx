@@ -1,8 +1,13 @@
 import React from 'react';
 import Link from 'next/link';
 import { Mail } from 'lucide-react';
+import { CategoryData } from '@/lib/categories';
 
-export default function Footer() {
+interface FooterProps {
+  categories?: CategoryData[];
+}
+
+export default function Footer({ categories = [] }: FooterProps) {
   const currentYear = new Date().getFullYear();
 
   return (
@@ -33,10 +38,30 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Col 2: Explore */}
+          {/* Col 2: Dynamic Categories from Database */}
           <div>
             <h4 className="text-gray-900 font-bold text-xs uppercase tracking-wider mb-3">
-              Explore
+              Categories
+            </h4>
+            <ul className="space-y-2 text-sm">
+              {categories.length > 0 ? (
+                categories.map((c) => (
+                  <li key={c.slug}>
+                    <Link href={`/${c.slug}`} className="hover:text-blue-600 transition">
+                      {c.name}
+                    </Link>
+                  </li>
+                ))
+              ) : (
+                <li className="text-gray-400 text-xs">No categories yet</li>
+              )}
+            </ul>
+          </div>
+
+          {/* Col 3: Quick Links */}
+          <div>
+            <h4 className="text-gray-900 font-bold text-xs uppercase tracking-wider mb-3">
+              Quick Links
             </h4>
             <ul className="space-y-2 text-sm">
               <li>
@@ -45,47 +70,23 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/comedy" className="hover:text-blue-600 transition">
-                  Comedy Classics
+                <Link href="/all-stories" className="hover:text-blue-600 transition">
+                  All Stories
                 </Link>
               </li>
               <li>
-                <Link href="/vintage-moments" className="hover:text-blue-600 transition">
-                  Vintage Moments
-                </Link>
-              </li>
-              <li>
-                <Link href="/entertainment" className="hover:text-blue-600 transition">
-                  Entertainment
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Col 3: Topics */}
-          <div>
-            <h4 className="text-gray-900 font-bold text-xs uppercase tracking-wider mb-3">
-              Topics
-            </h4>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <Link href="/comedy" className="hover:text-blue-600 transition">
-                  Tim Conway Sketches
-                </Link>
-              </li>
-              <li>
-                <Link href="/comedy" className="hover:text-blue-600 transition">
-                  The Tonight Show Moments
-                </Link>
-              </li>
-              <li>
-                <Link href="/vintage-moments" className="hover:text-blue-600 transition">
-                  The Carol Burnett Show
+                <Link href="/search" className="hover:text-blue-600 transition">
+                  Search
                 </Link>
               </li>
               <li>
                 <Link href="/about" className="hover:text-blue-600 transition">
                   About Editorial
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="hover:text-blue-600 transition">
+                  Contact Us
                 </Link>
               </li>
             </ul>

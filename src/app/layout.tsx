@@ -3,14 +3,10 @@ import Script from 'next/script';
 import { Inter, Outfit } from 'next/font/google';
 import './globals.css';
 import AuthProvider from '@/components/providers/AuthProvider';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
-import ReadingProgressBar from '@/components/ReadingProgressBar';
-import BackToTop from '@/components/BackToTop';
-import MobileBottomNav from '@/components/MobileBottomNav';
 import PublicLayoutWrapper from '@/components/PublicLayoutWrapper';
 import GoogleAnalytics from '@/components/analytics/GoogleAnalytics';
 import AdSenseScript from '@/components/ads/AdSenseScript';
+import { getAllCategories } from '@/lib/categories';
 
 const inter = Inter({
   subsets: ['latin', 'latin-ext', 'vietnamese'],
@@ -79,11 +75,12 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const categories = await getAllCategories();
   const adsenseId = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || 'ca-pub-3542813933597668';
 
   // Global Website Schema
@@ -138,7 +135,7 @@ export default function RootLayout({
         />
         <GoogleAnalytics />
         <AuthProvider>
-          <PublicLayoutWrapper>{children}</PublicLayoutWrapper>
+          <PublicLayoutWrapper categories={categories}>{children}</PublicLayoutWrapper>
         </AuthProvider>
       </body>
     </html>

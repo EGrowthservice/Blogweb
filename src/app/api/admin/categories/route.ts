@@ -4,6 +4,8 @@ import { Category } from '@/models/Category';
 import { Article } from '@/models/Article';
 import { requireAuth, apiSuccess, apiError } from '@/lib/api-guard';
 import { CategoryCreateSchema } from '@/lib/validations';
+import { revalidatePath } from 'next/cache';
+import { clearCategoriesCache } from '@/lib/categories';
 
 export const dynamic = 'force-dynamic';
 
@@ -123,6 +125,9 @@ export async function POST(req: NextRequest) {
       description,
       status,
     });
+
+    clearCategoriesCache();
+    revalidatePath('/', 'layout');
 
     return apiSuccess(category);
   } catch (error: any) {

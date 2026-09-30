@@ -7,8 +7,17 @@ import Footer from '@/components/Footer';
 import BackToTop from '@/components/BackToTop';
 import PopupAdModal from '@/components/ads/PopupAdModal';
 import AntiCopy from '@/components/AntiCopy';
+import { CategoryData } from '@/lib/categories';
 
-export default function PublicLayoutWrapper({ children }: { children: React.ReactNode }) {
+interface PublicLayoutWrapperProps {
+  children: React.ReactNode;
+  categories?: CategoryData[];
+}
+
+export default function PublicLayoutWrapper({
+  children,
+  categories = [],
+}: PublicLayoutWrapperProps) {
   const pathname = usePathname();
   const isAdmin = pathname?.startsWith('/admin');
 
@@ -18,9 +27,9 @@ export default function PublicLayoutWrapper({ children }: { children: React.Reac
 
   return (
     <>
-      <Header />
+      <Header categories={categories} />
       <main className="flex-1">{children}</main>
-      <Footer />
+      <Footer categories={categories} />
       <BackToTop />
       {/* 10-Second Mobile-Friendly Popup Ad */}
       <PopupAdModal />

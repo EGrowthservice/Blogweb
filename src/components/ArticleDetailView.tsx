@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { CATEGORIES, ArticleData } from '@/data/mockArticles';
+import { ArticleData } from '@/types/article';
 import CommentSection from '@/components/CommentSection';
 import AdBanner from '@/components/AdBanner';
 import { Clock } from 'lucide-react';
@@ -10,15 +10,19 @@ interface ArticleDetailViewProps {
   article: ArticleData;
   allArticles: ArticleData[];
   isCategoryPath?: boolean;
+  categoryName?: string;
 }
 
 export default function ArticleDetailView({
   article,
   allArticles,
   isCategoryPath = false,
+  categoryName,
 }: ArticleDetailViewProps) {
   const siteBase = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.pulseetm.click';
-  const categoryInfo = CATEGORIES.find((c) => c.slug === article.category);
+  const displayCategory =
+    categoryName ||
+    article.category.replace(/-/g, ' ').replace(/\b\w/g, (l) => l.toUpperCase());
 
   // 1. Sidebar Recommended Articles (other stories)
   const sidebarArticles = allArticles.filter((a) => a.slug !== article.slug).slice(0, 5);
@@ -86,7 +90,7 @@ export default function ArticleDetailView({
                   href={`/${article.category}`}
                   className="text-xs font-semibold text-blue-600 hover:underline uppercase tracking-wider"
                 >
-                  {categoryInfo?.name || 'Comedy Classics'}
+                  {displayCategory}
                 </Link>
               </div>
 

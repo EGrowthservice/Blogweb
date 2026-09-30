@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Clock } from 'lucide-react';
-import { ArticleData } from '@/data/mockArticles';
+import { ArticleData } from '@/types/article';
 
 interface ArticleCardProps {
   article: ArticleData;

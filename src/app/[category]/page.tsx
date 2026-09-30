@@ -2,7 +2,7 @@ import React from 'react';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { CATEGORIES } from '@/data/mockArticles';
+import { getCategoryBySlug, getAllCategories } from '@/lib/categories';
 import { getArticlesByCategory, getAllArticles, getArticleBySlug } from '@/lib/articles';
 import ArticleCard from '@/components/ArticleCard';
 import AdBanner from '@/components/AdBanner';
@@ -16,7 +16,8 @@ interface CategoryOrArticlePageProps {
 }
 
 export async function generateMetadata({ params }: CategoryOrArticlePageProps): Promise<Metadata> {
-  const cat = CATEGORIES.find((c) => c.slug === params.category);
+  // 1. Check if category exists in database
+  const cat = await getCategoryBySlug(params.category);
   if (cat) {
     const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.pulseetm.click';
     const categoryUrl = `${baseUrl}/${cat.slug}`;
@@ -35,7 +36,7 @@ export async function generateMetadata({ params }: CategoryOrArticlePageProps): 
     };
   }
 
-  // Check if it's an article slug accessed directly from homepage
+  // 2. Check if it's an article slug accessed directly from homepage
   const article = await getArticleBySlug(params.category);
   if (article) {
     const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.pulseetm.click';
@@ -80,13 +81,14 @@ export async function generateMetadata({ params }: CategoryOrArticlePageProps): 
 }
 
 export default async function CategoryOrArticlePage({ params }: CategoryOrArticlePageProps) {
-  const cat = CATEGORIES.find((c) => c.slug === params.category);
+  // 1. Query category from database
+  const cat = await getCategoryBySlug(params.category);
 
-  // If matching category slug, render Category View
+  // If matching category in DB, render Category View
   if (cat) {
-    const [articles, allArticles] = await Promise.all([
+    const [articles, allCategories] = await Promise.all([
       getArticlesByCategory(params.category),
-      getAllArticles(),
+      getAllCategories(),
     ]);
 
     return (
@@ -137,7 +139,7 @@ export default async function CategoryOrArticlePage({ params }: CategoryOrArticl
                 Explore Categories
               </h3>
               <div className="space-y-3">
-                {CATEGORIES.map((c) => (
+                {allCategories.map((c) => (
                   <Link
                     key={c.slug}
                     href={`/${c.slug}`}
@@ -160,7 +162,7 @@ export default async function CategoryOrArticlePage({ params }: CategoryOrArticl
     );
   }
 
-  // If not a category, check if it's an article slug
+  // 2. If not a category, check if it's an article slug in database
   const [article, allArticles] = await Promise.all([
     getArticleBySlug(params.category),
     getAllArticles(),

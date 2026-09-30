@@ -1,25 +1,29 @@
 import { cache } from 'react';
 import { connectToDatabase } from '@/lib/db';
 import { Article } from '@/models/Article';
-import { MOCK_ARTICLES, ArticleData } from '@/data/mockArticles';
+import { ArticleData } from '@/types/article';
+
+export type { ArticleData };
 
 // Helper to convert Mongoose doc to plain object matching ArticleData
 function formatArticleDoc(doc: any): ArticleData {
   return {
-    id: doc._id?.toString() || doc.id,
-    title: doc.title,
-    slug: doc.slug,
-    excerpt: doc.excerpt,
-    content: doc.content,
-    category: doc.category,
+    id: doc._id?.toString() || doc.id || '',
+    title: doc.title || '',
+    slug: doc.slug || '',
+    excerpt: doc.excerpt || '',
+    content: doc.content || '',
+    category: doc.category || '',
     tags: doc.tags || [],
-    featuredImage: doc.featuredImage,
-    featuredImageAlt: doc.featuredImageAlt,
+    featuredImage: doc.featuredImage || '',
+    featuredImageAlt: doc.featuredImageAlt || doc.title || '',
     author: {
-      name: doc.author?.name || 'Hieu Truong',
-      role: doc.author?.role || 'Founder & Solo Publisher',
-      avatar: doc.author?.avatar || 'https://lh3.googleusercontent.com/a/ACg8ocJSndp72J434Ex43jha0qklWhM3b8duc60X4ma-NSz3SQjDzg=s192-c',
-      bio: doc.author?.bio || 'Cultural journalist and Founder & Editor-in-Chief at PULSE Entertainment.',
+      name: doc.author?.name || 'Editorial Team',
+      role: doc.author?.role || 'Staff Writer',
+      avatar:
+        doc.author?.avatar ||
+        'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=256',
+      bio: doc.author?.bio || 'Preserving and archiving classic television comedy.',
       twitter: doc.author?.twitter || '@pulse_ent',
     },
     readTimeMinutes: doc.readTimeMinutes || 5,
@@ -27,7 +31,9 @@ function formatArticleDoc(doc: any): ArticleData {
     isTrending: Boolean(doc.isTrending),
     viewsCount: doc.viewsCount || 0,
     likesCount: doc.likesCount || 0,
-    publishedAt: doc.publishedAt ? new Date(doc.publishedAt).toISOString() : new Date().toISOString(),
+    publishedAt: doc.publishedAt
+      ? new Date(doc.publishedAt).toISOString()
+      : new Date().toISOString(),
   };
 }
 
@@ -62,11 +68,8 @@ export function clearArticlesCache(): void {
 }
 
 /**
- * Fetch all articles with database as single source of truth:
- * 1. Process Memory Cache (sub-millisecond)
- * 2. React Request Cache (dedupes per SSR request)
- * 3. MongoDB Atlas Query (real data from database, even if empty)
- * 4. Fallback to mock data ONLY if database connection is unavailable
+ * Fetch all articles directly from MongoDB database
+ * Single source of truth: 0 articles in database = returns empty array []
  */
 export const getAllArticles = cache(async (): Promise<ArticleData[]> => {
   const cacheKey = 'articles:all';
@@ -78,10 +81,14 @@ export const getAllArticles = cache(async (): Promise<ArticleData[]> => {
   try {
     const conn = await connectToDatabase();
     if (conn) {
-      // MongoDB is connected: Database is the absolute source of truth!
-      const articles = await Article.find().sort({ publishedAt: -1 }).lean().exec();
+      const articles = await Article.find({ status: 'published' })
+        .sort({ publishedAt: -1 })
+        .lean()
+        .exec();
+
       const formatted = (articles || []).map(formatArticleDoc);
       setInCache(cacheKey, formatted);
+
       // Pre-warm individual slug cache
       for (const art of formatted) {
         setInCache(`articles:slug:${art.slug}`, art);
@@ -89,13 +96,7 @@ export const getAllArticles = cache(async (): Promise<ArticleData[]> => {
       return formatted;
     }
   } catch (error) {
-    console.warn('MongoDB query failed, falling back to mock articles:', error);
-  }
-
-  // Only fall back to seed data if database is not reachable at all
-  if (!process.env.MONGODB_URI) {
-    setInCache(cacheKey, MOCK_ARTICLES, 15000);
-    return MOCK_ARTICLES;
+    console.error('Failed to fetch articles from MongoDB database:', error);
   }
 
   return [];
@@ -138,26 +139,16 @@ export const getArticleBySlug = cache(async (slug: string): Promise<ArticleData 
   try {
     const conn = await connectToDatabase();
     if (conn) {
-      const article = await Article.findOne({ slug }).lean().exec();
+      const article = await Article.findOne({ slug, status: 'published' }).lean().exec();
       if (article) {
         const formatted = formatArticleDoc(article);
         setInCache(cacheKey, formatted);
         return formatted;
       }
-      // If connected to DB and not found, it does NOT exist! Do not return fake mock data.
       return null;
     }
   } catch (error) {
-    console.warn('MongoDB query failed:', error);
-  }
-
-  // Only check MOCK_ARTICLES if DB is completely offline
-  if (!process.env.MONGODB_URI) {
-    const found = MOCK_ARTICLES.find((a) => a.slug === slug);
-    if (found) {
-      setInCache(cacheKey, found);
-      return found;
-    }
+    console.error(`Failed to fetch article slug ${slug} from MongoDB:`, error);
   }
 
   return null;
