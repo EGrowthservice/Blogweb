@@ -58,18 +58,52 @@
   background: #f1f1f1;
 }
 ::-webkit-scrollbar-thumb {
-  background: #ccc;
+  background: #c7c7c7;
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #999;
 }
 
-/* Hide scrollbar for horizontal tabs */
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
+/* Content Protection: Anti-copy text selection rules */
+body,
+article,
+.article-prose,
+main,
+h1, h2, h3, h4, h5, h6,
+p, span, blockquote {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
-.no-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+
+/* Allow text selection in form controls & comments */
+input,
+textarea,
+[contenteditable="true"],
+.allow-select {
+  -webkit-user-select: text !important;
+  -moz-user-select: text !important;
+  -ms-user-select: text !important;
+  user-select: text !important;
+}
+
+/* Modal and Interstitial Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleUp {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-scale-up {
+  animation: scaleUp 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }

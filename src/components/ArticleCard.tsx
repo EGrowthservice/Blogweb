@@ -7,16 +7,23 @@ import { ArticleData } from '@/data/mockArticles';
 interface ArticleCardProps {
   article: ArticleData;
   layout?: 'standard' | 'horizontal' | 'compact';
+  showCategoryInUrl?: boolean;
 }
 
-export default function ArticleCard({ article, layout = 'standard' }: ArticleCardProps) {
+export default function ArticleCard({
+  article,
+  layout = 'standard',
+  showCategoryInUrl = false,
+}: ArticleCardProps) {
   const formattedDate = new Date(article.publishedAt).toLocaleDateString('en-US', {
     month: 'long',
     day: 'numeric',
     year: 'numeric',
   });
 
-  const articleUrl = `/${article.category}/${article.slug}`;
+  // Slug behavior: if showCategoryInUrl is true (inside category view), use /[category]/[slug]
+  // Otherwise on homepage or general listings, use /[slug] directly
+  const articleUrl = showCategoryInUrl ? `/${article.category}/${article.slug}` : `/${article.slug}`;
 
   if (layout === 'compact') {
     return (
@@ -32,7 +39,9 @@ export default function ArticleCard({ article, layout = 'standard' }: ArticleCar
         </div>
         <div className="flex-1 min-w-0">
           <h4 className="text-sm font-semibold text-gray-900 group-hover:text-blue-600 transition line-clamp-2 leading-snug">
-            <Link href={articleUrl}>{article.title}</Link>
+            <Link href={articleUrl} prefetch={true}>
+              {article.title}
+            </Link>
           </h4>
           <div className="flex items-center gap-1 text-[11px] text-gray-500 mt-1">
             <Clock className="w-3 h-3 text-gray-400" />
@@ -47,7 +56,7 @@ export default function ArticleCard({ article, layout = 'standard' }: ArticleCar
     return (
       <article className="group flex flex-col sm:flex-row gap-5 p-4 rounded-lg bg-white border border-gray-200 hover:shadow-sm transition">
         <div className="relative w-full sm:w-64 h-48 sm:h-auto shrink-0 rounded-md overflow-hidden bg-gray-100">
-          <Link href={articleUrl}>
+          <Link href={articleUrl} prefetch={true}>
             <Image
               src={article.featuredImage}
               alt={article.featuredImageAlt || article.title}
@@ -61,7 +70,9 @@ export default function ArticleCard({ article, layout = 'standard' }: ArticleCar
         <div className="flex flex-col justify-between flex-1 py-1">
           <div>
             <h3 className="text-lg sm:text-xl font-bold text-gray-900 group-hover:text-blue-600 transition leading-snug">
-              <Link href={articleUrl}>{article.title}</Link>
+              <Link href={articleUrl} prefetch={true}>
+                {article.title}
+              </Link>
             </h3>
 
             <div className="flex items-center gap-1 text-xs text-gray-500 mt-2 mb-2">
@@ -82,7 +93,7 @@ export default function ArticleCard({ article, layout = 'standard' }: ArticleCar
   return (
     <article className="group flex flex-col bg-white rounded-lg overflow-hidden border border-gray-200 hover:shadow-md transition duration-200">
       <div className="relative w-full aspect-[16/10] bg-gray-100 overflow-hidden">
-        <Link href={articleUrl} tabIndex={-1}>
+        <Link href={articleUrl} tabIndex={-1} prefetch={true}>
           <Image
             src={article.featuredImage}
             alt={article.featuredImageAlt || article.title}
@@ -95,7 +106,9 @@ export default function ArticleCard({ article, layout = 'standard' }: ArticleCar
 
       <div className="p-4 sm:p-5 flex flex-col flex-1">
         <h3 className="text-lg sm:text-xl font-bold text-gray-900 group-hover:text-blue-600 transition leading-snug line-clamp-2">
-          <Link href={articleUrl}>{article.title}</Link>
+          <Link href={articleUrl} prefetch={true}>
+            {article.title}
+          </Link>
         </h3>
 
         <div className="flex items-center gap-1.5 text-xs text-gray-500 mt-2 mb-3">

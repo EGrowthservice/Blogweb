@@ -1,3 +1,4 @@
+import { cache } from 'react';
 import { connectToDatabase } from '@/lib/db';
 import { Article } from '@/models/Article';
 import { MOCK_ARTICLES, ArticleData } from '@/data/mockArticles';
@@ -30,132 +31,145 @@ function formatArticleDoc(doc: any): ArticleData {
   };
 }
 
-export async function getAllArticles(): Promise<ArticleData[]> {
+// In-Memory Global Process Cache (persists across requests on the server)
+interface CacheEntry<T> {
+  data: T;
+  expiresAt: number;
+}
+
+const memoryCache = new Map<string, CacheEntry<any>>();
+const DEFAULT_TTL_MS = 60 * 1000; // 60 seconds TTL
+
+function getFromCache<T>(key: string): T | null {
+  const item = memoryCache.get(key);
+  if (!item) return null;
+  if (Date.now() > item.expiresAt) {
+    memoryCache.delete(key);
+    return null;
+  }
+  return item.data as T;
+}
+
+function setInCache<T>(key: string, data: T, ttlMs: number = DEFAULT_TTL_MS): void {
+  memoryCache.set(key, {
+    data,
+    expiresAt: Date.now() + ttlMs,
+  });
+}
+
+export function clearArticlesCache(): void {
+  memoryCache.clear();
+}
+
+/**
+ * Fetch all articles with multi-layer caching:
+ * 1. Process Memory Cache (sub-millisecond)
+ * 2. React Request Cache (dedupes per SSR request)
+ * 3. MongoDB Atlas Query
+ * 4. Static Fallback Seed Data
+ */
+export const getAllArticles = cache(async (): Promise<ArticleData[]> => {
+  const cacheKey = 'articles:all';
+  const cached = getFromCache<ArticleData[]>(cacheKey);
+  if (cached) {
+    return cached;
+  }
+
   try {
     const conn = await connectToDatabase();
     if (conn) {
-      const articles = await Article.find().sort({ publishedAt: -1 }).lean();
-      if (articles.length > 0) {
-        return articles.map(formatArticleDoc);
+      const articles = await Article.find().sort({ publishedAt: -1 }).lean().exec();
+      if (articles && articles.length > 0) {
+        const formatted = articles.map(formatArticleDoc);
+        setInCache(cacheKey, formatted);
+        // Pre-warm individual slug cache
+        for (const art of formatted) {
+          setInCache(`articles:slug:${art.slug}`, art);
+        }
+        return formatted;
       }
     }
   } catch (error) {
     console.warn('MongoDB query failed, falling back to mock articles:', error);
   }
+
+  setInCache(cacheKey, MOCK_ARTICLES, 15000);
   return MOCK_ARTICLES;
-}
+});
 
-export async function getFeaturedArticles(): Promise<ArticleData[]> {
-  try {
-    const conn = await connectToDatabase();
-    if (conn) {
-      const articles = await Article.find({ isFeatured: true }).sort({ publishedAt: -1 }).limit(3).lean();
-      if (articles.length > 0) {
-        return articles.map(formatArticleDoc);
-      }
-    }
-  } catch (error) {
-    console.warn('MongoDB query failed, using mock data:', error);
+export const getFeaturedArticles = cache(async (): Promise<ArticleData[]> => {
+  const all = await getAllArticles();
+  const featured = all.filter((a) => a.isFeatured);
+  return featured.length > 0 ? featured.slice(0, 3) : all.slice(0, 3);
+});
+
+export const getTrendingArticles = cache(async (): Promise<ArticleData[]> => {
+  const all = await getAllArticles();
+  const trending = all.filter((a) => a.isTrending);
+  return trending.length > 0 ? trending.slice(0, 5) : all.slice(0, 5);
+});
+
+export const getArticlesByCategory = cache(async (category: string): Promise<ArticleData[]> => {
+  const all = await getAllArticles();
+  return all.filter((a) => a.category === category);
+});
+
+export const getArticleBySlug = cache(async (slug: string): Promise<ArticleData | null> => {
+  const cacheKey = `articles:slug:${slug}`;
+  const cached = getFromCache<ArticleData>(cacheKey);
+  if (cached) {
+    return cached;
   }
-  return MOCK_ARTICLES.filter((a) => a.isFeatured);
-}
 
-export async function getTrendingArticles(): Promise<ArticleData[]> {
-  try {
-    const conn = await connectToDatabase();
-    if (conn) {
-      const articles = await Article.find({ isTrending: true }).sort({ viewsCount: -1 }).limit(5).lean();
-      if (articles.length > 0) {
-        return articles.map(formatArticleDoc);
-      }
+  // Check if already present in all articles cache
+  const allCached = getFromCache<ArticleData[]>('articles:all');
+  if (allCached) {
+    const foundInAll = allCached.find((a) => a.slug === slug);
+    if (foundInAll) {
+      setInCache(cacheKey, foundInAll);
+      return foundInAll;
     }
-  } catch (error) {
-    console.warn('MongoDB query failed, using mock data:', error);
   }
-  return MOCK_ARTICLES.filter((a) => a.isTrending);
-}
 
-export async function getArticlesByCategory(category: string): Promise<ArticleData[]> {
   try {
     const conn = await connectToDatabase();
     if (conn) {
-      const articles = await Article.find({ category }).sort({ publishedAt: -1 }).lean();
-      if (articles.length > 0) {
-        return articles.map(formatArticleDoc);
-      }
-    }
-  } catch (error) {
-    console.warn('MongoDB query failed, using mock data:', error);
-  }
-  return MOCK_ARTICLES.filter((a) => a.category === category);
-}
-
-export async function getArticleBySlug(slug: string): Promise<ArticleData | null> {
-  try {
-    const conn = await connectToDatabase();
-    if (conn) {
-      const article = await Article.findOne({ slug }).lean();
+      const article = await Article.findOne({ slug }).lean().exec();
       if (article) {
-        return formatArticleDoc(article);
+        const formatted = formatArticleDoc(article);
+        setInCache(cacheKey, formatted);
+        return formatted;
       }
     }
   } catch (error) {
     console.warn('MongoDB query failed, using mock data:', error);
   }
+
   const found = MOCK_ARTICLES.find((a) => a.slug === slug);
-  return found || null;
-}
-
-export async function getRelatedArticles(
-  currentSlug: string,
-  category: string,
-  limit: number = 3
-): Promise<ArticleData[]> {
-  try {
-    const conn = await connectToDatabase();
-    if (conn) {
-      const articles = await Article.find({ category, slug: { $ne: currentSlug } })
-        .sort({ publishedAt: -1 })
-        .limit(limit)
-        .lean();
-      if (articles.length > 0) {
-        return articles.map(formatArticleDoc);
-      }
-    }
-  } catch (error) {
-    console.warn('MongoDB query failed, using mock data:', error);
+  if (found) {
+    setInCache(cacheKey, found);
+    return found;
   }
-  return MOCK_ARTICLES.filter((a) => a.slug !== currentSlug && a.category === category).slice(0, limit);
-}
 
-export async function searchArticles(query: string): Promise<ArticleData[]> {
+  return null;
+});
+
+export const getRelatedArticles = cache(
+  async (currentSlug: string, category: string, limit: number = 3): Promise<ArticleData[]> => {
+    const all = await getAllArticles();
+    return all.filter((a) => a.slug !== currentSlug && a.category === category).slice(0, limit);
+  }
+);
+
+export const searchArticles = cache(async (query: string): Promise<ArticleData[]> => {
   const q = query.toLowerCase().trim();
   if (!q) return [];
 
-  try {
-    const conn = await connectToDatabase();
-    if (conn) {
-      const articles = await Article.find({
-        $or: [
-          { title: { $regex: q, $options: 'i' } },
-          { excerpt: { $regex: q, $options: 'i' } },
-          { tags: { $in: [new RegExp(q, 'i')] } },
-        ],
-      })
-        .sort({ publishedAt: -1 })
-        .lean();
-      if (articles.length > 0) {
-        return articles.map(formatArticleDoc);
-      }
-    }
-  } catch (error) {
-    console.warn('MongoDB query failed, using mock search:', error);
-  }
-
-  return MOCK_ARTICLES.filter(
+  const all = await getAllArticles();
+  return all.filter(
     (a) =>
       a.title.toLowerCase().includes(q) ||
       a.excerpt.toLowerCase().includes(q) ||
       a.tags.some((t) => t.toLowerCase().includes(q))
   );
-}
+});

@@ -4,9 +4,9 @@ import React from 'react';
 import { usePathname } from 'next/navigation';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import ReadingProgressBar from '@/components/ReadingProgressBar';
 import BackToTop from '@/components/BackToTop';
-import MobileBottomNav from '@/components/MobileBottomNav';
+import PopupAdModal from '@/components/ads/PopupAdModal';
+import AntiCopy from '@/components/AntiCopy';
 
 export default function PublicLayoutWrapper({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -22,6 +22,10 @@ export default function PublicLayoutWrapper({ children }: { children: React.Reac
       <main className="flex-1">{children}</main>
       <Footer />
       <BackToTop />
+      {/* 10-Second Mobile-Friendly Popup Ad */}
+      <PopupAdModal />
+      {/* Anti-copy content protection */}
+      <AntiCopy />
     </>
   );
 }
