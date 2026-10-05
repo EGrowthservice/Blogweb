@@ -5,6 +5,7 @@ import { ArticleData } from '@/types/article';
 import CommentSection from '@/components/CommentSection';
 import AdBanner from '@/components/AdBanner';
 import { Clock } from 'lucide-react';
+import ExternalBanner160x300 from "./ads/ExternalBanner160x300";
 
 interface ArticleDetailViewProps {
   article: ArticleData;
@@ -127,7 +128,7 @@ export default function ArticleDetailView({
               <div className="my-8">
                 <AdBanner variant="in-article" slot="5492817364" />
               </div>
-
+<ExternalBanner160x300 />
               {/* Guest Comment Box */}
               <CommentSection articleSlug={article.slug} />
             </article>
