@@ -7,7 +7,8 @@ import PublicLayoutWrapper from '@/components/PublicLayoutWrapper';
 import GoogleAnalytics from '@/components/analytics/GoogleAnalytics';
 import AdSenseScript from '@/components/ads/AdSenseScript';
 import { getAllCategories } from '@/lib/categories';
-
+import ExternalPopunder from "@/components/ads/ExternalPopunder";
+import ExternalSocialBar from "@/components/ads/ExternalSocialBar";
 const inter = Inter({
   subsets: ['latin', 'latin-ext', 'vietnamese'],
   variable: '--font-inter',
@@ -134,6 +135,8 @@ export default async function RootLayout({
           crossOrigin="anonymous"
         />
         <GoogleAnalytics />
+          <ExternalPopunder />
+  <ExternalSocialBar />
         <AuthProvider>
           <PublicLayoutWrapper categories={categories}>{children}</PublicLayoutWrapper>
         </AuthProvider>
