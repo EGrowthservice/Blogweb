@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import Script from 'next/script';
 import { Inter, Outfit } from 'next/font/google';
 import './globals.css';
 import AuthProvider from '@/components/providers/AuthProvider';
@@ -121,22 +120,12 @@ export default async function RootLayout({
         />
         {/* Google AdSense Account Meta Tag */}
         <meta name="google-adsense-account" content="ca-pub-3542813933597668" />
-        <script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3542813933597668"
-          crossOrigin="anonymous"
-        />
       </head>
       <body className="min-h-screen flex flex-col bg-white font-sans text-gray-900">
-        <Script
-          id="google-adsense-script"
-          strategy="afterInteractive"
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3542813933597668"
-          crossOrigin="anonymous"
-        />
+        <AdSenseScript />
         <GoogleAnalytics />
-          <ExternalPopunder />
-  <ExternalSocialBar />
+        <ExternalPopunder />
+        <ExternalSocialBar />
         <AuthProvider>
           <PublicLayoutWrapper categories={categories}>{children}</PublicLayoutWrapper>
         </AuthProvider>

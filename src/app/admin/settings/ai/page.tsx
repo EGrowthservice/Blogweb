@@ -91,6 +91,7 @@ export default function AISettingsPage() {
       }
       fetchSettings();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [status, session, router]);
 
   const fetchSettings = async () => {

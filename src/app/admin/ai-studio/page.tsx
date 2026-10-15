@@ -847,8 +847,8 @@ function BriefTab({
       <div className="p-4 bg-indigo-950/30 border border-indigo-500/20 rounded-2xl flex items-start gap-3">
         <Info className="w-4 h-4 text-indigo-400 shrink-0 mt-0.5" />
         <p className="text-xs text-indigo-300/80">
-          Sau khi điền thông tin, bấm <strong>"Tạo Dàn ý"</strong> để AI lên kế hoạch bài viết,
-          hoặc <strong>"Tạo Bài Đầy đủ"</strong> để bỏ qua bước dàn ý. Cả hai nút đều ở thanh bên trái.
+          Sau khi điền thông tin, bấm <strong>&ldquo;Tạo Dàn ý&rdquo;</strong> để AI lên kế hoạch bài viết,
+          hoặc <strong>&ldquo;Tạo Bài Đầy đủ&rdquo;</strong> để bỏ qua bước dàn ý. Cả hai nút đều ở thanh bên trái.
         </p>
       </div>
     </div>
@@ -898,7 +898,7 @@ function OutlineTab({
         </div>
 
         <p className="text-xs text-zinc-500">
-          Dàn ý dưới đây có thể chỉnh sửa tự do. Sau khi hài lòng, bấm <strong className="text-zinc-300">"Viết bài từ Dàn ý"</strong>.
+          Dàn ý dưới đây có thể chỉnh sửa tự do. Sau khi hài lòng, bấm <strong className="text-zinc-300">&ldquo;Viết bài từ Dàn ý&rdquo;</strong>.
         </p>
 
         <textarea
@@ -1171,7 +1171,7 @@ function SEOTab({
         {!seoResult ? (
           <div className="text-center py-12 text-zinc-500">
             <Search className="w-10 h-10 mx-auto mb-3 text-zinc-700" />
-            <p className="text-sm">Bấm "Tạo SEO Data" để AI phân tích và tạo metadata tối ưu</p>
+            <p className="text-sm">Bấm &ldquo;Tạo SEO Data&rdquo; để AI phân tích và tạo metadata tối ưu</p>
           </div>
         ) : (
           <div className="space-y-4">
@@ -1212,7 +1212,7 @@ function SEOTab({
               <Info className="w-3.5 h-3.5 shrink-0 mt-0.5" />
               <span>
                 Các đề xuất này chỉ mang tính gợi ý. Vui lòng review và điều chỉnh phù hợp với bài viết thực tế.
-                Sao chép các giá trị và điền vào form bài viết sau khi bấm "Dùng trong Editor".
+                Sao chép các giá trị và điền vào form bài viết sau khi bấm &ldquo;Dùng trong Editor&rdquo;.
               </span>
             </div>
           </div>
@@ -1337,6 +1337,7 @@ function MediaTab({ generatedContent, onCopy }: { generatedContent: string; onCo
         </div>
         {embedCode && embedCode.includes('<img') && (
           <div className="space-y-2">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             {imgUrl && <img src={imgUrl} alt={altText} className="max-w-full rounded-xl max-h-48 object-cover" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />}
             <div className="flex items-center gap-2">
               <code className="flex-1 bg-zinc-800 border border-zinc-700 rounded-xl px-3 py-2 text-[11px] text-zinc-400 font-mono overflow-auto">{embedCode}</code>

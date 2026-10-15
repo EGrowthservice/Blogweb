@@ -13,6 +13,7 @@ export interface IAdvertisingSettings extends Document {
   adsenseContentSlot: string;
   adsenseSidebarSlot: string;
   adsenseFooterSlot: string;
+  adsterraEnabled: boolean;
   gtmEnabled: boolean;
   gtmContainerId: string;
   createdAt: Date;
@@ -37,6 +38,7 @@ const AdvertisingSettingsSchema = new Schema<IAdvertisingSettings>(
     adsenseContentSlot: { type: String, default: '', trim: true },
     adsenseSidebarSlot: { type: String, default: '', trim: true },
     adsenseFooterSlot: { type: String, default: '', trim: true },
+    adsterraEnabled: { type: Boolean, default: false },
     gtmEnabled: { type: Boolean, default: false },
     gtmContainerId: { type: String, default: '', trim: true },
   },
@@ -56,6 +58,7 @@ export async function getOrCreateAdvertisingSettings(): Promise<IAdvertisingSett
       gaEnabled: true,
       gaMeasurementId: 'G-5F0GDVTZPE',
       adsensePublisherId: process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || 'ca-pub-0000000000000000',
+      adsterraEnabled: false,
     });
   }
   return settings;

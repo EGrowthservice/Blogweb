@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const NATIVE_SCRIPT =
   "https://bicea.org/21/74470e21bd820fa79f095f4933e30022";
@@ -10,8 +10,28 @@ const CONTAINER_ID =
 
 export default function ExternalNativeBanner() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [enabled, setEnabled] = useState<boolean | null>(null);
 
   useEffect(() => {
+    let isMounted = true;
+    fetch('/api/settings/advertising')
+      .then((res) => res.json())
+      .then((json) => {
+        if (!isMounted) return;
+        setEnabled(!!json?.data?.adsterraEnabled);
+      })
+      .catch(() => {
+        if (isMounted) setEnabled(false);
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!enabled) return;
+
     const container = containerRef.current;
     if (!container) return;
 
@@ -30,7 +50,11 @@ export default function ExternalNativeBanner() {
 
     container.appendChild(adContainer);
     container.appendChild(script);
-  }, []);
+  }, [enabled]);
+
+  if (!enabled) {
+    return null;
+  }
 
   return (
     <div

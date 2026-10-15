@@ -1,14 +1,34 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const AD_KEY = "850cdc4e8dbdf125fffd09f647b32e54";
 const AD_SCRIPT = `https://bicea.org/22/${AD_KEY}`;
 
 export default function ExternalBanner160x300() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [enabled, setEnabled] = useState<boolean | null>(null);
 
   useEffect(() => {
+    let isMounted = true;
+    fetch('/api/settings/advertising')
+      .then((res) => res.json())
+      .then((json) => {
+        if (!isMounted) return;
+        setEnabled(!!json?.data?.adsterraEnabled);
+      })
+      .catch(() => {
+        if (isMounted) setEnabled(false);
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!enabled) return;
+
     const container = containerRef.current;
     if (!container) return;
 
@@ -42,7 +62,11 @@ export default function ExternalBanner160x300() {
       // Không xoá DOM khi React Strict Mode chạy effect lần đầu
       // để tránh inject script trùng.
     };
-  }, []);
+  }, [enabled]);
+
+  if (!enabled) {
+    return null;
+  }
 
   return (
     <div className="my-6 flex w-full justify-center overflow-hidden">

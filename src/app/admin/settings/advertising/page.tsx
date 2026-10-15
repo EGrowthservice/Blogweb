@@ -13,6 +13,9 @@ import {
   ShieldCheck,
   Tag,
   HelpCircle,
+  Radio,
+  Zap,
+  Power,
 } from 'lucide-react';
 import { useToast } from '@/components/admin/ToastContext';
 import { SkeletonTable, ErrorState } from '@/components/admin/StateViews';
@@ -47,6 +50,9 @@ export default function AdvertisingSettingsPage() {
   const [gtmEnabled, setGtmEnabled] = useState(false);
   const [gtmContainerId, setGtmContainerId] = useState('');
 
+  // 5. Adsterra Network
+  const [adsterraEnabled, setAdsterraEnabled] = useState(false);
+
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
 
   const fetchSettings = async () => {
@@ -75,6 +81,7 @@ export default function AdvertisingSettingsPage() {
       setAdsenseFooterSlot(d.adsenseFooterSlot || '');
       setGtmEnabled(d.gtmEnabled ?? false);
       setGtmContainerId(d.gtmContainerId || '');
+      setAdsterraEnabled(d.adsterraEnabled ?? false);
     } catch (err: any) {
       setError(err.message || 'Lỗi khi tải cấu hình');
     } finally {
@@ -131,6 +138,7 @@ export default function AdvertisingSettingsPage() {
         adsenseContentSlot: adsenseContentSlot.trim(),
         adsenseSidebarSlot: adsenseSidebarSlot.trim(),
         adsenseFooterSlot: adsenseFooterSlot.trim(),
+        adsterraEnabled,
         gtmEnabled,
         gtmContainerId: gtmContainerId.trim(),
       };
@@ -323,8 +331,19 @@ export default function AdvertisingSettingsPage() {
                 <LayoutGrid className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="text-base font-bold text-white">Google AdSense</h3>
-                <p className="text-xs text-zinc-400">
+                <div className="flex items-center gap-2.5">
+                  <h3 className="text-base font-bold text-white">Google AdSense</h3>
+                  <span
+                    className={`px-2 py-0.5 rounded-full text-[10px] font-semibold border ${
+                      adsenseEnabled
+                        ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20'
+                        : 'bg-zinc-800 text-zinc-400 border-zinc-700'
+                    }`}
+                  >
+                    {adsenseEnabled ? 'Đang bật' : 'Đang tắt'}
+                  </span>
+                </div>
+                <p className="text-xs text-zinc-400 mt-0.5">
                   Quản lý mã nhà xuất bản (Publisher ID) và các Slot quảng cáo trên giao diện blog
                 </p>
               </div>
@@ -444,7 +463,94 @@ export default function AdvertisingSettingsPage() {
           </div>
         </div>
 
-        {/* 4. Google Tag Manager (GTM) */}
+        {/* 4. Adsterra Network Section */}
+        <div className="p-6 bg-zinc-900 border border-zinc-800 rounded-2xl space-y-5 shadow-xl">
+          <div className="flex items-center justify-between border-b border-zinc-800/80 pb-4">
+            <div className="flex items-center gap-3">
+              <div className="p-2.5 rounded-xl bg-orange-500/10 text-orange-400 border border-orange-500/20">
+                <Radio className="w-5 h-5" />
+              </div>
+              <div>
+                <div className="flex items-center gap-2.5">
+                  <h3 className="text-base font-bold text-white">Mạng quảng cáo Adsterra</h3>
+                  <span
+                    className={`px-2 py-0.5 rounded-full text-[10px] font-semibold border ${
+                      adsterraEnabled
+                        ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20'
+                        : 'bg-rose-500/10 text-rose-400 border-rose-500/20'
+                    }`}
+                  >
+                    {adsterraEnabled ? 'Đang hoạt động' : 'Tạm thời tắt'}
+                  </span>
+                </div>
+                <p className="text-xs text-zinc-400 mt-0.5">
+                  Bật/tắt toàn bộ quảng cáo Adsterra (Popunder, Social Bar, Banner 160x300, Native Ads, Smartlink)
+                </p>
+              </div>
+            </div>
+
+            <label className="relative inline-flex items-center cursor-pointer">
+              <input
+                type="checkbox"
+                checked={adsterraEnabled}
+                onChange={(e) => setAdsterraEnabled(e.target.checked)}
+                className="sr-only peer"
+              />
+              <div className="w-11 h-6 bg-zinc-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-orange-500" />
+            </label>
+          </div>
+
+          <div className="space-y-3">
+            <div
+              className={`p-4 rounded-xl border text-xs space-y-2 ${
+                adsterraEnabled
+                  ? 'bg-orange-950/20 border-orange-500/30 text-orange-200'
+                  : 'bg-zinc-800/50 border-zinc-700/60 text-zinc-400'
+              }`}
+            >
+              <div className="flex items-center gap-2 font-semibold">
+                <Zap className="w-4 h-4 text-orange-400" />
+                <span>
+                  {adsterraEnabled
+                    ? 'Quảng cáo Adsterra đang được phân phát tới người xem'
+                    : 'Đã tạm thời dừng toàn bộ script quảng cáo Adsterra'}
+                </span>
+              </div>
+              <p className="text-[11px] leading-relaxed text-zinc-400">
+                Khi công tắc này <strong>TẮT</strong>, toàn bộ script Popunder (afders.org), Social Bar (bicea.org), Banner 160x300 và Native ads sẽ <strong>không được tải</strong> trên trình duyệt của độc giả.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+              <div className="p-3 bg-zinc-800/40 rounded-xl border border-zinc-800 flex items-center justify-between">
+                <span className="text-zinc-300">External Popunder</span>
+                <span className={`text-[10px] font-semibold px-2 py-0.5 rounded ${adsterraEnabled ? 'text-emerald-400 bg-emerald-500/10' : 'text-zinc-500 bg-zinc-800'}`}>
+                  {adsterraEnabled ? 'Bật' : 'Tắt'}
+                </span>
+              </div>
+              <div className="p-3 bg-zinc-800/40 rounded-xl border border-zinc-800 flex items-center justify-between">
+                <span className="text-zinc-300">External Social Bar</span>
+                <span className={`text-[10px] font-semibold px-2 py-0.5 rounded ${adsterraEnabled ? 'text-emerald-400 bg-emerald-500/10' : 'text-zinc-500 bg-zinc-800'}`}>
+                  {adsterraEnabled ? 'Bật' : 'Tắt'}
+                </span>
+              </div>
+              <div className="p-3 bg-zinc-800/40 rounded-xl border border-zinc-800 flex items-center justify-between">
+                <span className="text-zinc-300">Banner 160x300</span>
+                <span className={`text-[10px] font-semibold px-2 py-0.5 rounded ${adsterraEnabled ? 'text-emerald-400 bg-emerald-500/10' : 'text-zinc-500 bg-zinc-800'}`}>
+                  {adsterraEnabled ? 'Bật' : 'Tắt'}
+                </span>
+              </div>
+              <div className="p-3 bg-zinc-800/40 rounded-xl border border-zinc-800 flex items-center justify-between">
+                <span className="text-zinc-300">Native Banner</span>
+                <span className={`text-[10px] font-semibold px-2 py-0.5 rounded ${adsterraEnabled ? 'text-emerald-400 bg-emerald-500/10' : 'text-zinc-500 bg-zinc-800'}`}>
+                  {adsterraEnabled ? 'Bật' : 'Tắt'}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* 5. Google Tag Manager (GTM) */}
         <div className="p-6 bg-zinc-900 border border-zinc-800 rounded-2xl space-y-5 shadow-xl">
           <div className="flex items-center justify-between border-b border-zinc-800/80 pb-4">
             <div className="flex items-center gap-3">

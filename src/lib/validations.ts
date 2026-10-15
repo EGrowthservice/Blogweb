@@ -93,6 +93,7 @@ export const AdvertisingSettingsSchema = z.object({
   adsenseContentSlot: z.string().trim().regex(/^[0-9]*$/, 'Slot ID chỉ được chứa chữ số').default(''),
   adsenseSidebarSlot: z.string().trim().regex(/^[0-9]*$/, 'Slot ID chỉ được chứa chữ số').default(''),
   adsenseFooterSlot: z.string().trim().regex(/^[0-9]*$/, 'Slot ID chỉ được chứa chữ số').default(''),
+  adsterraEnabled: z.boolean().default(false),
   gtmEnabled: z.boolean().default(false),
   gtmContainerId: z
     .string()

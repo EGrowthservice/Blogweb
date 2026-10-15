@@ -7,21 +7,30 @@ const SCRIPT_URL =
 
 export default function ExternalSocialBar() {
   useEffect(() => {
-    const existing = document.querySelector(
-      `script[src="${SCRIPT_URL}"]`
-    );
+    let isMounted = true;
 
-    if (existing) return;
+    fetch('/api/settings/advertising')
+      .then((res) => res.json())
+      .then((json) => {
+        if (!isMounted) return;
+        if (!json?.success || !json?.data?.adsterraEnabled) {
+          return;
+        }
 
-    const script = document.createElement("script");
+        const existing = document.querySelector(
+          `script[src="${SCRIPT_URL}"]`
+        );
+        if (existing) return;
 
-    script.setAttribute("data-cfasync", "false");
-    script.src = SCRIPT_URL;
-
-    document.body.appendChild(script);
+        const script = document.createElement("script");
+        script.setAttribute("data-cfasync", "false");
+        script.src = SCRIPT_URL;
+        document.body.appendChild(script);
+      })
+      .catch((err) => console.error("Failed to load ExternalSocialBar config:", err));
 
     return () => {
-      // Giữ script sau khi load.
+      isMounted = false;
     };
   }, []);
 
