@@ -19,6 +19,8 @@ import {
   ShieldCheck,
   UserCheck,
   Megaphone,
+  Sparkles,
+  Settings2,
 } from 'lucide-react';
 import { ToastProvider } from '@/components/admin/ToastContext';
 
@@ -73,6 +75,21 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       active: pathname.startsWith('/admin/settings/advertising'),
       show: isAdmin,
     },
+    {
+      label: 'AI Article Studio',
+      href: '/admin/ai-studio',
+      icon: Sparkles,
+      active: pathname.startsWith('/admin/ai-studio'),
+      show: true,
+      highlight: true,
+    },
+    {
+      label: 'AI Settings',
+      href: '/admin/settings/ai',
+      icon: Settings2,
+      active: pathname.startsWith('/admin/settings/ai'),
+      show: isAdmin,
+    },
   ];
 
   // Helper for Breadcrumbs
@@ -91,6 +108,10 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         crumbs.push({ label: 'Người dùng', href: '/admin/users' });
       } else if (parts[1] === 'settings' && parts[2] === 'advertising') {
         crumbs.push({ label: 'Cài đặt Quảng cáo', href: '/admin/settings/advertising' });
+      } else if (parts[1] === 'ai-studio') {
+        crumbs.push({ label: 'AI Article Studio', href: '/admin/ai-studio' });
+      } else if (parts[1] === 'settings' && parts[2] === 'ai') {
+        crumbs.push({ label: 'AI Settings', href: '/admin/settings/ai' });
       }
     }
     return crumbs;
@@ -174,11 +195,16 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                       className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all ${
                         item.active
                           ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/20 font-semibold'
+                          : (item as any).highlight
+                          ? 'text-violet-300 hover:text-violet-100 hover:bg-violet-950/30 border border-violet-500/10'
                           : 'text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800/70'
                       }`}
                     >
                       <Icon className="w-4 h-4 shrink-0" />
                       {item.label}
+                      {(item as any).highlight && !item.active && (
+                        <span className="ml-auto text-[9px] font-bold uppercase tracking-wider bg-violet-500/20 text-violet-300 border border-violet-500/30 px-1.5 py-0.5 rounded">AI</span>
+                      )}
                     </Link>
                   );
                 })}

@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import {
@@ -15,6 +15,8 @@ import {
   Sparkles,
   Flame,
   CheckCircle,
+  Wand2,
+  X,
 } from 'lucide-react';
 import { useToast } from '@/components/admin/ToastContext';
 
@@ -48,16 +50,24 @@ interface PostEditorProps {
 
 export function PostEditor({ initialData, isEditMode = false }: PostEditorProps) {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const toast = useToast();
+
+  // Check for AI-prefilled content from URL params
+  const aiTitle = searchParams.get('ai_title') || '';
+  const aiContent = searchParams.get('ai_content') || '';
+  const aiExcerpt = searchParams.get('ai_excerpt') || '';
+  const aiTags = searchParams.get('ai_tags') || '';
+  const hasAIContent = !isEditMode && (!!aiTitle || !!aiContent);
 
   const [categories, setCategories] = useState<CategoryOption[]>([]);
   const [loadingCategories, setLoadingCategories] = useState(true);
 
-  // Form State
-  const [title, setTitle] = useState(initialData?.title || '');
-  const [slug, setSlug] = useState(initialData?.slug || '');
-  const [excerpt, setExcerpt] = useState(initialData?.excerpt || '');
-  const [content, setContent] = useState(initialData?.content || '');
+  // Form State — pre-fill from AI params if available
+  const [title, setTitle] = useState(initialData?.title || aiTitle || '');
+  const [slug, setSlug] = useState(initialData?.slug || (aiTitle ? generateSlugStatic(aiTitle) : ''));
+  const [excerpt, setExcerpt] = useState(initialData?.excerpt || aiExcerpt || '');
+  const [content, setContent] = useState(initialData?.content || aiContent || '');
   const [categoryId, setCategoryId] = useState<string>(
     typeof initialData?.categoryId === 'object'
       ? initialData?.categoryId?._id
@@ -65,17 +75,30 @@ export function PostEditor({ initialData, isEditMode = false }: PostEditorProps)
   );
   const [thumbnail, setThumbnail] = useState(initialData?.thumbnail || '');
   const [thumbnailAlt, setThumbnailAlt] = useState(initialData?.thumbnailAlt || '');
-  const [tagsInput, setTagsInput] = useState(initialData?.tags?.join(', ') || '');
+  const [tagsInput, setTagsInput] = useState(initialData?.tags?.join(', ') || aiTags || '');
   const [status, setStatus] = useState<'draft' | 'published' | 'archived'>(
     initialData?.status || 'draft'
   );
   const [isFeatured, setIsFeatured] = useState(initialData?.isFeatured ?? false);
   const [isTrending, setIsTrending] = useState(initialData?.isTrending ?? false);
   const [readTimeMinutes, setReadTimeMinutes] = useState(initialData?.readTimeMinutes ?? 5);
+  const [showAIBanner, setShowAIBanner] = useState(hasAIContent);
 
   const [submitting, setSubmitting] = useState(false);
   const [formError, setFormError] = useState('');
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
+
+  // Static slug generator (used for initial state before hooks run)
+  function generateSlugStatic(str: string) {
+    return str
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/[đĐ]/g, 'd')
+      .replace(/[^a-z0-9\s-]/g, '')
+      .trim()
+      .replace(/\s+/g, '-');
+  }
 
   // Helper to slugify
   const generateSlug = (str: string) => {
@@ -215,6 +238,19 @@ export function PostEditor({ initialData, isEditMode = false }: PostEditorProps)
 
   return (
     <div className="space-y-6 max-w-5xl mx-auto">
+      {/* AI Content Banner */}
+      {showAIBanner && (
+        <div className="p-4 bg-violet-500/10 border border-violet-500/20 rounded-2xl flex items-start gap-3">
+          <Wand2 className="w-5 h-5 shrink-0 text-violet-400 mt-0.5" />
+          <div className="flex-1">
+            <p className="text-sm font-semibold text-violet-300">Nội dung từ AI Article Studio</p>
+            <p className="text-xs text-violet-400/80 mt-0.5">Tiêu đề, nội dung và tóm tắt đã được điền sẵn từ AI. Kiểm tra lại trước khi lưu — đặc biệt là ảnh đại diện, danh mục và slug.</p>
+          </div>
+          <button onClick={() => setShowAIBanner(false)} className="text-violet-400 hover:text-violet-200">
+            <X className="w-4 h-4" />
+          </button>
+        </div>
+      )}
       {/* Top action bar */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-zinc-800/80 pb-4">
         <div className="flex items-center gap-3">
