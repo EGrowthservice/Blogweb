@@ -60,8 +60,9 @@ export default function AdSenseAd({
   };
 
   const actualSlot = getSlotId();
-  const publisherId = config?.adsensePublisherId || process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || '';
-  const isEnabled = config?.adsenseEnabled ?? false;
+  const defaultClientId = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || 'ca-pub-3542813933597668';
+  const publisherId = config?.adsensePublisherId || defaultClientId;
+  const isEnabled = config ? config.adsenseEnabled : true;
   const isProduction =
     isEnabled && publisherId.startsWith('ca-pub-') && publisherId !== 'ca-pub-0000000000000000';
 

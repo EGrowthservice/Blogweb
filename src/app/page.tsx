@@ -30,6 +30,11 @@ export default async function HomePage() {
 
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+      {/* Top Header Leaderboard Ad */}
+      <div className="mb-8">
+        <AdBanner variant="leaderboard" slot="7182930415" />
+      </div>
+
       {/* 1. Dynamic Categories Showcase (Show only when articles exist) */}
       {hasAnyCategoryArticles && (
         <section className="mb-12 pb-10 border-b border-gray-200">

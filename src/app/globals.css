@@ -107,3 +107,248 @@ textarea,
 .animate-scale-up {
   animation: scaleUp 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
+
+/* ========================================================
+   INDEPENDENT MEDIA BLOCKS, RESIZING & DND (BLOGWEB)
+   ======================================================== */
+.media-block {
+  position: relative;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  border: 2px solid transparent;
+  border-radius: 12px;
+  padding: 4px;
+}
+
+.blogweb-visual-editor .media-block {
+  border: 2px solid #3f3f46;
+  border-radius: 12px;
+  padding: 8px;
+  margin: 1.5rem auto;
+  user-select: none;
+}
+
+.blogweb-visual-editor .media-block:hover,
+.blogweb-visual-editor .media-block.is-selected {
+  border-color: #6366f1 !important;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.35) !important;
+}
+
+.blogweb-visual-editor .media-block.is-dragging {
+  opacity: 0.45;
+  border-style: dashed;
+  border-color: #9ca3af;
+}
+
+/* Drop Indicator Lines */
+.blogweb-visual-editor .drop-indicator-top {
+  border-top: 3px solid #6366f1 !important;
+}
+
+.blogweb-visual-editor .drop-indicator-bottom {
+  border-bottom: 3px solid #6366f1 !important;
+}
+
+/* Floating Action Toolbar on Media Block (Always visible inside editor on hover/select) */
+.media-block-toolbar {
+  display: none;
+  align-items: center;
+  gap: 6px;
+  background: rgba(15, 23, 42, 0.95);
+  backdrop-filter: blur(8px);
+  color: #f4f4f5;
+  padding: 5px 8px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.6), 0 8px 10px -6px rgba(0, 0, 0, 0.6);
+  z-index: 50;
+  font-size: 12px;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.blogweb-visual-editor .media-block-toolbar {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 0.95;
+  pointer-events: auto;
+}
+
+.blogweb-visual-editor .media-block:hover .media-block-toolbar,
+.blogweb-visual-editor .media-block.is-selected .media-block-toolbar {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.media-toolbar-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 2px 4px;
+  border-radius: 6px;
+}
+
+.media-toolbar-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #a1a1aa;
+  padding: 0 4px;
+}
+
+.media-drag-handle {
+  cursor: grab;
+  padding: 3px 6px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #cbd5e1;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 4px;
+  transition: background 0.15s ease, color 0.15s ease;
+  user-select: none;
+}
+
+.media-drag-handle:hover {
+  background: rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+}
+
+.media-drag-handle:active {
+  cursor: grabbing;
+}
+
+.media-btn {
+  background: transparent;
+  border: none;
+  color: #e2e8f0;
+  padding: 3px 6px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.media-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+.media-btn.active {
+  background: #6366f1;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.media-delete-btn {
+  background: rgba(239, 68, 68, 0.2) !important;
+  color: #fca5a5 !important;
+  border: 1px solid rgba(239, 68, 68, 0.4) !important;
+  font-weight: 700 !important;
+  padding: 3px 8px !important;
+  border-radius: 6px !important;
+}
+
+.media-delete-btn:hover {
+  background: #ef4444 !important;
+  color: #ffffff !important;
+  border-color: #ef4444 !important;
+}
+
+/* Mouse Resize Corner Handles */
+.media-resize-handle {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  background: #6366f1;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  display: none;
+  z-index: 50;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  transition: transform 0.1s ease;
+  cursor: nwse-resize;
+  pointer-events: auto;
+}
+
+.media-resize-handle:hover {
+  transform: scale(1.35);
+  background: #4f46e5;
+}
+
+.blogweb-visual-editor .media-resize-handle {
+  display: block !important;
+  visibility: visible !important;
+}
+
+.blogweb-visual-editor .media-resize-se {
+  bottom: -7px;
+  right: -7px;
+  cursor: nwse-resize;
+}
+
+.blogweb-visual-editor .media-resize-sw {
+  bottom: -7px;
+  left: -7px;
+  cursor: nesw-resize;
+}
+
+/* Instant Upload Preview & Overlays */
+.media-upload-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(24, 24, 27, 0.85);
+  backdrop-filter: blur(2px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #818cf8;
+  border-radius: 10px;
+  z-index: 20;
+}
+
+.media-upload-error {
+  position: absolute;
+  inset: 0;
+  background: rgba(69, 10, 10, 0.94);
+  backdrop-filter: blur(2px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #f87171;
+  border-radius: 10px;
+  z-index: 20;
+  padding: 1rem;
+}
+
+/* Public Article Detail: pristine styling with 0 editor chrome (NEVER apply to visual editor) */
+article:not(.blogweb-visual-editor) .media-block,
+div:not(.blogweb-visual-editor).article-prose .media-block {
+  border: none;
+  padding: 0;
+  border-radius: 0;
+}
+
+article:not(.blogweb-visual-editor) .media-block-toolbar,
+div:not(.blogweb-visual-editor).article-prose .media-block-toolbar,
+article:not(.blogweb-visual-editor) .media-resize-handle,
+div:not(.blogweb-visual-editor).article-prose .media-resize-handle {
+  display: none !important;
+}

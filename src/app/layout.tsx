@@ -4,7 +4,6 @@ import './globals.css';
 import AuthProvider from '@/components/providers/AuthProvider';
 import PublicLayoutWrapper from '@/components/PublicLayoutWrapper';
 import GoogleAnalytics from '@/components/analytics/GoogleAnalytics';
-import AdSenseScript from '@/components/ads/AdSenseScript';
 import { getAllCategories } from '@/lib/categories';
 import ExternalPopunder from "@/components/ads/ExternalPopunder";
 import ExternalSocialBar from "@/components/ads/ExternalSocialBar";
@@ -24,6 +23,9 @@ const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.pulseetm.click'
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
+  verification: {
+    google: 'rpBsmx7-EVogE7lH6Ybg9T_U_MA4k6qCXbQKSkcsxqg',
+  },
   other: {
     'google-adsense-account': 'ca-pub-3542813933597668',
   },
@@ -113,16 +115,29 @@ export default async function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${outfit.variable}`}>
       <head>
+        {/* Google Site Verification for Search Console */}
+        <meta
+          name="google-site-verification"
+          content="rpBsmx7-EVogE7lH6Ybg9T_U_MA4k6qCXbQKSkcsxqg"
+        />
+
+        {/* Google AdSense Account Meta Tag */}
+        <meta name="google-adsense-account" content={adsenseId} />
+
+        {/* Google AdSense Script in Head */}
+        <script
+          async
+          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseId}`}
+          crossOrigin="anonymous"
+        />
+
         {/* Organization & WebSite JSON-LD Schema */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
-        {/* Google AdSense Account Meta Tag */}
-        <meta name="google-adsense-account" content="ca-pub-3542813933597668" />
       </head>
       <body className="min-h-screen flex flex-col bg-white font-sans text-gray-900">
-        <AdSenseScript />
         <GoogleAnalytics />
         <ExternalPopunder />
         <ExternalSocialBar />
