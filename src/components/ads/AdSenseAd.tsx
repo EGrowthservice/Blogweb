@@ -102,11 +102,22 @@ export default function AdSenseAd({
 
   return (
     <div
-      className={`ad-container flex flex-col items-center justify-center overflow-hidden rounded-md border border-gray-200 bg-gray-50 p-2 text-center transition-all ${getContainerStyle()} ${className}`}
+      className={`ad-container flex flex-col items-center justify-center overflow-hidden rounded-md border border-gray-200 bg-gray-50 p-3 text-center transition-all ${getContainerStyle()} ${className}`}
     >
-      <span className="text-[10px] uppercase tracking-widest text-gray-400 mb-1 select-none font-medium">
-        ADVERTISEMENT
-      </span>
+      <div className="flex flex-wrap items-center justify-center gap-2 mb-2 select-none">
+        <span className="text-[10px] uppercase tracking-widest text-gray-400 font-bold">
+          ADVERTISEMENT
+        </span>
+        <span className="text-[10px] text-gray-300">•</span>
+        <span className="text-[10px] font-mono text-gray-600 bg-white px-2 py-0.5 rounded border border-gray-200">
+          ID: <strong className="text-gray-800">{publisherId}</strong>
+        </span>
+        {actualSlot && (
+          <span className="text-[10px] font-mono text-gray-600 bg-white px-2 py-0.5 rounded border border-gray-200">
+            Slot: <strong className="text-gray-800">{actualSlot}</strong>
+          </span>
+        )}
+      </div>
 
       <ins
         className="adsbygoogle"
