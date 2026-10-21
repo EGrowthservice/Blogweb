@@ -30,14 +30,9 @@ export default async function HomePage() {
 
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
-      {/* Top Header Leaderboard Ad */}
-      <div className="mb-8">
-        <AdBanner variant="leaderboard" slot="7182930415" />
-      </div>
-
       {/* 1. Dynamic Categories Showcase (Show only when articles exist) */}
       {hasAnyCategoryArticles && (
-        <section className="mb-12 pb-10 border-b border-gray-200">
+        <section className="mb-8 pb-8 border-b border-gray-200">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
             {categoryHighlights.map(({ category, article }) => (
               <div key={category.slug} className="flex flex-col">
@@ -100,6 +95,11 @@ export default async function HomePage() {
           </div>
         </section>
       )}
+
+      {/* Prominent High-Visibility Ad Placement between Highlights and Latest Stories */}
+      <div className="my-8">
+        <AdBanner variant="leaderboard" slot="7182930415" />
+      </div>
 
       {/* 2. Main 2-Column Stories Feed */}
       <section className="mb-12">
