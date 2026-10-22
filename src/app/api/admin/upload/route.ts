@@ -41,8 +41,9 @@ export async function POST(req: NextRequest) {
 
     const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://mmltqgekvpdnezqdavvc.supabase.co';
     const serviceKey =
-      process.env.NEXT_PUBLIC_SUPABASE_SECRET ||
       process.env.SUPABASE_SERVICE_ROLE_KEY ||
+      process.env.SUPABASE_SECRET ||
+      process.env.NEXT_PUBLIC_SUPABASE_SECRET ||
       process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ||
       '';
 
