@@ -7,7 +7,7 @@ import ArticleCard from '@/components/ArticleCard';
 import AdBanner from '@/components/AdBanner';
 import { ChevronRight, Newspaper } from 'lucide-react';
 
-export const revalidate = 0; // Dynamic database updates
+export const revalidate = 60; // ISR cache 60s for instant loading
 
 export const metadata: Metadata = {
   title: 'All Stories & Archive | PULSE Entertainment',

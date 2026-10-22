@@ -7,7 +7,7 @@ import ArticleCard from '@/components/ArticleCard';
 import AdBanner from '@/components/AdBanner';
 import { Clock, ArrowRight } from 'lucide-react';
 
-export const revalidate = 0; // Dynamic database updates
+export const revalidate = 60; // ISR cache 60s for blazing-fast initial load
 
 export default async function HomePage() {
   const [categories, articles] = await Promise.all([

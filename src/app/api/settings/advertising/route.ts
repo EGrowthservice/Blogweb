@@ -4,13 +4,25 @@ import { getOrCreateAdvertisingSettings } from '@/models/AdvertisingSettings';
 
 export const dynamic = 'force-dynamic';
 
+let cachedResponse: any = null;
+let lastCacheTime = 0;
+const CACHE_TTL_MS = 60 * 1000; // 60 seconds TTL
+
 export async function GET() {
+  const now = Date.now();
+  if (cachedResponse && now - lastCacheTime < CACHE_TTL_MS) {
+    return NextResponse.json(cachedResponse, {
+      headers: {
+        'Cache-Control': 'public, max-age=60, stale-while-revalidate=120',
+      },
+    });
+  }
+
   try {
     await connectToDatabase();
     const settings = await getOrCreateAdvertisingSettings();
 
-    // Only return safe public configuration
-    return NextResponse.json({
+    const responseData = {
       success: true,
       data: {
         gaEnabled: settings.gaEnabled,
@@ -28,6 +40,15 @@ export async function GET() {
         adsterraEnabled: settings.adsterraEnabled ?? false,
         gtmEnabled: settings.gtmEnabled,
         gtmContainerId: settings.gtmContainerId,
+      },
+    };
+
+    cachedResponse = responseData;
+    lastCacheTime = now;
+
+    return NextResponse.json(responseData, {
+      headers: {
+        'Cache-Control': 'public, max-age=60, stale-while-revalidate=120',
       },
     });
   } catch (error: any) {

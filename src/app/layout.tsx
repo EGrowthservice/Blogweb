@@ -124,6 +124,12 @@ export default async function RootLayout({
         {/* Google AdSense Account Meta Tag */}
         <meta name="google-adsense-account" content={adsenseId} />
 
+        {/* Performance Preconnect & DNS Prefetch */}
+        <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://images.unsplash.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="https://googleads.g.doubleclick.net" />
+
         {/* Google AdSense Script in Head */}
         <script
           async
