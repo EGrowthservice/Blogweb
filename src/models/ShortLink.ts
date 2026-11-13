@@ -7,6 +7,7 @@ export interface IShortLink extends Document {
   articleTitle: string;
   category: string;
   targetUrl: string;
+  mode?: 'title' | 'random';
   clicks: number;
   lastVisitedAt?: Date;
   createdAt: Date;
@@ -48,6 +49,11 @@ const ShortLinkSchema = new Schema<IShortLink>(
       type: String,
       required: true,
       trim: true,
+    },
+    mode: {
+      type: String,
+      enum: ['title', 'random'],
+      default: 'title',
     },
     clicks: {
       type: Number,

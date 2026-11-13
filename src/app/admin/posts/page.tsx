@@ -21,6 +21,7 @@ import { ConfirmDialog } from '@/components/admin/ConfirmDialog';
 import { ServerPagination } from '@/components/admin/ServerPagination';
 import { SearchInput } from '@/components/admin/SearchInput';
 import { SkeletonTable, EmptyState, ErrorState } from '@/components/admin/StateViews';
+import ShortLinkModal from '@/components/ShortLinkModal';
 
 interface PostItem {
   _id: string;
@@ -58,6 +59,9 @@ export default function AdminPostsPage() {
   // Delete Confirm Dialog
   const [deleteTarget, setDeleteTarget] = useState<PostItem | null>(null);
   const [deleteLoading, setDeleteLoading] = useState(false);
+
+  // ShortLink Preview Modal
+  const [shortLinkTarget, setShortLinkTarget] = useState<PostItem | null>(null);
 
   // Fetch Categories for the filter dropdown
   useEffect(() => {
@@ -328,9 +332,9 @@ export default function AdminPostsPage() {
                         {post.status === 'published' && (
                           <>
                             <button
-                              onClick={() => handleCopyShortLink(post.slug)}
+                              onClick={() => setShortLinkTarget(post)}
                               className="p-1.5 text-blue-400 hover:text-blue-300 bg-blue-950/20 hover:bg-blue-950/40 rounded-lg border border-blue-900/30 transition-colors"
-                              title="Tạo & sao chép Shortlink theo title"
+                              title="Mở bảng tạo & xem trước Shortlink (Title hoặc Random)"
                             >
                               <Link2 className="w-4 h-4" />
                             </button>
@@ -392,6 +396,17 @@ export default function AdminPostsPage() {
         onConfirm={handleConfirmDelete}
         onCancel={() => setDeleteTarget(null)}
       />
+
+      {/* ShortLink Preview & Generator Modal */}
+      {shortLinkTarget && (
+        <ShortLinkModal
+          isOpen={!!shortLinkTarget}
+          onClose={() => setShortLinkTarget(null)}
+          articleTitle={shortLinkTarget.title}
+          articleSlug={shortLinkTarget.slug}
+          category={shortLinkTarget.category}
+        />
+      )}
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import crypto from 'crypto';
 import { connectToDatabase } from '@/lib/db';
-import { Article, IArticle } from '@/models/Article';
-import { ShortLink, IShortLink } from '@/models/ShortLink';
+import { Article } from '@/models/Article';
+import { ShortLink } from '@/models/ShortLink';
 
 const STOP_WORDS = new Set([
   'a', 'an', 'the', 'and', 'or', 'but', 'if', 'then', 'so', 'as', 'at',
@@ -11,11 +11,10 @@ const STOP_WORDS = new Set([
 ]);
 
 /**
- * Generates a clean, readable short code from random words of an article's title.
+ * Dạng 1: Generates a clean, readable short code from random keywords in the article's title.
  * e.g., "Tim Conway’s Funniest News Desk Moments" -> "news-desk-7k3" or "conway-moments-9a2"
  */
 export function generateTitleBasedShortCode(title: string): string {
-  // 1. Sanitize title into lowercase alphanumeric tokens
   const cleanTokens = title
     .toLowerCase()
     .replace(/[^a-z0-9\s]/g, ' ')
@@ -39,6 +38,20 @@ export function generateTitleBasedShortCode(title: string): string {
   return `${picked[0]}-${picked[1]}-${randomHash}`;
 }
 
+/**
+ * Dạng 2: Generates a purely random alphanumeric short code.
+ * e.g., "rnd-8k2m9p" or "r-4f9b2"
+ */
+export function generatePureRandomShortCode(): string {
+  const chars = '23456789abcdefghjkmnpqrstuvwxyz';
+  let randomStr = '';
+  const bytes = crypto.randomBytes(6);
+  for (let i = 0; i < 6; i++) {
+    randomStr += chars[bytes[i] % chars.length];
+  }
+  return `rnd-${randomStr}`;
+}
+
 export interface ShortLinkResult {
   code: string;
   shortUrl: string;
@@ -46,14 +59,16 @@ export interface ShortLinkResult {
   articleTitle: string;
   articleSlug: string;
   category: string;
+  mode: 'title' | 'random';
   clicks: number;
 }
 
 /**
- * Creates or retrieves a short link for a given article slug.
+ * Creates or retrieves a short link for a given article slug in either 'title' or 'random' mode.
  */
 export async function getOrCreateShortLink(
   articleSlug: string,
+  mode: 'title' | 'random' = 'title',
   regenerate = false
 ): Promise<ShortLinkResult | null> {
   await connectToDatabase();
@@ -64,9 +79,13 @@ export async function getOrCreateShortLink(
   const siteBase = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.pulseetm.click';
   const targetUrl = `/${article.category}/${article.slug}`;
 
-  // Check if link already exists and regenerate is false
+  // If link already exists for this article and mode, and regenerate is false, return it
   if (!regenerate) {
-    const existing = await ShortLink.findOne({ articleSlug: article.slug }).exec();
+    const existing = await ShortLink.findOne({
+      articleSlug: article.slug,
+      ...(mode ? { mode } : {}),
+    }).sort({ createdAt: -1 }).exec();
+
     if (existing) {
       return {
         code: existing.code,
@@ -75,16 +94,17 @@ export async function getOrCreateShortLink(
         articleTitle: existing.articleTitle,
         articleSlug: existing.articleSlug,
         category: existing.category,
+        mode: (existing.mode as 'title' | 'random') || mode,
         clicks: existing.clicks,
       };
     }
   }
 
-  // Generate a random title-based code, ensuring uniqueness
-  let code = generateTitleBasedShortCode(article.title);
+  // Generate unique code based on requested mode
+  let code = mode === 'random' ? generatePureRandomShortCode() : generateTitleBasedShortCode(article.title);
   let attempts = 0;
-  while ((await ShortLink.exists({ code })) && attempts < 5) {
-    code = generateTitleBasedShortCode(article.title);
+  while ((await ShortLink.exists({ code })) && attempts < 8) {
+    code = mode === 'random' ? generatePureRandomShortCode() : generateTitleBasedShortCode(article.title);
     attempts++;
   }
 
@@ -95,6 +115,7 @@ export async function getOrCreateShortLink(
     articleTitle: article.title,
     category: article.category,
     targetUrl,
+    mode,
     clicks: 0,
   });
 
@@ -105,14 +126,17 @@ export async function getOrCreateShortLink(
     articleTitle: created.articleTitle,
     articleSlug: created.articleSlug,
     category: created.category,
+    mode: created.mode as 'title' | 'random',
     clicks: created.clicks,
   };
 }
 
 /**
- * Picks a random published article and generates a short link for it ("shotlink theo random title").
+ * Picks a random published article and creates a short link.
  */
-export async function createRandomTitleShortLink(): Promise<ShortLinkResult | null> {
+export async function createRandomArticleShortLink(
+  mode: 'title' | 'random' = 'title'
+): Promise<ShortLinkResult | null> {
   await connectToDatabase();
 
   const count = await Article.countDocuments({ status: 'published' });
@@ -125,8 +149,13 @@ export async function createRandomTitleShortLink(): Promise<ShortLinkResult | nu
 
   if (!randomArticle) return null;
 
-  return getOrCreateShortLink(randomArticle.slug, false);
+  return getOrCreateShortLink(randomArticle.slug, mode, false);
 }
+
+/**
+ * Backwards compatibility alias for createRandomArticleShortLink.
+ */
+export const createRandomTitleShortLink = createRandomArticleShortLink;
 
 /**
  * Resolves a short link code and increments its click counter.
@@ -141,7 +170,6 @@ export async function resolveAndTrackShortCode(
   // 1. Check ShortLink collection
   const link = await ShortLink.findOne({ code: normalizedCode }).exec();
   if (link) {
-    // Non-blocking counter update
     ShortLink.updateOne(
       { _id: link._id },
       { $inc: { clicks: 1 }, $set: { lastVisitedAt: new Date() } }
@@ -150,7 +178,7 @@ export async function resolveAndTrackShortCode(
     return { targetUrl: link.targetUrl, articleSlug: link.articleSlug };
   }
 
-  // 2. Direct slug fallback if someone used full or partial slug
+  // 2. Fallback: direct match with slug
   const article = await Article.findOne({
     $or: [{ slug: normalizedCode }, { slug: new RegExp(`^${normalizedCode}`) }],
     status: 'published',
@@ -165,4 +193,3 @@ export async function resolveAndTrackShortCode(
 
   return null;
 }
-

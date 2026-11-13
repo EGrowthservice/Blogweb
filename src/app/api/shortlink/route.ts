@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import {
   getOrCreateShortLink,
-  createRandomTitleShortLink,
+  createRandomArticleShortLink,
 } from '@/lib/shortlinks';
 import { ShortLink } from '@/models/ShortLink';
 import { connectToDatabase } from '@/lib/db';
@@ -12,10 +12,12 @@ export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
     const slug = searchParams.get('slug');
-    const isRandom = searchParams.get('random') === 'true';
+    const isRandomArticle = searchParams.get('random') === 'true';
+    const mode = (searchParams.get('mode') === 'random' ? 'random' : 'title') as 'title' | 'random';
+    const regenerate = searchParams.get('regenerate') === 'true';
 
-    if (isRandom) {
-      const result = await createRandomTitleShortLink();
+    if (isRandomArticle) {
+      const result = await createRandomArticleShortLink(mode);
       if (!result) {
         return NextResponse.json(
           { success: false, message: 'No published articles found' },
@@ -26,7 +28,7 @@ export async function GET(req: NextRequest) {
     }
 
     if (slug) {
-      const result = await getOrCreateShortLink(slug);
+      const result = await getOrCreateShortLink(slug, mode, regenerate);
       if (!result) {
         return NextResponse.json(
           { success: false, message: 'Article not found' },
@@ -52,6 +54,7 @@ export async function GET(req: NextRequest) {
       articleTitle: l.articleTitle,
       articleSlug: l.articleSlug,
       category: l.category,
+      mode: l.mode || 'title',
       clicks: l.clicks,
       createdAt: l.createdAt,
     }));
@@ -69,10 +72,11 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json().catch(() => ({}));
-    const { slug, random, regenerate } = body;
+    const { slug, random, regenerate, mode = 'title' } = body;
+    const selectedMode = mode === 'random' ? 'random' : 'title';
 
     if (random) {
-      const result = await createRandomTitleShortLink();
+      const result = await createRandomArticleShortLink(selectedMode);
       if (!result) {
         return NextResponse.json(
           { success: false, message: 'No published articles found' },
@@ -89,7 +93,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const result = await getOrCreateShortLink(slug, !!regenerate);
+    const result = await getOrCreateShortLink(slug, selectedMode, !!regenerate);
     if (!result) {
       return NextResponse.json(
         { success: false, message: 'Article not found' },

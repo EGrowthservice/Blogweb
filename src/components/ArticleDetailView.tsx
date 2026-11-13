@@ -127,7 +127,7 @@ export default function ArticleDetailView({
                     <span>Posted {formattedDate}</span>
                   </div>
                 </div>
-                <ShareButtons title={article.title} url={pageUrl} slug={article.slug} />
+                <ShareButtons title={article.title} url={pageUrl} slug={article.slug} category={article.category} />
               </div>
 
               {/* Featured Image */}
@@ -151,7 +151,7 @@ export default function ArticleDetailView({
               {/* Bottom Share Buttons */}
               <div className="mt-8 pt-6 pb-6 border-t border-b border-gray-200 flex flex-wrap items-center justify-between gap-4">
                 <span className="text-xs font-semibold text-gray-600">Enjoyed this article? Share or copy short link:</span>
-                <ShareButtons title={article.title} url={pageUrl} slug={article.slug} />
+                <ShareButtons title={article.title} url={pageUrl} slug={article.slug} category={article.category} />
               </div>
 
               {/* Author Bio Card for E-E-A-T */}
