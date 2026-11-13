@@ -1,15 +1,19 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Share2, Link as LinkIcon, Check } from 'lucide-react';
+import { Share2, Link as LinkIcon, Check, Sparkles, Shuffle } from 'lucide-react';
 
 interface ShareButtonsProps {
   title: string;
   url?: string;
+  slug?: string;
 }
 
-export default function ShareButtons({ title, url }: ShareButtonsProps) {
+export default function ShareButtons({ title, url, slug }: ShareButtonsProps) {
   const [copied, setCopied] = useState(false);
+  const [shortCopied, setShortCopied] = useState(false);
+  const [shortCode, setShortCode] = useState<string | null>(null);
+  const [loadingShort, setLoadingShort] = useState(false);
 
   const getShareUrl = () => {
     if (url) return url;
@@ -24,6 +28,34 @@ export default function ShareButtons({ title, url }: ShareButtonsProps) {
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);
       });
+    }
+  };
+
+  const handleCopyShortLink = async () => {
+    if (!slug) {
+      handleCopyLink();
+      return;
+    }
+
+    setLoadingShort(true);
+    try {
+      const res = await fetch(`/api/shortlink?slug=${encodeURIComponent(slug)}`);
+      const data = await res.json();
+      if (data.success && data.data?.shortUrl) {
+        const fullShortUrl = data.data.shortUrl;
+        setShortCode(data.data.code);
+        if (navigator.clipboard) {
+          await navigator.clipboard.writeText(fullShortUrl);
+          setShortCopied(true);
+          setTimeout(() => setShortCopied(false), 3000);
+        }
+      } else {
+        handleCopyLink();
+      }
+    } catch {
+      handleCopyLink();
+    } finally {
+      setLoadingShort(false);
     }
   };
 
@@ -45,15 +77,39 @@ export default function ShareButtons({ title, url }: ShareButtonsProps) {
   };
 
   return (
-    <div className="flex items-center gap-2">
-      <span className="text-xs font-semibold text-neutral-400 uppercase tracking-wider mr-1 flex items-center gap-1">
-        <Share2 className="w-3.5 h-3.5" /> Share:
+    <div className="flex flex-wrap items-center gap-2 pt-2 pb-1">
+      <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider mr-1 flex items-center gap-1">
+        <Share2 className="w-3.5 h-3.5 text-blue-600" /> Share:
       </span>
+
+      {/* Title-Based Short Link Button */}
+      {slug && (
+        <button
+          onClick={handleCopyShortLink}
+          disabled={loadingShort}
+          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-blue-50 hover:bg-blue-100 border border-blue-200 text-blue-700 text-xs font-medium transition"
+          title="Copy short link generated from title"
+        >
+          {shortCopied ? (
+            <>
+              <Check className="w-3.5 h-3.5 text-emerald-600" />
+              <span className="text-emerald-700 font-semibold">
+                /s/{shortCode} copied!
+              </span>
+            </>
+          ) : (
+            <>
+              <Sparkles className="w-3.5 h-3.5 text-blue-600" />
+              <span>{loadingShort ? 'Generating...' : 'Short Link'}</span>
+            </>
+          )}
+        </button>
+      )}
 
       {/* X / Twitter */}
       <button
         onClick={handleTwitterShare}
-        className="p-2 rounded-full bg-neutral-900 border border-neutral-800 text-neutral-300 hover:text-white hover:border-neutral-700 transition"
+        className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 border border-gray-300 text-gray-700 hover:text-black transition"
         title="Share on X"
         aria-label="Share on X"
       >
@@ -65,7 +121,7 @@ export default function ShareButtons({ title, url }: ShareButtonsProps) {
       {/* Facebook */}
       <button
         onClick={handleFacebookShare}
-        className="p-2 rounded-full bg-neutral-900 border border-neutral-800 text-neutral-300 hover:text-white hover:border-neutral-700 transition"
+        className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 border border-gray-300 text-gray-700 hover:text-blue-600 transition"
         title="Share on Facebook"
         aria-label="Share on Facebook"
       >
@@ -77,7 +133,7 @@ export default function ShareButtons({ title, url }: ShareButtonsProps) {
       {/* Reddit */}
       <button
         onClick={handleRedditShare}
-        className="p-2 rounded-full bg-neutral-900 border border-neutral-800 text-neutral-300 hover:text-white hover:border-neutral-700 transition"
+        className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 border border-gray-300 text-gray-700 hover:text-orange-600 transition"
         title="Share on Reddit"
         aria-label="Share on Reddit"
       >
@@ -86,14 +142,14 @@ export default function ShareButtons({ title, url }: ShareButtonsProps) {
         </svg>
       </button>
 
-      {/* Copy link */}
+      {/* Copy standard full URL link */}
       <button
         onClick={handleCopyLink}
-        className="p-2 rounded-full bg-neutral-900 border border-neutral-800 text-neutral-300 hover:text-white hover:border-neutral-700 transition"
-        title="Copy Link"
-        aria-label="Copy Link"
+        className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 border border-gray-300 text-gray-700 hover:text-black transition"
+        title="Copy Full Page URL"
+        aria-label="Copy Full Page URL"
       >
-        {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <LinkIcon className="w-3.5 h-3.5" />}
+        {copied ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <LinkIcon className="w-3.5 h-3.5" />}
       </button>
     </div>
   );

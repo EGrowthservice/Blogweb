@@ -4,8 +4,8 @@ import Link from 'next/link';
 import { ArticleData } from '@/types/article';
 import CommentSection from '@/components/CommentSection';
 import AdBanner from '@/components/AdBanner';
+import ShareButtons from '@/components/ShareButtons';
 import { Clock } from 'lucide-react';
-import ExternalBanner160x300 from "./ads/ExternalBanner160x300";
 
 interface ArticleDetailViewProps {
   article: ArticleData;
@@ -52,6 +52,18 @@ export default function ArticleDetailView({
       ? article.publishedAt
       : new Date(article.publishedAt).toISOString();
 
+  const authorName =
+    article.author?.name && article.author.name !== 'Super Admin'
+      ? article.author.name
+      : 'PULSE Editorial Team';
+  const authorRole = article.author?.role || 'Entertainment & Sports Journalist';
+  const authorBio =
+    article.author?.bio ||
+    'Dedicated to comprehensive television history, sports tactical analysis, and classic variety archives.';
+  const authorAvatar =
+    article.author?.avatar ||
+    'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=256';
+
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'NewsArticle',
@@ -64,6 +76,11 @@ export default function ArticleDetailView({
     image: [article.featuredImage],
     datePublished: publishedIso,
     dateModified: publishedIso,
+    author: {
+      '@type': 'Person',
+      name: authorName,
+      jobTitle: authorRole,
+    },
     publisher: {
       '@type': 'Organization',
       name: 'PULSE Entertainment',
@@ -100,10 +117,17 @@ export default function ArticleDetailView({
                 {article.title}
               </h1>
 
-              {/* Meta: Only Posted Date */}
-              <div className="flex items-center gap-1.5 text-xs text-gray-500 mb-6 pb-4 border-b border-gray-200">
-                <Clock className="w-3.5 h-3.5 text-gray-400" />
-                <span>Posted {formattedDate}</span>
+              {/* Meta & Share Buttons */}
+              <div className="flex flex-wrap items-center justify-between gap-3 mb-6 pb-4 border-b border-gray-200">
+                <div className="flex items-center gap-2 text-xs text-gray-500">
+                  <span className="font-semibold text-gray-900">By {authorName}</span>
+                  <span>•</span>
+                  <div className="flex items-center gap-1">
+                    <Clock className="w-3.5 h-3.5 text-gray-400" />
+                    <span>Posted {formattedDate}</span>
+                  </div>
+                </div>
+                <ShareButtons title={article.title} url={pageUrl} slug={article.slug} />
               </div>
 
               {/* Featured Image */}
@@ -124,11 +148,39 @@ export default function ArticleDetailView({
                 dangerouslySetInnerHTML={{ __html: article.content }}
               />
 
+              {/* Bottom Share Buttons */}
+              <div className="mt-8 pt-6 pb-6 border-t border-b border-gray-200 flex flex-wrap items-center justify-between gap-4">
+                <span className="text-xs font-semibold text-gray-600">Enjoyed this article? Share or copy short link:</span>
+                <ShareButtons title={article.title} url={pageUrl} slug={article.slug} />
+              </div>
+
+              {/* Author Bio Card for E-E-A-T */}
+              <div className="my-6 p-5 bg-gray-50 border border-gray-200 rounded-lg flex items-center gap-4">
+                <div className="relative w-12 h-12 rounded-full overflow-hidden shrink-0 bg-gray-200">
+                  <Image
+                    src={authorAvatar}
+                    alt={authorName}
+                    fill
+                    sizes="48px"
+                    className="object-cover"
+                  />
+                </div>
+                <div className="text-xs space-y-1">
+                  <div className="flex items-center gap-2">
+                    <span className="font-bold text-gray-900 text-sm">{authorName}</span>
+                    <span className="text-[11px] text-blue-600 font-medium bg-blue-50 px-2 py-0.5 rounded-full border border-blue-100">
+                      {authorRole}
+                    </span>
+                  </div>
+                  <p className="text-gray-600 leading-relaxed">{authorBio}</p>
+                </div>
+              </div>
+
               {/* In-article ad placement (retained inside article content) */}
               <div className="my-8">
                 <AdBanner variant="in-article" slot="5492817364" />
               </div>
-<ExternalBanner160x300 />
+
               {/* Guest Comment Box */}
               <CommentSection articleSlug={article.slug} />
             </article>

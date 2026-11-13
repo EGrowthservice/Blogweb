@@ -33,21 +33,22 @@ export const metadata: Metadata = {
     canonical: './',
   },
   title: {
-    default: 'PULSE Entertainment | Comedy Classics & Tim Conway TV Moments',
+    default: 'PULSE Entertainment | Pop Culture, Sports Analysis & Classic Television',
     template: '%s | PULSE Entertainment',
   },
   description:
-    'Explore timeless comedy sketches, legendary Tonight Show moments, and Tim Conway television classics.',
+    'Thoughtful pop culture retrospectives, in-depth sports tactical analysis, television awards recaps, and classic television comedy archives.',
   keywords: [
     'PULSE Entertainment',
-    'Comedy Classics',
+    'Television Awards',
+    'Emmy Awards',
+    'Pop Culture',
+    'Sports Tactical Analysis',
+    'Champions League',
+    'Classic Comedy',
     'Tim Conway',
     'The Carol Burnett Show',
-    'Johnny Carson',
-    'Tonight Show',
-    'Vintage Television',
-    'Harvey Korman',
-    'Comedy Sketches',
+    'Television Retrospectives',
   ],
   robots: {
     index: true,
@@ -65,15 +66,15 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: baseUrl,
     siteName: 'PULSE Entertainment',
-    title: 'PULSE Entertainment | Comedy Classics & Tim Conway TV Moments',
+    title: 'PULSE Entertainment | Pop Culture, Sports Analysis & Classic Television',
     description:
-      'Explore timeless comedy sketches, legendary Tonight Show moments, and Tim Conway television classics.',
+      'Thoughtful pop culture retrospectives, in-depth sports tactical analysis, television awards recaps, and classic television comedy archives.',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'PULSE Entertainment | Comedy Classics & Tim Conway TV Moments',
+    title: 'PULSE Entertainment | Pop Culture, Sports Analysis & Classic Television',
     description:
-      'Explore timeless comedy sketches, legendary Tonight Show moments, and Tim Conway television classics.',
+      'Thoughtful pop culture retrospectives, in-depth sports tactical analysis, television awards recaps, and classic television comedy archives.',
   },
 };
 

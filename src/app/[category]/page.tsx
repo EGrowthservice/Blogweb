@@ -42,6 +42,7 @@ export async function generateMetadata({ params }: CategoryOrArticlePageProps): 
   const article = await getArticleBySlug(params.category);
   if (article) {
     const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.pulseetm.click';
+    const canonicalArticleUrl = `${baseUrl}/${article.category}/${article.slug}`;
     const articleUrl = `${baseUrl}/${article.slug}`;
     const publishedIso =
       typeof article.publishedAt === 'string'
@@ -52,12 +53,12 @@ export async function generateMetadata({ params }: CategoryOrArticlePageProps): 
       title: `${article.title} | PULSE Entertainment`,
       description: article.excerpt,
       alternates: {
-        canonical: articleUrl,
+        canonical: canonicalArticleUrl,
       },
       openGraph: {
         title: article.title,
         description: article.excerpt,
-        url: articleUrl,
+        url: canonicalArticleUrl,
         siteName: 'PULSE Entertainment',
         type: 'article',
         publishedTime: publishedIso,

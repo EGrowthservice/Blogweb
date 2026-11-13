@@ -14,6 +14,7 @@ import {
   Archive,
   Eye,
   Filter,
+  Link2,
 } from 'lucide-react';
 import { useToast } from '@/components/admin/ToastContext';
 import { ConfirmDialog } from '@/components/admin/ConfirmDialog';
@@ -126,6 +127,23 @@ export default function AdminPostsPage() {
       toast.error(err.message || 'Không thể xóa bài viết');
     } finally {
       setDeleteLoading(false);
+    }
+  };
+
+  const handleCopyShortLink = async (slug: string) => {
+    try {
+      const res = await fetch(`/api/shortlink?slug=${encodeURIComponent(slug)}`);
+      const json = await res.json();
+      if (json.success && json.data?.shortUrl) {
+        if (navigator.clipboard) {
+          await navigator.clipboard.writeText(json.data.shortUrl);
+        }
+        toast.success(`Đã sao chép Shortlink: /s/${json.data.code}`);
+      } else {
+        toast.error('Không thể tạo shortlink');
+      }
+    } catch {
+      toast.error('Lỗi khi tạo shortlink');
     }
   };
 
@@ -308,14 +326,23 @@ export default function AdminPostsPage() {
                     <td className="py-3.5 px-4 text-right">
                       <div className="flex items-center justify-end gap-2">
                         {post.status === 'published' && (
-                          <Link
-                            href={`/${post.category}/${post.slug}`}
-                            target="_blank"
-                            className="p-1.5 text-zinc-400 hover:text-white bg-zinc-800 hover:bg-zinc-700 rounded-lg border border-zinc-700 transition-colors"
-                            title="Xem trên trang chủ"
-                          >
-                            <ExternalLink className="w-4 h-4" />
-                          </Link>
+                          <>
+                            <button
+                              onClick={() => handleCopyShortLink(post.slug)}
+                              className="p-1.5 text-blue-400 hover:text-blue-300 bg-blue-950/20 hover:bg-blue-950/40 rounded-lg border border-blue-900/30 transition-colors"
+                              title="Tạo & sao chép Shortlink theo title"
+                            >
+                              <Link2 className="w-4 h-4" />
+                            </button>
+                            <Link
+                              href={`/${post.category}/${post.slug}`}
+                              target="_blank"
+                              className="p-1.5 text-zinc-400 hover:text-white bg-zinc-800 hover:bg-zinc-700 rounded-lg border border-zinc-700 transition-colors"
+                              title="Xem trên trang chủ"
+                            >
+                              <ExternalLink className="w-4 h-4" />
+                            </Link>
+                          </>
                         )}
                         <Link
                           href={`/admin/posts/${post._id}/edit`}

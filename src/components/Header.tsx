@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Search, Menu, X } from 'lucide-react';
+import { Search, Menu, X, Shuffle } from 'lucide-react';
 import { CategoryData } from '@/lib/categories';
 
 interface HeaderProps {
@@ -75,8 +75,17 @@ export default function Header({ categories = [] }: HeaderProps) {
             })}
           </nav>
 
-          {/* Right: Search Bar */}
-          <div className="flex items-center">
+          {/* Right: Search Bar & Random Story */}
+          <div className="flex items-center gap-3">
+            <Link
+              href="/s/random"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium text-gray-700 bg-gray-100 hover:bg-blue-50 hover:text-blue-600 transition border border-gray-200"
+              title="Read a random story via short link"
+            >
+              <Shuffle className="w-3.5 h-3.5 text-blue-600" />
+              <span className="hidden md:inline">Random Story</span>
+            </Link>
+
             <form onSubmit={handleSearchSubmit} className="relative hidden sm:block">
               <input
                 type="search"
@@ -137,6 +146,14 @@ export default function Header({ categories = [] }: HeaderProps) {
               </Link>
             );
           })}
+          <Link
+            href="/s/random"
+            onClick={() => setMobileMenuOpen(false)}
+            className="flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 transition"
+          >
+            <Shuffle className="w-4 h-4 text-blue-600" />
+            <span>Random Story</span>
+          </Link>
         </div>
       )}
     </header>

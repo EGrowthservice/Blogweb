@@ -23,7 +23,7 @@ export default function ContactPage() {
           Contact Us
         </h1>
         <p className="mt-2 text-base text-gray-600">
-          Have a question, feedback, or comedy archive suggestion? We would love to hear from you.
+          Have a question, feedback, story tip, or editorial inquiry? We would love to hear from you.
         </p>
       </div>
 

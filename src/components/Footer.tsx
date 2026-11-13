@@ -28,7 +28,7 @@ export default function Footer({ categories = [] }: FooterProps) {
               </span>
             </Link>
             <p className="text-xs sm:text-sm text-gray-500 leading-relaxed">
-              Your definitive destination for timeless comedy sketches, classic television retrospectives, and iconic Tim Conway moments.
+              Your definitive destination for pop culture retrospectives, sports tactical analyses, and classic television comedy archives.
             </p>
             <div className="pt-1 flex items-center gap-1.5 text-xs text-gray-600">
               <Mail className="w-3.5 h-3.5 text-blue-600" />
@@ -72,6 +72,16 @@ export default function Footer({ categories = [] }: FooterProps) {
               <li>
                 <Link href="/all-stories" className="hover:text-blue-600 transition">
                   All Stories
+                </Link>
+              </li>
+              <li>
+                <Link href="/s/random" className="hover:text-blue-600 transition">
+                  Random Story
+                </Link>
+              </li>
+              <li>
+                <Link href="/shortlink" className="hover:text-blue-600 transition">
+                  Short Links
                 </Link>
               </li>
               <li>
