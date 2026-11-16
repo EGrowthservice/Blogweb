@@ -1,7 +1,7 @@
 {
   "name": "PULSE TechTips",
   "short_name": "PULSE",
-  "description": "Thủ thuật công nghệ, tối ưu máy tính, mẹo điện thoại & tiện ích số trực tuyến",
+  "description": "Practical PC optimization guides, smartphone tricks, Excel productivity tutorials, and free web utilities.",
   "icons": [
     {
       "src": "/favicon-32x32.png",

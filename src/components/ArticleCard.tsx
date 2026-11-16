@@ -27,6 +27,10 @@ export default function ArticleCard({
 
   // Check if image is valid; if empty or null, we will omit the image container
   const hasValidImage = Boolean(article.featuredImage && article.featuredImage.trim().length > 5);
+  const authorName =
+    article.author?.name && article.author.name !== 'Super Admin'
+      ? article.author.name
+      : 'Editorial Desk';
 
   if (layout === 'compact') {
     return (
@@ -162,7 +166,7 @@ export default function ArticleCard({
         </p>
 
         <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
-          <span className="text-slate-400 font-medium">By Alex Morgan</span>
+          <span className="text-slate-500 font-medium">By {authorName}</span>
           <span className="inline-flex items-center gap-1 font-bold text-blue-600 group-hover:translate-x-1 transition duration-200">
             Read Guide <ArrowRight className="w-3.5 h-3.5" />
           </span>

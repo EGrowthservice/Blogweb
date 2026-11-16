@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 };
 
 export default function TermsOfServicePage() {
-  const lastUpdated = 'November 13, 2026';
+  const lastUpdated = 'November 16, 2026';
   const effectiveDate = 'January 1, 2026';
 
   return (
@@ -139,7 +139,7 @@ export default function TermsOfServicePage() {
           The Service and all materials published herein are provided strictly on an &quot;as is&quot; and &quot;as available&quot; basis, without warranties of any kind, whether express, statutory, or implied. PULSE TechTips explicitly disclaims all implied warranties of merchantability, fitness for a particular purpose, and non-infringement.
         </p>
         <p className="text-xs text-gray-600 leading-relaxed">
-          In no event shall PULSE TechTips, its editors, authors, or technical affiliates be liable for any indirect, consequential, incidental, special, or punitive damages arising from your access to, use of, or inability to access the website, including but not limited to loss of data, errors in published historical retrospectives, or external server downtime.
+          In no event shall PULSE TechTips, its editors, authors, or technical affiliates be liable for any indirect, consequential, incidental, special, or punitive damages arising from your access to, use of, or inability to access the website, including but not limited to loss of data, errors in published computing guides, or external server downtime.
         </p>
       </section>
 

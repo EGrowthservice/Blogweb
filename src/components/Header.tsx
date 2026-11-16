@@ -15,10 +15,11 @@ export default function Header({ categories = [] }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
 
-  // Dynamically build navigation from database categories + Web Tools Suite
+  // Dynamically build navigation from database categories + All Tutorials + Web Tools Suite
   const navLinks = [
     { name: 'Home', href: '/' },
     ...categories.map((c) => ({ name: c.name, href: `/${c.slug}` })),
+    { name: 'All Tutorials', href: '/all-stories' },
     { name: 'Web Tools', href: '/tools' },
   ];
 

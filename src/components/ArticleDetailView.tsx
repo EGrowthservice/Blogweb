@@ -5,7 +5,7 @@ import { ArticleData } from '@/types/article';
 import CommentSection from '@/components/CommentSection';
 import AdBanner from '@/components/AdBanner';
 import ShareButtons from '@/components/ShareButtons';
-import { Clock } from 'lucide-react';
+import { Clock, ChevronRight, Home } from 'lucide-react';
 
 interface ArticleDetailViewProps {
   article: ArticleData;
@@ -66,25 +66,56 @@ export default function ArticleDetailView({
 
   const jsonLd = {
     '@context': 'https://schema.org',
-    '@type': 'TechArticle',
-    mainEntityOfPage: {
-      '@type': 'WebPage',
-      '@id': pageUrl,
-    },
-    headline: article.title,
-    description: article.excerpt,
-    image: [article.featuredImage],
-    datePublished: publishedIso,
-    dateModified: publishedIso,
-    author: {
-      '@type': 'Person',
-      name: authorName,
-      jobTitle: authorRole,
-    },
-    publisher: {
-      '@type': 'Organization',
-      name: 'PULSE TechTips',
-    },
+    '@graph': [
+      {
+        '@type': 'TechArticle',
+        mainEntityOfPage: {
+          '@type': 'WebPage',
+          '@id': pageUrl,
+        },
+        headline: article.title,
+        description: article.excerpt,
+        image: [article.featuredImage],
+        datePublished: publishedIso,
+        dateModified: publishedIso,
+        author: {
+          '@type': 'Person',
+          name: authorName,
+          jobTitle: authorRole,
+        },
+        publisher: {
+          '@type': 'Organization',
+          name: 'PULSE TechTips',
+          logo: {
+            '@type': 'ImageObject',
+            url: `${siteBase}/favicon-48x48.png`,
+          },
+        },
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: 'Home',
+            item: siteBase,
+          },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: displayCategory,
+            item: `${siteBase}/${article.category}`,
+          },
+          {
+            '@type': 'ListItem',
+            position: 3,
+            name: article.title,
+            item: pageUrl,
+          },
+        ],
+      },
+    ],
   };
 
   return (
@@ -95,7 +126,21 @@ export default function ArticleDetailView({
       />
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
-        {/* Top advertisement banner REMOVED as requested */}
+        {/* Breadcrumb Navigation */}
+        <nav className="flex items-center gap-1.5 text-xs text-slate-500 mb-6 font-medium flex-wrap" aria-label="Breadcrumb">
+          <Link href="/" className="hover:text-blue-600 transition flex items-center gap-1">
+            <Home className="w-3.5 h-3.5" />
+            <span>Home</span>
+          </Link>
+          <ChevronRight className="w-3 h-3 text-slate-400" />
+          <Link href={`/${article.category}`} className="hover:text-blue-600 transition">
+            {displayCategory}
+          </Link>
+          <ChevronRight className="w-3 h-3 text-slate-400" />
+          <span className="text-slate-800 font-semibold truncate max-w-[200px] sm:max-w-xs md:max-w-md">
+            {article.title}
+          </span>
+        </nav>
 
         {/* 2-Column Article Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10">
