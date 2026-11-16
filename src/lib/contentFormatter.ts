@@ -351,38 +351,107 @@ export function convertStandaloneMediaUrls(content: string): string {
 
 export function renderContentToHtml(content: string): string {
   if (!content || typeof content !== 'string') return '';
-  let html = content.trim();
+  let text = content.replace(/\r\n/g, '\n').trim();
 
-  html = convertStandaloneMediaUrls(html);
+  // If already clean semantic HTML with <p> and headings, return as is
+  if (text.includes('<p') && (text.includes('<h2') || text.includes('<h3') || text.includes('<ul'))) {
+    return text;
+  }
 
-  // Markdown headings
-  html = html.replace(/^(#{1,6})\s+(.+)$/gm, (m, hashes, text) => {
-    const level = hashes.length;
-    const tag = level <= 2 ? 'h2' : level === 3 ? 'h3' : 'h4';
-    return `<${tag}>${formatInline(text.trim())}</${tag}>`;
+  // 1. Fenced Code Blocks (```lang ... ```)
+  text = text.replace(/```([a-z0-9_-]*)\n([\s\S]*?)```/gi, (match, lang, code) => {
+    const escaped = code
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .trim();
+    const languageClass = lang ? `language-${lang}` : 'language-bash';
+    return `\n\n<pre class="bg-slate-950 text-emerald-400 p-4 sm:p-5 rounded-2xl font-mono text-xs sm:text-sm overflow-x-auto my-6 border border-slate-800 shadow-md leading-relaxed"><code class="${languageClass}">${escaped}</code></pre>\n\n`;
   });
 
-  // Markdown blockquotes
-  html = html.replace(/^>\s*(.+)$/gm, (m, text) => {
-    return `<blockquote>${formatInline(text.trim())}</blockquote>`;
+  // 2. GitHub Alert Boxes (> [!TIP] ... or > [!NOTE] ...)
+  text = text.replace(/^>\s*\[!(TIP|NOTE|IMPORTANT|WARNING|CAUTION)\]\s*\n((?:>.*\n?)*)/gim, (match, type, body) => {
+    const cleanBody = (body as string)
+      .split('\n')
+      .map((l: string) => l.replace(/^>\s?/, '').trim())
+      .filter(Boolean)
+      .join('<br />');
+
+    const alertStyles: Record<string, { bg: string; border: string; text: string; label: string }> = {
+      TIP: { bg: 'bg-emerald-50', border: 'border-emerald-500', text: 'text-emerald-900', label: 'Pro Tip' },
+      NOTE: { bg: 'bg-blue-50', border: 'border-blue-500', text: 'text-blue-900', label: 'Important Note' },
+      IMPORTANT: { bg: 'bg-indigo-50', border: 'border-indigo-500', text: 'text-indigo-900', label: 'Important' },
+      WARNING: { bg: 'bg-amber-50', border: 'border-amber-500', text: 'text-amber-900', label: 'Warning' },
+      CAUTION: { bg: 'bg-red-50', border: 'border-red-500', text: 'text-red-900', label: 'Caution' },
+    };
+    const s = alertStyles[type.toUpperCase()] || alertStyles.TIP;
+    return `\n\n<div class="p-4 sm:p-5 my-6 rounded-2xl border-l-4 ${s.border} ${s.bg} ${s.text} shadow-xs"><div class="font-black uppercase tracking-wider text-xs mb-1.5">${s.label}</div><div class="text-sm sm:text-base leading-relaxed">${cleanBody}</div></div>\n\n`;
   });
 
-  // Markdown images
-  html = html.replace(/^!\[([^\]]*)\]\((https?:\/\/[^\s)]+)\)$/gm, (m, alt, url) => {
-    return createImageEmbed(url, alt || 'Image');
-  });
+  // 3. Standard blockquotes (> text)
+  text = text.replace(/^>\s*(.+)$/gm, '\n\n<blockquote class="p-4 my-4 bg-slate-50 border-l-4 border-slate-300 rounded-r-xl italic text-slate-700 text-sm sm:text-base">$1</blockquote>\n\n');
 
-  // Markdown lists
-  html = html.replace(/(?:^|\n)([-*+]\s+[^\n]+(?:\n[-*+]\s+[^\n]+)*)/g, (m, block) => {
-    const items = block
+  // 4. Horizontal separators (---)
+  text = text.replace(/^---$/gm, '\n\n<hr class="my-8 border-slate-200" />\n\n');
+
+  // 5. Headings (### and ##)
+  text = text.replace(/^###\s+(.+)$/gm, '\n\n<h3 class="text-xl sm:text-2xl font-bold text-slate-900 mt-8 mb-3 tracking-tight font-display">$1</h3>\n\n');
+  text = text.replace(/^##\s+(.+)$/gm, '\n\n<h2 class="text-2xl sm:text-3xl font-black text-slate-900 mt-10 mb-4 tracking-tight font-display">$1</h2>\n\n');
+  text = text.replace(/^#\s+(.+)$/gm, '\n\n<h2 class="text-2xl sm:text-3xl font-black text-slate-900 mt-10 mb-4 tracking-tight font-display">$1</h2>\n\n');
+
+  // 6. Unordered lists (- or *)
+  text = text.replace(/(?:^|\n)((?:[-*]\s+.+\n?)+)/g, (match, listBlock) => {
+    const items = (listBlock as string)
       .trim()
       .split('\n')
-      .map((l: string) => `  <li>${formatInline(l.replace(/^[-*+]\s+/, '').trim())}</li>`)
+      .map((l: string) => {
+        const line = l.replace(/^[-*]\s+/, '').trim();
+        return `<li class="leading-relaxed">${line}</li>`;
+      })
       .join('\n');
-    return `\n<ul>\n${items}\n</ul>\n`;
+    return `\n\n<ul class="list-disc pl-5 space-y-2.5 my-4 text-slate-700 text-sm sm:text-base">\n${items}\n</ul>\n\n`;
   });
 
-  html = formatInline(html);
+  // 7. Ordered lists (1. 2.)
+  text = text.replace(/(?:^|\n)((?:\d+\.\s+.+\n?)+)/g, (match, listBlock) => {
+    const items = (listBlock as string)
+      .trim()
+      .split('\n')
+      .map((l: string) => {
+        const line = l.replace(/^\d+\.\s+/, '').trim();
+        return `<li class="leading-relaxed">${line}</li>`;
+      })
+      .join('\n');
+    return `\n\n<ol class="list-decimal pl-5 space-y-2.5 my-4 text-slate-700 text-sm sm:text-base">\n${items}\n</ol>\n\n`;
+  });
 
-  return sanitizeHtml(html);
+  // 8. Inline formatting: code, bold, italic, links
+  text = text.replace(/`([^`\n]+)`/g, '<code class="px-1.5 py-0.5 rounded bg-slate-100 text-blue-700 font-mono text-xs sm:text-sm border border-slate-200 font-semibold">$1</code>');
+  text = text.replace(/\*\*([^*\n]+)\*\*/g, '<strong class="font-bold text-slate-900">$1</strong>');
+  text = text.replace(/(^|[^\*])\*([^*\n]+)\*([^\*]|$)/g, '$1<em>$2</em>$3');
+  text = text.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline font-semibold hover:text-blue-800">$1</a>');
+
+  // 9. Separate block tags so following prose is always an isolated block
+  text = text.replace(/(<\/h[1-6]>)\s*([^\n<])/g, '$1\n\n$2');
+  text = text.replace(/(<\/ul>|<\/ol>|<\/pre>|<\/div>|<\/blockquote>|<hr[^>]*>)\s*([^\n<])/g, '$1\n\n$2');
+
+  // 10. Process blocks and wrap non-block text in <p> paragraphs
+  const rawBlocks = text.split(/\n{2,}/);
+  const finalHtmlBlocks: string[] = [];
+
+  for (const block of rawBlocks) {
+    const trimmed = block.trim();
+    if (!trimmed) continue;
+
+    // If it's already an HTML block tag, push directly
+    if (/^<(?:h[1-6]|ul|ol|pre|div|blockquote|hr|table|figure|p|section)\b/i.test(trimmed)) {
+      finalHtmlBlocks.push(trimmed);
+    } else {
+      // It is standard body prose -> wrap in <p>
+      const paragraphHtml = `<p class="text-slate-700 leading-relaxed text-sm sm:text-base mb-5">${trimmed.replace(/\n/g, '<br />')}</p>`;
+      finalHtmlBlocks.push(paragraphHtml);
+    }
+  }
+
+  return finalHtmlBlocks.join('\n\n');
 }

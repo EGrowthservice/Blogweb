@@ -2,6 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArticleData } from '@/types/article';
+import { renderContentToHtml } from '@/lib/contentFormatter';
 import CommentSection from '@/components/CommentSection';
 import AdBanner from '@/components/AdBanner';
 import ShareButtons from '@/components/ShareButtons';
@@ -190,7 +191,7 @@ export default function ArticleDetailView({
               {/* Article Content Body */}
               <div
                 className="article-prose"
-                dangerouslySetInnerHTML={{ __html: article.content }}
+                dangerouslySetInnerHTML={{ __html: renderContentToHtml(article.content) }}
               />
 
               {/* Bottom Share Buttons */}
