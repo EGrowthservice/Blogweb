@@ -1,22 +1,21 @@
 "use client";
 
-const SMARTLINK =
-  "https://arwf.org/4/eaae549f64515b95b9774c18106759c8";
+import React from "react";
 
 interface ExternalSmartlinkProps {
   children?: React.ReactNode;
   className?: string;
+  href?: string;
 }
 
 export default function ExternalSmartlink({
-  children = "Xem thêm",
+  children = "Read More",
   className = "",
+  href = "/all-stories",
 }: ExternalSmartlinkProps) {
   return (
     <a
-      href={SMARTLINK}
-      target="_blank"
-      rel="nofollow sponsored noopener noreferrer"
+      href={href}
       className={className}
     >
       {children}

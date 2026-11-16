@@ -36,7 +36,32 @@ const nextConfig = {
     return [
       {
         source: '/celebrity',
-        destination: '/celebrities',
+        destination: '/all-stories',
+        permanent: true,
+      },
+      {
+        source: '/celebrities',
+        destination: '/all-stories',
+        permanent: true,
+      },
+      {
+        source: '/movies',
+        destination: '/all-stories',
+        permanent: true,
+      },
+      {
+        source: '/music',
+        destination: '/all-stories',
+        permanent: true,
+      },
+      {
+        source: '/tv-shows',
+        destination: '/all-stories',
+        permanent: true,
+      },
+      {
+        source: '/pop-culture',
+        destination: '/all-stories',
         permanent: true,
       },
       {

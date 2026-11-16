@@ -56,12 +56,12 @@ export function buildYouTubeMediaBlockHtml({
     ? `
   <header class="media-block-toolbar" contenteditable="false">
     <div class="media-toolbar-group">
-      <span class="media-drag-handle" title="Kéo để đổi vị trí" draggable="true">⠿ Kéo</span>
-      <button type="button" class="media-btn media-move-up" title="Di chuyển lên trên">▲ Lên</button>
-      <button type="button" class="media-btn media-move-down" title="Di chuyển xuống dưới">▼ Xuống</button>
+      <span class="media-drag-handle" title="Drag to reorder" draggable="true">⠿ Drag</span>
+      <button type="button" class="media-btn media-move-up" title="Move up">▲ Up</button>
+      <button type="button" class="media-btn media-move-down" title="Move down">▼ Down</button>
     </div>
     <span class="media-toolbar-label">${isShorts ? 'YouTube Shorts' : 'YouTube Video'}</span>
-    <button type="button" class="media-btn media-delete-btn" title="Xóa video khỏi bài viết">🗑️ Xóa</button>
+    <button type="button" class="media-btn media-delete-btn" title="Remove video">🗑️ Delete</button>
   </header>`
     : '';
 
@@ -105,7 +105,7 @@ export function isValidImageUrl(url: string | null | undefined): boolean {
 
 export function buildImageMediaBlockHtml({
   url,
-  alt = 'Minh họa bài viết',
+  alt = 'Tutorial illustration',
   caption = '',
   width = null,
   align = 'center',
@@ -120,7 +120,7 @@ export function buildImageMediaBlockHtml({
 }): string {
   if (!url || typeof url !== 'string') return '';
   const cleanUrl = url.trim();
-  const cleanAlt = (alt || 'Minh họa bài viết').replace(/"/g, '&quot;');
+  const cleanAlt = (alt || 'Tutorial illustration').replace(/"/g, '&quot;');
   const rawWidthStr = width ? String(width).trim() : '';
   const safeAlign = ['left', 'center', 'right'].includes(align) ? align : 'center';
   
@@ -146,43 +146,43 @@ export function buildImageMediaBlockHtml({
     ? `
   <header class="media-block-toolbar" contenteditable="false">
     <div class="media-toolbar-group">
-      <span class="media-drag-handle" title="Kéo để đổi vị trí" draggable="true">⠿ Kéo</span>
-      <button type="button" class="media-btn media-move-up" title="Di chuyển ảnh lên trên đoạn văn trước">▲ Lên</button>
-      <button type="button" class="media-btn media-move-down" title="Di chuyển ảnh xuống dưới đoạn văn sau">▼ Xuống</button>
+      <span class="media-drag-handle" title="Drag to reorder" draggable="true">⠿ Drag</span>
+      <button type="button" class="media-btn media-move-up" title="Move image up">▲ Up</button>
+      <button type="button" class="media-btn media-move-down" title="Move image down">▼ Down</button>
     </div>
-    <div class="media-toolbar-group" title="Phóng to / thu nhỏ ảnh">
-      <button type="button" class="media-btn media-size-btn" data-size="25" title="Kích thước nhỏ 25%">25%</button>
-      <button type="button" class="media-btn media-size-btn" data-size="50" title="Kích thước vừa 50%">50%</button>
-      <button type="button" class="media-btn media-size-btn" data-size="75" title="Kích thước lớn 75%">75%</button>
-      <button type="button" class="media-btn media-size-btn" data-size="100" title="Kích thước đầy đủ 100%">100%</button>
-      <button type="button" class="media-btn media-zoom-out" title="Thu nhỏ bớt ảnh">➖</button>
-      <button type="button" class="media-btn media-zoom-in" title="Phóng to thêm ảnh">➕</button>
+    <div class="media-toolbar-group" title="Resize image">
+      <button type="button" class="media-btn media-size-btn" data-size="25" title="Small 25%">25%</button>
+      <button type="button" class="media-btn media-size-btn" data-size="50" title="Medium 50%">50%</button>
+      <button type="button" class="media-btn media-size-btn" data-size="75" title="Large 75%">75%</button>
+      <button type="button" class="media-btn media-size-btn" data-size="100" title="Full size 100%">100%</button>
+      <button type="button" class="media-btn media-zoom-out" title="Zoom out">➖</button>
+      <button type="button" class="media-btn media-zoom-in" title="Zoom in">➕</button>
     </div>
     <div class="media-toolbar-group">
-      <button type="button" class="media-btn media-align-left ${safeAlign === 'left' ? 'active' : ''}" data-align-btn="left" title="Căn lề trái">Trái</button>
-      <button type="button" class="media-btn media-align-center ${safeAlign === 'center' ? 'active' : ''}" data-align-btn="center" title="Căn lề giữa">Giữa</button>
-      <button type="button" class="media-btn media-align-right ${safeAlign === 'right' ? 'active' : ''}" data-align-btn="right" title="Căn lề phải">Phải</button>
+      <button type="button" class="media-btn media-align-left ${safeAlign === 'left' ? 'active' : ''}" data-align-btn="left" title="Align left">Left</button>
+      <button type="button" class="media-btn media-align-center ${safeAlign === 'center' ? 'active' : ''}" data-align-btn="center" title="Align center">Center</button>
+      <button type="button" class="media-btn media-align-right ${safeAlign === 'right' ? 'active' : ''}" data-align-btn="right" title="Align right">Right</button>
     </div>
-    <button type="button" class="media-btn media-delete-btn" title="Xóa ảnh này khỏi nội dung">🗑️ Xóa</button>
+    <button type="button" class="media-btn media-delete-btn" title="Remove image">🗑️ Delete</button>
   </header>`
     : '';
 
   const resizeHandlesHtml = isInteractive
     ? `
-    <span class="media-resize-handle media-resize-se" data-handle="se" title="Kéo góc này để phóng to / thu nhỏ kích thước ảnh"></span>
-    <span class="media-resize-handle media-resize-sw" data-handle="sw" title="Kéo góc này để phóng to / thu nhỏ kích thước ảnh"></span>`
+    <span class="media-resize-handle media-resize-se" data-handle="se" title="Drag corner to resize"></span>
+    <span class="media-resize-handle media-resize-sw" data-handle="sw" title="Drag corner to resize"></span>`
     : '';
 
   return `\n<figure class="media-block media-block-image" data-media-type="image" ${rawWidthStr ? `data-width="${rawWidthStr}"` : ''} data-align="${safeAlign}" style="${widthStyle}${marginStyle}text-align:${safeAlign};position:relative;" contenteditable="false">${toolbarHtml}
   <div class="media-image-wrapper" style="position:relative;display:inline-block;width:100%;max-width:100%;">
-    <img src="${cleanUrl}" alt="${cleanAlt}" loading="lazy" style="width:100%;height:auto;border-radius:10px;display:block;box-shadow:0 4px 12px rgba(0,0,0,0.06);" onerror="this.onerror=null;this.parentElement.innerHTML='<div style=\\'padding:1.25rem;background:#fef2f2;border:1px solid #fecaca;border-radius:8px;color:#dc2626;font-size:0.875rem;\\'>⚠️ Không thể tải ảnh: ${cleanUrl}</div>';" />${resizeHandlesHtml}
+    <img src="${cleanUrl}" alt="${cleanAlt}" loading="lazy" style="width:100%;height:auto;border-radius:10px;display:block;box-shadow:0 4px 12px rgba(0,0,0,0.06);" onerror="this.onerror=null;this.parentElement.innerHTML='<div style=\\'padding:1.25rem;background:#fef2f2;border:1px solid #fecaca;border-radius:8px;color:#dc2626;font-size:0.875rem;\\'>⚠️ Unable to load image: ${cleanUrl}</div>';" />${resizeHandlesHtml}
   </div>${cleanCaption}
 </figure>\n`;
 }
 
 export function createImageEmbed(
   url: string,
-  alt = 'Minh họa bài viết',
+  alt = 'Tutorial illustration',
   caption = '',
   options: { width?: number | string; align?: string; interactive?: boolean } = {}
 ): string {
@@ -329,7 +329,7 @@ export function convertStandaloneMediaUrls(content: string): string {
         return createYouTubeEmbed(targetUrl);
       }
       if (isValidImageUrl(targetUrl)) {
-        return createImageEmbed(targetUrl, 'Minh họa bài viết');
+        return createImageEmbed(targetUrl, 'Tutorial illustration');
       }
     }
 
@@ -339,7 +339,7 @@ export function convertStandaloneMediaUrls(content: string): string {
         return createYouTubeEmbed(trimmed);
       }
       if (isValidImageUrl(trimmed)) {
-        return createImageEmbed(trimmed, 'Minh họa bài viết');
+        return createImageEmbed(trimmed, 'Tutorial illustration');
       }
     }
 
