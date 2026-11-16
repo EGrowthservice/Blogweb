@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { ArticleData } from '@/types/article';
 import { renderContentToHtml } from '@/lib/contentFormatter';
 import CommentSection from '@/components/CommentSection';
-import AdBanner from '@/components/AdBanner';
 import ShareButtons from '@/components/ShareButtons';
 import { Clock, ChevronRight, Home } from 'lucide-react';
 
@@ -222,11 +221,6 @@ export default function ArticleDetailView({
                 </div>
               </div>
 
-              {/* In-article ad placement (retained inside article content) */}
-              <div className="my-8">
-                <AdBanner variant="in-article" slot="5492817364" />
-              </div>
-
               {/* Guest Comment Box */}
               <CommentSection articleSlug={article.slug} />
             </article>
@@ -285,9 +279,6 @@ export default function ArticleDetailView({
                 })}
               </div>
             </div>
-
-            {/* Sidebar Ad Placement */}
-            <AdBanner variant="sidebar" slot="3829104756" />
           </aside>
         </div>
 
@@ -358,11 +349,6 @@ export default function ArticleDetailView({
             </div>
           </section>
         )}
-
-        {/* Bottom Ad banner below Related Stories */}
-        <div className="mt-12 pt-6 border-t border-gray-200">
-          <AdBanner variant="multiplex" slot="9876543210" />
-        </div>
       </div>
     </>
   );

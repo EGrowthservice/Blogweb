@@ -3,7 +3,6 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { searchArticles } from '@/lib/articles';
 import ArticleCard from '@/components/ArticleCard';
-import AdBanner from '@/components/AdBanner';
 import { Search, ChevronRight } from 'lucide-react';
 
 interface SearchPageProps {
@@ -79,10 +78,6 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
           No tutorials found matching &quot;{query}&quot;. Try different keywords such as &quot;windows&quot;, &quot;excel&quot;, or &quot;security&quot;.
         </div>
       ) : null}
-
-      <div className="mt-12">
-        <AdBanner variant="multiplex" slot="9876543210" />
-      </div>
     </div>
   );
 }

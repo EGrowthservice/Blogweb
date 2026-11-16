@@ -60,11 +60,21 @@ export default function AdSenseAd({
   };
 
   const actualSlot = getSlotId();
+  const isDummySlot =
+    !actualSlot ||
+    actualSlot === '9876543210' ||
+    actualSlot === '7182930415' ||
+    actualSlot === '5492817364' ||
+    actualSlot === '3829104756';
+
   const defaultClientId = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || 'ca-pub-3542813933597668';
   const publisherId = config?.adsensePublisherId || defaultClientId;
-  const isEnabled = config ? config.adsenseEnabled : true;
+  const isEnabled = Boolean(config?.adsenseEnabled);
   const isProduction =
-    isEnabled && publisherId.startsWith('ca-pub-') && publisherId !== 'ca-pub-0000000000000000';
+    isEnabled &&
+    !isDummySlot &&
+    publisherId.startsWith('ca-pub-') &&
+    publisherId !== 'ca-pub-0000000000000000';
 
   useEffect(() => {
     if (isProduction && typeof window !== 'undefined' && !adPushed.current && actualSlot) {
@@ -77,26 +87,26 @@ export default function AdSenseAd({
     }
   }, [isProduction, actualSlot]);
 
-  // Dimension presets to avoid Cumulative Layout Shift (CLS)
   const getContainerStyle = () => {
     switch (position) {
       case 'header':
-        return 'min-h-[90px] max-w-[728px] mx-auto my-4';
+        return 'max-w-[728px] mx-auto my-4';
       case 'sidebar':
-        return 'min-h-[250px] w-full my-6';
+        return 'w-full my-6';
       case 'content':
-        return 'min-h-[250px] max-w-[650px] mx-auto my-8';
+        return 'max-w-[650px] mx-auto my-8';
       case 'footer':
-        return 'min-h-[100px] max-w-[728px] mx-auto my-6';
+        return 'max-w-[728px] mx-auto my-6';
       default:
-        return 'min-h-[100px] w-full my-4';
+        return 'w-full my-4';
     }
   };
 
   // CRITICAL FOR ADSENSE APPROVAL:
-  // If AdSense is not active with a genuine publisher ID and configured slot,
-  // DO NOT render any placeholder, dashed border, or text. Return null to keep layout 100% clean.
-  if (!isProduction || !actualSlot) {
+  // If AdSense is not explicitly enabled with a real configured slot,
+  // NEVER render any placeholder, empty container, min-height, or "Advertisement" text.
+  // Return null to keep layout 100% clean and avoid "Low value / under construction" rejection.
+  if (!isProduction || !actualSlot || isDummySlot) {
     return null;
   }
 

@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { getCategoryBySlug, getAllCategories } from '@/lib/categories';
 import { getArticlesByCategory, getAllArticles, getArticleBySlug } from '@/lib/articles';
 import ArticleCard from '@/components/ArticleCard';
-import AdBanner from '@/components/AdBanner';
 import ArticleDetailView from '@/components/ArticleDetailView';
 import { ChevronRight, Home, Sparkles, BookOpen, Wrench, ArrowRight } from 'lucide-react';
 
@@ -235,9 +234,6 @@ export default async function CategoryOrArticlePage({ params }: CategoryOrArticl
                 ))}
               </div>
             </div>
-
-            {/* Responsive AdSense Banner */}
-            <AdBanner variant="sidebar" slot="3847291056" />
           </aside>
         </div>
       </div>

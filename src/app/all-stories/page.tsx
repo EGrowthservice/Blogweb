@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { getAllArticles } from '@/lib/articles';
 import { getAllCategories } from '@/lib/categories';
 import ArticleCard from '@/components/ArticleCard';
-import AdBanner from '@/components/AdBanner';
 import { ChevronRight, BookOpen, Sparkles, Filter, Home } from 'lucide-react';
 
 export const revalidate = 60; // ISR cache 60s for instant loading
@@ -91,11 +90,6 @@ export default async function AllStoriesPage() {
           ))}
         </div>
       )}
-
-      {/* Bottom Ad placement */}
-      <div className="mt-16 pt-8 border-t border-slate-200">
-        <AdBanner variant="multiplex" slot="9876543210" />
-      </div>
     </div>
   );
 }

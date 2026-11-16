@@ -4,7 +4,6 @@ import Image from 'next/image';
 import { getAllArticles } from '@/lib/articles';
 import { getAllCategories } from '@/lib/categories';
 import ArticleCard from '@/components/ArticleCard';
-import AdBanner from '@/components/AdBanner';
 import YouTubeVideoSection from '@/components/YouTubeVideoSection';
 import {
   Clock,
@@ -259,11 +258,6 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Prominent Leaderboard Ad Placement */}
-      <div className="my-10">
-        <AdBanner variant="leaderboard" slot="7182930415" />
-      </div>
-
       {/* 4. Embedded YouTube Tech Video Masterclass (User Request) */}
       <YouTubeVideoSection />
 
@@ -437,11 +431,6 @@ export default async function HomePage() {
           </Link>
         </section>
       )}
-
-      {/* Bottom Ad placement */}
-      <div className="mt-12 pt-6 border-t border-slate-200">
-        <AdBanner variant="multiplex" slot="9876543210" />
-      </div>
     </div>
   );
 }
