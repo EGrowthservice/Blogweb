@@ -7,10 +7,8 @@ import {
   Copy,
   Check,
   RotateCcw,
-  Sparkles,
   ArrowLeft,
   AlertTriangle,
-  FileCode,
   CheckCircle2,
 } from 'lucide-react';
 
@@ -19,8 +17,8 @@ const SAMPLE_JSON = `{
   "domain": "https://www.pulseetm.click",
   "features": [
     "Tech Tutorials",
-    "Computer Hacks",
-    "Online Utilities"
+    "Productivity Guides",
+    "Digital Utilities"
   ],
   "stats": {
     "activeUsers": 15420,
@@ -41,10 +39,10 @@ export default function JsonFormatterPage() {
       const parsed = JSON.parse(inputJson);
       setInputJson(JSON.stringify(parsed, null, spaces));
       setError(null);
-      setSuccessMsg(`Đã định dạng thành công (${spaces} spaces)`);
+      setSuccessMsg(`Successfully formatted with ${spaces}-space indentation.`);
       setTimeout(() => setSuccessMsg(null), 2500);
     } catch (err: any) {
-      setError(err.message || 'Cú pháp JSON không hợp lệ');
+      setError(err.message || 'Invalid JSON syntax encountered');
     }
   };
 
@@ -54,25 +52,25 @@ export default function JsonFormatterPage() {
       const parsed = JSON.parse(inputJson);
       setInputJson(JSON.stringify(parsed));
       setError(null);
-      setSuccessMsg('Đã nén JSON thành 1 dòng duy nhất');
+      setSuccessMsg('Successfully minified JSON into a single line.');
       setTimeout(() => setSuccessMsg(null), 2500);
     } catch (err: any) {
-      setError(err.message || 'Cú pháp JSON không hợp lệ');
+      setError(err.message || 'Invalid JSON syntax encountered');
     }
   };
 
   const handleValidate = () => {
     try {
       if (!inputJson.trim()) {
-        setError('Vui lòng nhập chuỗi JSON để kiểm tra');
+        setError('Please enter a JSON string to validate.');
         return;
       }
       JSON.parse(inputJson);
       setError(null);
-      setSuccessMsg('Tuyệt vời! Cú pháp JSON hoàn toàn hợp lệ 100%');
+      setSuccessMsg('Syntax valid! Valid RFC 8259 JSON structure.');
       setTimeout(() => setSuccessMsg(null), 3000);
     } catch (err: any) {
-      setError(err.message || 'Cú pháp JSON không hợp lệ');
+      setError(err.message || 'Invalid JSON syntax encountered');
     }
   };
 
@@ -98,21 +96,21 @@ export default function JsonFormatterPage() {
           className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-medium text-gray-500 hover:text-blue-600 transition"
         >
           <ArrowLeft className="w-4 h-4" />
-          <span>Quay lại danh sách Tiện ích</span>
+          <span>Back to Online Tools</span>
         </Link>
       </div>
 
       {/* Header */}
       <div className="mb-8">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-50 text-cyan-700 text-xs font-semibold mb-3 border border-cyan-200">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-semibold mb-3 border border-blue-200">
           <Code2 className="w-3.5 h-3.5" />
-          <span>Công Cụ Lập Trình & Dữ Liệu</span>
+          <span>Developer & Data Tools</span>
         </div>
         <h1 className="text-2xl sm:text-4xl font-extrabold text-gray-900 tracking-tight mb-2">
-          Định Dạng & Kiểm Tra Cú Pháp JSON
+          JSON Formatter & Validator
         </h1>
         <p className="text-sm sm:text-base text-gray-600">
-          Làm đẹp cấu trúc JSON, nén gọn mã (Minify) và phát hiện vị trí lỗi cú pháp chính xác theo tiêu chuẩn RFC 8259.
+          Beautify raw JSON payloads, minify whitespace for production APIs, and detect exact syntax error line offsets in compliance with RFC 8259 standards.
         </p>
       </div>
 
@@ -125,31 +123,31 @@ export default function JsonFormatterPage() {
               onClick={() => handleBeautify(2)}
               className="px-3 py-1.5 rounded-lg text-xs font-bold bg-blue-600 hover:bg-blue-700 text-white transition shadow-sm"
             >
-              Làm Đẹp (2 Spaces)
+              Beautify (2 Spaces)
             </button>
             <button
               onClick={() => handleBeautify(4)}
               className="px-3 py-1.5 rounded-lg text-xs font-bold bg-gray-100 hover:bg-gray-200 text-gray-800 transition"
             >
-              Làm Đẹp (4 Spaces)
+              Beautify (4 Spaces)
             </button>
             <button
               onClick={handleMinify}
               className="px-3 py-1.5 rounded-lg text-xs font-bold bg-gray-100 hover:bg-gray-200 text-gray-800 transition"
             >
-              Nén Minify
+              Minify
             </button>
             <button
               onClick={handleValidate}
               className="px-3 py-1.5 rounded-lg text-xs font-bold bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 transition"
             >
-              Kiểm Tra Lỗi
+              Validate Syntax
             </button>
             <button
               onClick={handleLoadSample}
               className="px-3 py-1.5 rounded-lg text-xs font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-50 transition"
             >
-              Mẫu JSON
+              Load Sample
             </button>
           </div>
 
@@ -157,7 +155,7 @@ export default function JsonFormatterPage() {
             <button
               onClick={() => setInputJson('')}
               className="p-1.5 text-xs text-gray-400 hover:text-red-500 rounded-md transition"
-              title="Xóa trắng"
+              title="Clear editor"
             >
               <RotateCcw className="w-4 h-4" />
             </button>
@@ -171,11 +169,11 @@ export default function JsonFormatterPage() {
             >
               {copied ? (
                 <>
-                  <Check className="w-3.5 h-3.5" /> Đã Copy!
+                  <Check className="w-3.5 h-3.5" /> Copied!
                 </>
               ) : (
                 <>
-                  <Copy className="w-3.5 h-3.5" /> Sao Chép
+                  <Copy className="w-3.5 h-3.5" /> Copy JSON
                 </>
               )}
             </button>
@@ -187,7 +185,7 @@ export default function JsonFormatterPage() {
           <div className="mb-4 p-3.5 rounded-xl bg-red-50 border border-red-200 text-red-700 text-xs sm:text-sm flex items-start gap-2.5">
             <AlertTriangle className="w-4 h-4 text-red-600 flex-shrink-0 mt-0.5" />
             <div>
-              <span className="font-bold">Lỗi cú pháp: </span>
+              <span className="font-bold">Syntax Error: </span>
               <span className="font-mono">{error}</span>
             </div>
           </div>
@@ -208,8 +206,8 @@ export default function JsonFormatterPage() {
             if (error) setError(null);
           }}
           rows={16}
-          placeholder="Dán chuỗi JSON cần định dạng vào đây..."
-          className="w-full p-4 font-mono text-xs sm:text-sm border border-gray-300 rounded-xl bg-gray-900 text-emerald-400 focus:outline-none focus:ring-2 focus:ring-blue-500 leading-relaxed resize-y"
+          placeholder="Paste or type JSON data here..."
+          className="w-full p-4 font-mono text-xs sm:text-sm border border-gray-300 rounded-xl bg-gray-950 text-emerald-400 focus:outline-none focus:ring-2 focus:ring-blue-500 leading-relaxed resize-y"
           spellCheck={false}
         />
       </div>
@@ -217,17 +215,20 @@ export default function JsonFormatterPage() {
       {/* Developer FAQ */}
       <div className="bg-white rounded-2xl border border-gray-200 p-6 sm:p-8 space-y-3 text-sm text-gray-700 leading-relaxed">
         <h2 className="text-lg font-bold text-gray-900 mb-2">
-          Lợi Ích Của Việc Chuẩn Hóa Dữ Liệu JSON
+          Benefits of Standardized JSON Data
         </h2>
         <p>
-          JSON (JavaScript Object Notation) là định dạng trao đổi dữ liệu tiêu chuẩn trên toàn thế giới giữa máy chủ và ứng dụng web.
+          JSON (JavaScript Object Notation) is the ubiquitous standard data format powering modern web APIs, microservices, and client-server communication.
         </p>
         <ul className="list-disc pl-5 space-y-1 text-gray-600">
           <li>
-            <strong>Dễ đọc và gỡ lỗi (Debugging):</strong> Thụt dòng 2 hoặc 4 spaces giúp lập trình viên nhanh chóng nhìn ra cấu trúc lồng nhau của các object và array.
+            <strong>Streamlined Debugging:</strong> Indenting object properties with 2 or 4 spaces makes hierarchical arrays and key-value relationships readily understandable.
           </li>
           <li>
-            <strong>Tiết kiệm băng thông (Minification):</strong> Chế độ Minify xóa bỏ mọi khoảng trắng và ngắt dòng không cần thiết, giúp payload API truyền qua mạng nhanh hơn.
+            <strong>Network Bandwidth Optimization:</strong> Minification strips redundant spaces, tabs, and line breaks, reducing payload size for faster HTTP transfers.
+          </li>
+          <li>
+            <strong>Client-Side Security:</strong> Validating JSON on your browser prevents unexpected syntax anomalies before persisting data to remote databases.
           </li>
         </ul>
       </div>

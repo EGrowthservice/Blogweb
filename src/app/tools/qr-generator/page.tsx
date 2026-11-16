@@ -8,10 +8,8 @@ import {
   Copy,
   Check,
   ArrowLeft,
-  Sparkles,
   Link2,
   Wifi,
-  Mail,
   FileText,
   Phone,
 } from 'lucide-react';
@@ -73,21 +71,21 @@ export default function QrGeneratorPage() {
           className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-medium text-gray-500 hover:text-blue-600 transition"
         >
           <ArrowLeft className="w-4 h-4" />
-          <span>Quay lại danh sách Tiện ích</span>
+          <span>Back to Online Tools</span>
         </Link>
       </div>
 
       {/* Header */}
       <div className="mb-8">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-50 text-purple-700 text-xs font-semibold mb-3 border border-purple-200">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-semibold mb-3 border border-blue-200">
           <QrCode className="w-3.5 h-3.5" />
-          <span>Mã Phản Hồi Nhanh</span>
+          <span>Quick Response Matrix</span>
         </div>
         <h1 className="text-2xl sm:text-4xl font-extrabold text-gray-900 tracking-tight mb-2">
-          Trình Tạo Mã QR Code Miễn Phí
+          Free QR Code Generator
         </h1>
         <p className="text-sm sm:text-base text-gray-600">
-          Tạo mã QR tức thì cho đường link website, mạng WiFi, số điện thoại hoặc văn bản. Tải về ảnh PNG độ phân giải cao hoàn toàn miễn phí.
+          Instantly generate high-resolution QR codes for websites, Wi-Fi networks, phone numbers, or arbitrary plain text. Download crystal-clear PNG images 100% free with no expiration.
         </p>
       </div>
 
@@ -104,47 +102,47 @@ export default function QrGeneratorPage() {
               }}
               className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition whitespace-nowrap ${
                 qrType === 'url'
-                  ? 'bg-purple-600 text-white shadow-sm'
+                  ? 'bg-blue-600 text-white shadow-sm'
                   : 'text-gray-600 hover:bg-gray-100'
               }`}
             >
-              <Link2 className="w-3.5 h-3.5" /> Link Website
+              <Link2 className="w-3.5 h-3.5" /> Website URL
             </button>
             <button
               onClick={() => {
                 setQrType('text');
-                setContent('Chào mừng bạn đến với PULSE TechTips!');
+                setContent('Welcome to PULSE TechTips & Digital Tools!');
               }}
               className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition whitespace-nowrap ${
                 qrType === 'text'
-                  ? 'bg-purple-600 text-white shadow-sm'
+                  ? 'bg-blue-600 text-white shadow-sm'
                   : 'text-gray-600 hover:bg-gray-100'
               }`}
             >
-              <FileText className="w-3.5 h-3.5" /> Văn Bản
+              <FileText className="w-3.5 h-3.5" /> Plain Text
             </button>
             <button
               onClick={() => setQrType('wifi')}
               className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition whitespace-nowrap ${
                 qrType === 'wifi'
-                  ? 'bg-purple-600 text-white shadow-sm'
+                  ? 'bg-blue-600 text-white shadow-sm'
                   : 'text-gray-600 hover:bg-gray-100'
               }`}
             >
-              <Wifi className="w-3.5 h-3.5" /> Mạng WiFi
+              <Wifi className="w-3.5 h-3.5" /> Wi-Fi Network
             </button>
             <button
               onClick={() => {
                 setQrType('phone');
-                setContent('0901234567');
+                setContent('+18005550199');
               }}
               className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition whitespace-nowrap ${
                 qrType === 'phone'
-                  ? 'bg-purple-600 text-white shadow-sm'
+                  ? 'bg-blue-600 text-white shadow-sm'
                   : 'text-gray-600 hover:bg-gray-100'
               }`}
             >
-              <Phone className="w-3.5 h-3.5" /> Số Điện Thoại
+              <Phone className="w-3.5 h-3.5" /> Phone Number
             </button>
           </div>
 
@@ -153,63 +151,63 @@ export default function QrGeneratorPage() {
             <div className="space-y-4">
               <div>
                 <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
-                  Tên Mạng WiFi (SSID)
+                  Network Name (SSID)
                 </label>
                 <input
                   type="text"
                   value={wifiSsid}
                   onChange={(e) => setWifiSsid(e.target.value)}
-                  placeholder="Ví dụ: WiFi_CongTy_Tang2"
-                  className="w-full px-3.5 py-2.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:outline-none"
+                  placeholder="e.g. Office_Guest_5GHz"
+                  className="w-full px-3.5 py-2.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
                 />
               </div>
               <div>
                 <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
-                  Mật Khẩu WiFi
+                  Wi-Fi Password
                 </label>
                 <input
                   type="text"
                   value={wifiPassword}
                   onChange={(e) => setWifiPassword(e.target.value)}
-                  placeholder="Nhập mật khẩu WiFi..."
-                  className="w-full px-3.5 py-2.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:outline-none"
+                  placeholder="Enter Wi-Fi password..."
+                  className="w-full px-3.5 py-2.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
                 />
               </div>
               <div>
                 <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
-                  Loại Mã Hóa
+                  Security Encryption
                 </label>
                 <select
                   value={wifiType}
                   onChange={(e) => setWifiType(e.target.value)}
-                  className="w-full px-3.5 py-2.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:outline-none"
+                  className="w-full px-3.5 py-2.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
                 >
-                  <option value="WPA">WPA / WPA2 / WPA3 (Phổ biến)</option>
-                  <option value="WEP">WEP</option>
-                  <option value="nopass">Không có mật khẩu</option>
+                  <option value="WPA">WPA / WPA2 / WPA3 (Standard)</option>
+                  <option value="WEP">WEP (Legacy)</option>
+                  <option value="nopass">None (Open Network)</option>
                 </select>
               </div>
             </div>
           ) : qrType === 'phone' ? (
             <div>
               <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
-                Số Điện Thoại
+                Phone Number
               </label>
               <input
                 type="tel"
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
-                placeholder="Nhập số điện thoại (ví dụ: 0987654321)..."
-                className="w-full px-3.5 py-2.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:outline-none"
+                placeholder="e.g. +18005550199..."
+                className="w-full px-3.5 py-2.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
               />
               <p className="text-xs text-gray-500 mt-1.5">
-                Khi quét mã, điện thoại sẽ tự động mở bàn phím gọi số này.
+                Scanning this code automatically initiates a dial prompt on mobile devices.
               </p>
             </div>
           ) : (
             <div>
               <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
-                {qrType === 'url' ? 'Đường Dẫn URL' : 'Nội Dung Văn Bản'}
+                {qrType === 'url' ? 'Destination Web URL' : 'Plain Text Message'}
               </label>
               <textarea
                 value={content}
@@ -217,10 +215,10 @@ export default function QrGeneratorPage() {
                 rows={4}
                 placeholder={
                   qrType === 'url'
-                    ? 'Nhập địa chỉ link (ví dụ: https://www.pulseetm.click)...'
-                    : 'Nhập nội dung cần mã hóa thành mã QR...'
+                    ? 'Enter web link (e.g., https://www.pulseetm.click)...'
+                    : 'Type or paste content to encode into QR code...'
                 }
-                className="w-full p-3.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:outline-none font-mono"
+                className="w-full p-3.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none font-mono"
               />
             </div>
           )}
@@ -232,7 +230,7 @@ export default function QrGeneratorPage() {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={qrUrl}
-              alt="Mã QR xem trước"
+              alt="QR Code Live Preview"
               width={220}
               height={220}
               className="rounded-xl"
@@ -242,9 +240,9 @@ export default function QrGeneratorPage() {
           <div className="w-full space-y-2.5">
             <button
               onClick={handleDownload}
-              className="w-full py-3 px-4 rounded-xl font-bold text-sm bg-purple-600 hover:bg-purple-700 text-white transition flex items-center justify-center gap-2 shadow-sm"
+              className="w-full py-3 px-4 rounded-xl font-bold text-sm bg-blue-600 hover:bg-blue-700 text-white transition flex items-center justify-center gap-2 shadow-sm"
             >
-              <Download className="w-4 h-4" /> Tải Xuống Ảnh PNG
+              <Download className="w-4 h-4" /> Download High-Res PNG
             </button>
             <button
               onClick={handleCopyLink}
@@ -252,11 +250,11 @@ export default function QrGeneratorPage() {
             >
               {copied ? (
                 <>
-                  <Check className="w-4 h-4 text-emerald-600" /> Đã Copy Dữ Liệu!
+                  <Check className="w-4 h-4 text-emerald-600" /> Copied Payload!
                 </>
               ) : (
                 <>
-                  <Copy className="w-4 h-4" /> Sao Chép Nội Dung Mã
+                  <Copy className="w-4 h-4" /> Copy Encoded Payload
                 </>
               )}
             </button>
@@ -267,17 +265,20 @@ export default function QrGeneratorPage() {
       {/* Guide & Best Practices */}
       <div className="bg-white rounded-2xl border border-gray-200 p-6 sm:p-8 space-y-3 text-sm text-gray-700 leading-relaxed">
         <h2 className="text-lg font-bold text-gray-900 mb-2">
-          Cách Quét & Ứng Dụng Mã QR Hiệu Quả
+          How to Scan and Utilize QR Codes Efficiently
         </h2>
         <p>
-          Mã QR (Quick Response) ngày nay có thể được quét trực tiếp bằng camera trên hầu hết điện thoại thông minh (iPhone, Samsung, Xiaomi) mà không cần cài thêm ứng dụng phụ trợ.
+          Modern smartphones running iOS (Camera app) and Android (Google Lens / Camera) feature native QR code decoding without requiring third-party scanning software.
         </p>
         <ul className="list-disc pl-5 space-y-1 text-gray-600">
           <li>
-            <strong>Chia sẻ WiFi không cần nhập pass:</strong> In mã QR WiFi dán tại phòng khách hoặc quán cafe để khách hàng chỉ cần giơ máy quét là kết nối ngay.
+            <strong>Instant Wi-Fi Sharing:</strong> Print and display your Wi-Fi QR code so visitors and clients can connect immediately without manually entering complex passwords.
           </li>
           <li>
-            <strong>In trên danh thiếp & tài liệu:</strong> Giúp người nhận truy cập nhanh website hoặc danh bạ chỉ trong 1 giây.
+            <strong>Print Collateral & Business Cards:</strong> Place compact QR codes on physical flyers, posters, or business cards to direct high-intent traffic to specific landing pages.
+          </li>
+          <li>
+            <strong>Static Security:</strong> Standard QR codes encode payload data statically, meaning they never expire and operate independently without tracking cookies or redirects.
           </li>
         </ul>
       </div>

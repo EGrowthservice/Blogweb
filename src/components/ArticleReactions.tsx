@@ -57,19 +57,19 @@ export default function ArticleReactions({ articleSlug }: ArticleReactionsProps)
   };
 
   const reactionButtons = [
-    { key: 'fire' as const, emoji: '🔥', label: 'Hot Take' },
-    { key: 'popcorn' as const, emoji: '🍿', label: 'Must Watch' },
+    { key: 'fire' as const, emoji: '🔥', label: 'Super Helpful' },
+    { key: 'popcorn' as const, emoji: '⚡', label: 'Instant Fix' },
     { key: 'mindblown' as const, emoji: '🤯', label: 'Mind Blown' },
     { key: 'applause' as const, emoji: '👏', label: 'Brilliant' },
   ];
 
   return (
-    <div className="my-8 p-5 sm:p-6 rounded-2xl bg-neutral-900/90 border border-neutral-800 text-center">
-      <h4 className="text-sm font-bold font-display text-white uppercase tracking-wider mb-1">
-        What&apos;s Your Reaction?
+    <div className="my-8 p-5 sm:p-6 rounded-2xl bg-slate-900 border border-slate-800 text-center">
+      <h4 className="text-sm font-bold text-white uppercase tracking-wider mb-1">
+        Was This Guide Helpful?
       </h4>
-      <p className="text-xs text-neutral-400 mb-4">
-        Share how this story made you feel with fellow entertainment readers.
+      <p className="text-xs text-slate-400 mb-4">
+        Share your reaction and let other readers know how this tutorial worked for you.
       </p>
 
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">

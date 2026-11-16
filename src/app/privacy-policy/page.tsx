@@ -137,7 +137,7 @@ export default function PrivacyPolicyPage() {
           3. Web Analytics (Google Analytics 4)
         </h2>
         <p className="text-sm text-gray-600 leading-relaxed">
-          We use Google Analytics 4 (GA4) to understand reader interests across our entertainment and sports coverage. Google Analytics uses first-party cookies to track aggregated visitor metrics. You can prevent Google Analytics from recording your browsing activity across all websites by installing the{' '}
+          We use Google Analytics 4 (GA4) to understand reader interests across our tech tutorials, troubleshooting guides, and online utilities. Google Analytics uses first-party cookies to track aggregated visitor metrics. You can prevent Google Analytics from recording your browsing activity across all websites by installing the{' '}
           <a
             href="https://tools.google.com/dlpage/gaoptout"
             target="_blank"
@@ -154,7 +154,7 @@ export default function PrivacyPolicyPage() {
         <h2 className="text-xl font-bold text-gray-900">4. Information You Voluntarily Provide</h2>
         <div className="space-y-2 text-sm text-gray-600">
           <p>
-            You are free to explore and read all articles, sports analyses, and archives on PULSE TechTips without registering or disclosing any personal details.
+            You are free to explore and read all tutorials, guides, and browser tools on PULSE TechTips without registering or disclosing any personal details.
           </p>
           <p>
             When you post a comment or submit an inquiry through our Contact Form, you may provide your name and email address. We use this information solely to display your public comment or respond to your inquiry. We never sell, lease, or monetize your contact details with external data brokers.

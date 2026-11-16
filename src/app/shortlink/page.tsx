@@ -74,22 +74,22 @@ export default function ShortLinkPage() {
           <span>Smart Blog Shortlinks</span>
         </div>
         <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 tracking-tight">
-          Blog Short Link Generator
+          Article Short URL Generator
         </h1>
         <p className="mt-2 text-sm text-gray-600 leading-relaxed">
-          Tạo và xem trước link rút gọn cho các bài viết trên blog. Hỗ trợ 2 định dạng: <strong>Short theo Title</strong> (lấy từ khóa của tiêu đề) và <strong>Short theo Random</strong> (mã ngẫu nhiên).
+          Generate clean, memorable short links for any tutorial or article on PULSE. Supports two generation algorithms: <strong>Title-Based</strong> (semantic keyword slug) and <strong>Random Code</strong> (ultra-compact alphanumeric).
         </p>
       </div>
 
       {/* Main Generator Card */}
-      <div className="p-6 sm:p-8 rounded-xl bg-gradient-to-br from-blue-50/70 to-indigo-50/40 border border-blue-200 shadow-sm space-y-6">
+      <div className="p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-blue-50/70 to-slate-50 border border-blue-200 shadow-sm space-y-6">
         <div>
           <h2 className="text-lg font-bold text-gray-900 flex items-center gap-2">
             <Sparkles className="w-5 h-5 text-blue-600" />
-            <span>Tạo Shortlink Mới: Chọn Dạng Bạn Muốn</span>
+            <span>Generate New Shortlink: Select Format</span>
           </h2>
           <p className="text-xs text-gray-600 mt-1">
-            Chọn một trong 2 định dạng dưới đây và bấm tạo để xem trước link rút gọn.
+            Choose your preferred URL style below to preview and copy your shareable link.
           </p>
         </div>
 
@@ -111,14 +111,14 @@ export default function ShortLinkPage() {
             <div className="flex items-center justify-between">
               <span className="font-bold text-sm text-gray-900 flex items-center gap-1.5">
                 <Sparkles className="w-4 h-4 text-blue-600" />
-                1. Short theo Title (Tiêu đề)
+                1. Title-Based Slug
               </span>
               <span className="text-[10px] uppercase font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full">
-                Khuyên dùng
+                Recommended
               </span>
             </div>
             <p className="text-xs text-gray-500 mt-2 leading-relaxed">
-              Trích xuất từ khóa ý nghĩa từ tiêu đề bài viết kết hợp mã ngắn. Ví dụ: <code className="text-blue-600 bg-blue-50/50 px-1 rounded">/s/news-desk-3a8f</code>
+              Extracts meaningful keywords from the guide title combined with a short hash. Example: <code className="text-blue-600 bg-blue-50/50 px-1 rounded">/s/excel-vlookup-3a8f</code>
             </p>
           </button>
 
@@ -138,14 +138,14 @@ export default function ShortLinkPage() {
             <div className="flex items-center justify-between">
               <span className="font-bold text-sm text-gray-900 flex items-center gap-1.5">
                 <Shuffle className="w-4 h-4 text-indigo-600" />
-                2. Short theo Random (Ngẫu nhiên)
+                2. Random Alphanumeric
               </span>
               <span className="text-[10px] uppercase font-bold text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-full">
-                Siêu ngắn
+                Ultra-Compact
               </span>
             </div>
             <p className="text-xs text-gray-500 mt-2 leading-relaxed">
-              Tạo chuỗi ký tự ngẫu nhiên hoàn toàn không phụ thuộc tiêu đề. Ví dụ: <code className="text-indigo-600 bg-indigo-50/50 px-1 rounded">/s/rnd-8k2m9p</code>
+              Generates a clean, short random identifier with zero keyword bias. Example: <code className="text-indigo-600 bg-indigo-50/50 px-1 rounded">/s/rnd-8k2m9p</code>
             </p>
           </button>
         </div>
@@ -159,11 +159,11 @@ export default function ShortLinkPage() {
                   {currentLink.category}
                 </span>
                 <span className="text-[11px] text-gray-500 font-mono">
-                  Định dạng: <strong>{currentLink.mode === 'random' ? 'Random' : 'Title-based'}</strong>
+                  Algorithm: <strong>{currentLink.mode === 'random' ? 'Random Hash' : 'Title Keywords'}</strong>
                 </span>
               </div>
               <span className="text-xs text-gray-500">
-                Lượt nhấp: <strong className="text-gray-900">{currentLink.clicks}</strong>
+                Click Count: <strong className="text-gray-900">{currentLink.clicks}</strong>
               </span>
             </div>
 
@@ -172,12 +172,12 @@ export default function ShortLinkPage() {
                 {currentLink.articleTitle}
               </h3>
               <p className="text-xs text-gray-500 flex items-center gap-1">
-                Đích đến: <code className="text-blue-600 bg-gray-50 px-1.5 py-0.5 rounded border border-gray-200">{currentLink.targetUrl}</code>
+                Target URL: <code className="text-blue-600 bg-gray-50 px-1.5 py-0.5 rounded border border-gray-200">{currentLink.targetUrl}</code>
               </p>
             </div>
 
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 pt-1">
-              <div className="flex-1 px-3.5 py-2.5 rounded-lg bg-gray-900 font-mono text-sm text-blue-300 break-all select-all flex items-center">
+              <div className="flex-1 px-3.5 py-2.5 rounded-lg bg-gray-950 font-mono text-sm text-blue-300 break-all select-all flex items-center">
                 {currentLink.shortUrl}
               </div>
 
@@ -189,12 +189,12 @@ export default function ShortLinkPage() {
                 {copied ? (
                   <>
                     <Check className="w-4 h-4 text-emerald-300" />
-                    <span>Đã sao chép!</span>
+                    <span>Copied!</span>
                   </>
                 ) : (
                   <>
                     <Copy className="w-4 h-4" />
-                    <span>Sao chép Link</span>
+                    <span>Copy Link</span>
                   </>
                 )}
               </button>
@@ -204,10 +204,10 @@ export default function ShortLinkPage() {
                 onClick={() => handleGenerate(selectedMode)}
                 disabled={loading}
                 className="inline-flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-lg border border-gray-300 bg-white hover:bg-gray-50 text-gray-700 text-xs font-semibold transition"
-                title="Tạo link cho bài viết ngẫu nhiên khác"
+                title="Generate link for another tutorial"
               >
                 <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin' : ''}`} />
-                <span>Đổi bài khác</span>
+                <span>Next Guide</span>
               </button>
 
               <a
@@ -215,10 +215,10 @@ export default function ShortLinkPage() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-lg border border-gray-300 bg-white hover:bg-gray-50 text-gray-700 text-xs font-semibold transition"
-                title="Thử nghiệm chuyển hướng"
+                title="Test 301 redirection"
               >
                 <ExternalLink className="w-3.5 h-3.5" />
-                <span>Thử</span>
+                <span>Test</span>
               </a>
             </div>
           </div>
@@ -226,21 +226,21 @@ export default function ShortLinkPage() {
       </div>
 
       {/* Universal Random URL Banner */}
-      <div className="p-6 rounded-lg bg-gray-50 border border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div className="p-6 rounded-2xl bg-gray-50 border border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4">
         <div className="space-y-1">
           <h3 className="text-sm font-bold text-gray-900 flex items-center gap-2">
             <Shuffle className="w-4 h-4 text-blue-600" />
-            <span>Link chuyển hướng ngẫu nhiên toàn cục: <code className="text-blue-600">/s/random</code></span>
+            <span>Global Random Tutorial Redirector: <code className="text-blue-600">/s/random</code></span>
           </h3>
           <p className="text-xs text-gray-600">
-            Truy cập <code className="bg-white px-1 border rounded">https://www.pulseetm.click/s/random</code> sẽ tự động chuyển hướng độc giả đến một bài viết ngẫu nhiên bất kỳ trên website!
+            Visiting <code className="bg-white px-1 border rounded">https://www.pulseetm.click/s/random</code> automatically redirects visitors to a surprise verified tech tutorial on the site!
           </p>
         </div>
         <Link
           href="/s/random"
-          className="shrink-0 inline-flex items-center gap-1.5 px-4 py-2 bg-white hover:bg-gray-100 border border-gray-300 rounded-md text-xs font-semibold text-gray-800 transition"
+          className="shrink-0 inline-flex items-center gap-1.5 px-4 py-2 bg-white hover:bg-gray-100 border border-gray-300 rounded-lg text-xs font-semibold text-gray-800 transition"
         >
-          <span>Thử /s/random</span>
+          <span>Try /s/random</span>
           <ArrowRight className="w-3.5 h-3.5" />
         </Link>
       </div>
@@ -249,19 +249,19 @@ export default function ShortLinkPage() {
       {recentLinks.length > 0 && (
         <section className="space-y-4">
           <h2 className="text-lg font-bold text-gray-900">
-            Danh Sách Short Links Gần Đây
+            Recently Generated Short Links
           </h2>
-          <div className="border border-gray-200 rounded-lg overflow-hidden shadow-xs">
+          <div className="border border-gray-200 rounded-xl overflow-hidden shadow-xs bg-white">
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs">
                 <thead className="bg-gray-50 border-b border-gray-200 text-gray-600 font-semibold">
                   <tr>
-                    <th className="py-3 px-4">Mã Link</th>
-                    <th className="py-3 px-4">Định Dạng</th>
-                    <th className="py-3 px-4">Tiêu Đề Bài Viết</th>
-                    <th className="py-3 px-4">Chuyên Mục</th>
-                    <th className="py-3 px-4 text-center">Lượt Nhấp</th>
-                    <th className="py-3 px-4 text-right">Thao Tác</th>
+                    <th className="py-3 px-4">Short Code</th>
+                    <th className="py-3 px-4">Format</th>
+                    <th className="py-3 px-4">Tutorial Title</th>
+                    <th className="py-3 px-4">Category</th>
+                    <th className="py-3 px-4 text-center">Clicks</th>
+                    <th className="py-3 px-4 text-right">Actions</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200">
@@ -293,7 +293,7 @@ export default function ShortLinkPage() {
                           onClick={() => handleCopy(item.shortUrl)}
                           className="text-blue-600 hover:underline font-medium"
                         >
-                          Sao chép
+                          Copy
                         </button>
                         <span>•</span>
                         <a
@@ -302,7 +302,7 @@ export default function ShortLinkPage() {
                           rel="noopener noreferrer"
                           className="text-gray-600 hover:text-gray-900"
                         >
-                          Xem
+                          Open
                         </a>
                       </td>
                     </tr>

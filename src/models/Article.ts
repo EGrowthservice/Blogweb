@@ -35,7 +35,7 @@ export interface IArticle extends Document {
 
 const AuthorSchema = new Schema<IAuthor>({
   name: { type: String, required: true },
-  role: { type: String, required: true, default: 'Entertainment Editor' },
+  role: { type: String, required: true, default: 'Tech Editor' },
   avatar: { type: String, required: true, default: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=256' },
   bio: { type: String, required: true, default: 'Content Creator & Editor' },
   twitter: { type: String },

@@ -45,11 +45,11 @@ export interface IAISettings extends Document {
 
 const AISettingsSchema = new Schema<IAISettings>(
   {
-    websiteName: { type: String, default: 'TheHorizon' },
-    websiteDescription: { type: String, default: 'Entertainment & News editorial website' },
-    defaultLanguage: { type: String, default: 'vi' },
-    writingTone: { type: String, default: 'professional, engaging, informative' },
-    targetAudience: { type: String, default: 'General Vietnamese readers interested in entertainment' },
+    websiteName: { type: String, default: 'PULSE TechTips' },
+    websiteDescription: { type: String, default: 'Tech tips, computer optimization & digital utilities website' },
+    defaultLanguage: { type: String, default: 'en' },
+    writingTone: { type: String, default: 'professional, practical, instructional' },
+    targetAudience: { type: String, default: 'Global readers seeking practical computing tutorials and web tools' },
 
     preferredArticleStructure: {
       type: String,

@@ -5,14 +5,14 @@ import { getAllArticles } from '@/lib/articles';
 import { getAllCategories } from '@/lib/categories';
 import ArticleCard from '@/components/ArticleCard';
 import AdBanner from '@/components/AdBanner';
-import { ChevronRight, Newspaper } from 'lucide-react';
+import { ChevronRight, BookOpen, Sparkles, Filter, Home } from 'lucide-react';
 
 export const revalidate = 60; // ISR cache 60s for instant loading
 
 export const metadata: Metadata = {
-  title: 'Tất Cả Thủ Thuật & Hướng Dẫn | PULSE TechTips',
+  title: 'Complete Tutorials & Tech Guides Archive | PULSE TechTips',
   description:
-    'Duyệt qua toàn bộ danh mục bài viết hướng dẫn về Windows, macOS, Android, iPhone, Excel và kỹ năng công nghệ thực chiến.',
+    'Browse our comprehensive catalog of field-tested guides on Windows 11, macOS, Android, iPhone, Excel modeling, and cybersecurity essentials.',
   alternates: {
     canonical: 'https://www.pulseetm.click/all-stories',
   },
@@ -25,44 +25,45 @@ export default async function AllStoriesPage() {
   ]);
 
   return (
-    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
       {/* Breadcrumbs */}
-      <nav className="flex items-center gap-2 text-xs text-gray-400 mb-6">
-        <Link href="/" className="hover:text-gray-700 transition">
-          Home
+      <nav className="flex items-center gap-2 text-xs text-slate-500 mb-6 font-medium">
+        <Link href="/" className="hover:text-blue-600 transition flex items-center gap-1">
+          <Home className="w-3.5 h-3.5" />
+          <span>Home</span>
         </Link>
-        <ChevronRight className="w-3.5 h-3.5 text-gray-400" />
-        <span className="text-gray-900 font-medium">All Stories</span>
+        <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
+        <span className="text-slate-900 font-bold">Complete Tutorial Archive</span>
       </nav>
 
-      {/* Page Header */}
-      <div className="mb-8 pb-5 border-b border-gray-200 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+      {/* Page Header: White / Black / Red / Blue */}
+      <div className="mb-10 pb-6 border-b border-slate-200 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6">
         <div>
-          <div className="flex items-center gap-2 text-blue-600 mb-2">
-            <Newspaper className="w-5 h-5" />
-            <span className="text-xs font-bold uppercase tracking-wider">Kho Lưu Trữ</span>
+          <div className="inline-flex items-center gap-2 text-red-600 mb-2 text-xs font-black uppercase tracking-wider">
+            <span className="w-2 h-2 rounded-full bg-red-600"></span>
+            <span>Comprehensive Index</span>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight">
-            Tất Cả Thủ Thuật & Hướng Dẫn
+          <h1 className="text-2xl sm:text-4xl font-black text-slate-900 tracking-tight font-display">
+            All Practical Tech Tutorials ({articles.length})
           </h1>
-          <p className="mt-1 text-sm text-gray-600">
-            Duyệt qua toàn bộ {articles.length} bài viết hướng dẫn chi tiết từng bước.
+          <p className="mt-2 text-sm text-slate-600 max-w-2xl leading-relaxed">
+            Browse through our complete library of audited step-by-step guides, troubleshooting workflows, and software cheat sheets.
           </p>
         </div>
 
         {/* Dynamic Category Filter Pills */}
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <Link
             href="/all-stories"
-            className="px-3 py-1.5 rounded-full text-xs font-semibold bg-gray-900 text-white"
+            className="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-950 text-white shadow-sm"
           >
-            Tất cả ({articles.length})
+            All Disciplines ({articles.length})
           </Link>
           {categories.map((cat) => (
             <Link
               key={cat.slug}
               href={`/${cat.slug}`}
-              className="px-3 py-1.5 rounded-full text-xs font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition"
+              className="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-white text-slate-700 hover:bg-blue-50 hover:text-blue-600 transition border border-slate-200"
             >
               {cat.name}
             </Link>
@@ -70,12 +71,13 @@ export default async function AllStoriesPage() {
         </div>
       </div>
 
-      {/* Articles Grid */}
+      {/* Articles Grid (3 columns on desktop, 2 on tablet, 1 on mobile) */}
       {articles.length === 0 ? (
-        <div className="py-16 text-center bg-gray-50 border border-gray-200 rounded-lg">
-          <h3 className="text-base font-semibold text-gray-900 mb-1">No stories published yet</h3>
-          <p className="text-sm text-gray-500">
-            New stories will appear here once published from the Admin dashboard.
+        <div className="py-20 text-center bg-white border border-slate-200 rounded-3xl p-8 shadow-sm">
+          <BookOpen className="w-12 h-12 text-slate-300 mx-auto mb-3" />
+          <h3 className="text-base font-bold text-slate-900 mb-1">No tutorials available</h3>
+          <p className="text-sm text-slate-500">
+            Articles will appear here once published from the technical console.
           </p>
         </div>
       ) : (
@@ -84,14 +86,14 @@ export default async function AllStoriesPage() {
             <ArticleCard
               key={article.id || article.slug}
               article={article}
-              showCategoryInUrl={false}
+              showCategoryInUrl={true}
             />
           ))}
         </div>
       )}
 
       {/* Bottom Ad placement */}
-      <div className="mt-14 pt-8 border-t border-gray-200">
+      <div className="mt-16 pt-8 border-t border-slate-200">
         <AdBanner variant="multiplex" slot="9876543210" />
       </div>
     </div>

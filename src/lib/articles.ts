@@ -19,12 +19,12 @@ function formatArticleDoc(doc: any): ArticleData {
     featuredImageAlt: doc.featuredImageAlt || doc.title || '',
     author: {
       name: doc.author?.name || 'Editorial Team',
-      role: doc.author?.role || 'Staff Writer',
+      role: doc.author?.role || 'Tech Lead & Staff Writer',
       avatar:
         doc.author?.avatar ||
         'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=256',
-      bio: doc.author?.bio || 'Preserving and archiving classic television comedy.',
-      twitter: doc.author?.twitter || '@pulse_ent',
+      bio: doc.author?.bio || 'Practical computing guides, OS optimization, and digital tools.',
+      twitter: doc.author?.twitter || '@PulseTechTips',
     },
     readTimeMinutes: doc.readTimeMinutes || 5,
     isFeatured: Boolean(doc.isFeatured),

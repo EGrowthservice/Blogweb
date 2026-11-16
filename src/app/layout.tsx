@@ -33,24 +33,24 @@ export const metadata: Metadata = {
     canonical: './',
   },
   title: {
-    default: 'PULSE TechTips | Thủ Thuật Máy Tính, Điện Thoại, Excel & Tiện Ích Số',
+    default: 'PULSE TechTips | PC Optimization, Smartphone Hacks, Excel Guides & Web Tools',
     template: '%s | PULSE TechTips',
   },
   description:
-    'Chuyên trang thủ thuật công nghệ, hướng dẫn sửa lỗi máy tính Windows/Mac, mẹo dùng điện thoại iOS/Android, kỹ năng tin học văn phòng Excel và bộ công cụ tiện ích số trực tuyến miễn phí.',
+    'Your premier resource for practical computer optimization guides, Windows & Mac fixes, smartphone battery hacks, Excel formulas, and free client-side browser utilities.',
   keywords: [
     'PULSE TechTips',
-    'Thủ thuật máy tính',
-    'Tăng tốc Windows 11',
-    'Thủ thuật Excel',
-    'Hàm XLOOKUP',
-    'Thủ thuật điện thoại',
-    'Tiết kiệm pin iPhone',
-    'Tiện ích trực tuyến',
-    'Rút gọn link',
-    'Tạo mã QR',
-    'Tạo mật khẩu mạnh',
-    'Đếm từ trực tuyến',
+    'PC Optimization',
+    'Windows 11 speed up',
+    'Excel formulas',
+    'XLOOKUP guide',
+    'Smartphone hacks',
+    'iPhone battery health',
+    'Online web tools',
+    'URL shortener',
+    'QR code generator',
+    'Password generator',
+    'JSON formatter',
   ],
   robots: {
     index: true,
@@ -65,18 +65,18 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: 'website',
-    locale: 'vi_VN',
+    locale: 'en_US',
     url: baseUrl,
     siteName: 'PULSE TechTips',
-    title: 'PULSE TechTips | Thủ Thuật Máy Tính, Điện Thoại, Excel & Tiện Ích Số',
+    title: 'PULSE TechTips | PC Optimization, Smartphone Hacks, Excel Guides & Web Tools',
     description:
-      'Chuyên trang thủ thuật công nghệ, hướng dẫn sửa lỗi máy tính Windows/Mac, mẹo dùng điện thoại iOS/Android, kỹ năng tin học văn phòng Excel và bộ công cụ tiện ích số trực tuyến miễn phí.',
+      'Your premier resource for practical computer optimization guides, Windows & Mac fixes, smartphone battery hacks, Excel formulas, and free client-side browser utilities.',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'PULSE TechTips | Thủ Thuật Máy Tính, Điện Thoại, Excel & Tiện Ích Số',
+    title: 'PULSE TechTips | PC Optimization, Smartphone Hacks, Excel Guides & Web Tools',
     description:
-      'Chuyên trang thủ thuật công nghệ, hướng dẫn sửa lỗi máy tính Windows/Mac, mẹo dùng điện thoại iOS/Android, kỹ năng tin học văn phòng Excel và bộ công cụ tiện ích số trực tuyến miễn phí.',
+      'Your premier resource for practical computer optimization guides, Windows & Mac fixes, smartphone battery hacks, Excel formulas, and free client-side browser utilities.',
   },
   icons: {
     icon: [

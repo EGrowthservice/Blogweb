@@ -14,8 +14,8 @@ interface GoogleAuthModalProps {
 export default function GoogleAuthModal({
   isOpen,
   onClose,
-  title = 'Join PULSE Entertainment',
-  description = 'Sign in with your Google account to save articles, participate in discussions, and customize your entertainment feed.',
+  title = 'Join PULSE TechTips',
+  description = 'Sign in with your Google account to bookmark tutorials, participate in tech discussions, and personalize your digital feed.',
 }: GoogleAuthModalProps) {
   if (!isOpen) return null;
 
@@ -33,7 +33,7 @@ export default function GoogleAuthModal({
           <X className="w-5 h-5" />
         </button>
 
-        <div className="flex items-center gap-2 text-brand-500 font-semibold text-xs tracking-wider uppercase mb-3">
+        <div className="flex items-center gap-2 text-blue-500 font-semibold text-xs tracking-wider uppercase mb-3">
           <Sparkles className="w-4 h-4" />
           <span>Reader Account</span>
         </div>
@@ -47,12 +47,12 @@ export default function GoogleAuthModal({
 
         <div className="space-y-3 mb-6 bg-neutral-950/60 p-4 rounded-xl border border-neutral-800/80 text-xs text-neutral-300">
           <div className="flex items-center gap-3">
-            <Bookmark className="w-4 h-4 text-brand-400 shrink-0" />
-            <span>Save articles to read later across all your devices</span>
+            <Bookmark className="w-4 h-4 text-blue-400 shrink-0" />
+            <span>Save tutorials to read later across all your devices</span>
           </div>
           <div className="flex items-center gap-3">
-            <MessageSquare className="w-4 h-4 text-brand-400 shrink-0" />
-            <span>Join insightful discussions on Hollywood and pop culture</span>
+            <MessageSquare className="w-4 h-4 text-blue-400 shrink-0" />
+            <span>Join insightful discussions on OS tuning and office tools</span>
           </div>
         </div>
 

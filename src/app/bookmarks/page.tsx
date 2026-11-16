@@ -68,7 +68,7 @@ export default function BookmarksPage() {
           Your Personal Reading Library
         </h1>
         <p className="text-neutral-400 text-sm mb-8 leading-relaxed max-w-md mx-auto">
-          Sign in with your Google account to save Hollywood scoops, film reviews, and celebrity features to read whenever you want.
+          Sign in with your Google account to save computer tutorials, Excel shortcuts, and tech tips to read anytime.
         </p>
         <button
           onClick={() => signIn('google')}
@@ -117,13 +117,13 @@ export default function BookmarksPage() {
           <Bookmark className="w-12 h-12 text-neutral-600 mx-auto mb-3" />
           <h3 className="text-lg font-bold text-white">No saved stories yet</h3>
           <p className="text-xs text-neutral-400 mt-1 max-w-sm mx-auto">
-            Browse our latest entertainment stories and click the bookmark icon to save them here.
+            Browse our latest tech guides and click the bookmark icon to save them here.
           </p>
           <Link
-            href="/"
-            className="inline-flex items-center gap-2 mt-6 px-5 py-2.5 bg-brand-600 hover:bg-brand-500 text-white text-xs font-semibold rounded-xl transition"
+            href="/all-stories"
+            className="inline-flex items-center gap-2 mt-6 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold rounded-xl transition"
           >
-            <span>Explore Stories</span>
+            <span>Explore Tutorials</span>
             <ArrowRight className="w-4 h-4" />
           </Link>
         </div>

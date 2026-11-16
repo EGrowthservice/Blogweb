@@ -19,10 +19,10 @@ export default function NotFound() {
 
         <div className="space-y-2">
           <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight">
-            Story Not Found
+            Tutorial Not Found
           </h1>
           <p className="text-sm text-gray-500 leading-relaxed">
-            The sketch, retrospective, or story you are looking for might have been moved, renamed, or is no longer available.
+            The guide, technical tutorial, or online tool you are looking for might have been moved, renamed, or is no longer available.
           </p>
         </div>
 
@@ -39,7 +39,7 @@ export default function NotFound() {
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium text-sm transition border border-gray-200"
           >
             <Compass className="w-4 h-4" />
-            Browse All Stories
+            Browse All Tutorials
           </Link>
         </div>
       </div>

@@ -55,11 +55,11 @@ export default function ArticleDetailView({
   const authorName =
     article.author?.name && article.author.name !== 'Super Admin'
       ? article.author.name
-      : 'Ban Biên Tập PULSE TechTips';
+      : 'PULSE TechTips Editorial Team';
   const authorRole = article.author?.role || 'Tech Lead & Senior Editor';
   const authorBio =
     article.author?.bio ||
-    'Chuyên gia công nghệ với hơn 8 năm kinh nghiệm trong quản trị hệ thống, tối ưu máy tính, thủ thuật di động và đào tạo tin học văn phòng ứng dụng.';
+    'Senior Systems Administrator and Tech Lead with over 8 years of experience in OS optimization, enterprise network troubleshooting, and productivity software automation.';
   const authorAvatar =
     article.author?.avatar ||
     'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=256';

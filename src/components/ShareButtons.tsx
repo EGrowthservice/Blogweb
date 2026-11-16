@@ -33,7 +33,7 @@ export default function ShareButtons({ title, url, slug, category }: ShareButton
 
   const handleTwitterShare = () => {
     const shareUrl = encodeURIComponent(getShareUrl());
-    const shareText = encodeURIComponent(`${title} via @PulseEnt`);
+    const shareText = encodeURIComponent(`${title} via @PulseTechTips`);
     window.open(`https://twitter.com/intent/tweet?text=${shareText}&url=${shareUrl}`, '_blank', 'noopener,noreferrer');
   };
 
@@ -60,10 +60,10 @@ export default function ShareButtons({ title, url, slug, category }: ShareButton
           <button
             onClick={() => setModalOpen(true)}
             className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-blue-50 hover:bg-blue-100 border border-blue-200 text-blue-700 text-xs font-medium transition shadow-xs"
-            title="Mở bảng tạo & xem trước shortlink (Title hoặc Random)"
+            title="Create & preview short link (Title or Random)"
           >
             <Sparkles className="w-3.5 h-3.5 text-blue-600" />
-            <span>Tạo Short Link</span>
+            <span>Short Link</span>
           </button>
         )}
 
@@ -107,8 +107,8 @@ export default function ShareButtons({ title, url, slug, category }: ShareButton
         <button
           onClick={handleCopyLink}
           className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 border border-gray-300 text-gray-700 hover:text-black transition"
-          title="Sao chép link đầy đủ của bài viết"
-          aria-label="Copy Full URL"
+          title="Copy direct article URL"
+          aria-label="Copy direct article URL"
         >
           {copied ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <LinkIcon className="w-3.5 h-3.5" />}
         </button>

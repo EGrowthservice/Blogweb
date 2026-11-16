@@ -1,5 +1,5 @@
 /**
- * PULSE Entertainment - Analytics & Conversion Tracking Service
+ * PULSE TechTips - Analytics & Conversion Tracking Service
  * Only tracks real user interactions (No bot/auto-clicking, compliant with Google policies).
  */
 

@@ -6,11 +6,11 @@ import { AlertCircle, Scale, ShieldAlert, Video, Award, Mail } from 'lucide-reac
 export const metadata: Metadata = {
   title: 'Disclaimer & Editorial Disclosures | PULSE TechTips',
   description:
-    'Technical disclaimer, software guide notices, and programmatic advertising disclosures for PULSE TechTips.',
+    'Technical guide disclaimer, software execution notices, and programmatic advertising disclosures for PULSE TechTips.',
 };
 
 export default function DisclaimerPage() {
-  const lastUpdated = 'November 13, 2026';
+  const lastUpdated = 'November 16, 2026';
 
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 text-gray-700 space-y-10 leading-relaxed text-[15px]">
@@ -29,53 +29,43 @@ export default function DisclaimerPage() {
       </div>
 
       {/* Intro Card */}
-      <div className="p-6 rounded-lg bg-gray-50 border border-gray-200 space-y-2">
+      <div className="p-6 rounded-2xl bg-gray-50 border border-gray-200 space-y-2">
         <p className="text-sm text-gray-700 leading-relaxed">
-          The tutorials, technical guides, computer troubleshooting instructions, and software utilities provided on <strong>PULSE TechTips</strong> (accessible at <strong>https://www.pulseetm.click</strong>) are published in good faith for general informational, educational, and productivity purposes only.
+          The tutorials, technical troubleshooting instructions, software guides, and browser utilities provided on <strong>PULSE TechTips</strong> (accessible at <strong>https://www.pulseetm.click</strong>) are published in good faith for general educational, practical troubleshooting, and computing productivity purposes only.
         </p>
       </div>
 
-      {/* 1. Commentary & Archival Purpose */}
+      {/* 1. Technical Guides & Educational Utility Purpose */}
       <section className="space-y-3 pt-4 border-t border-gray-200">
         <h2 className="text-xl font-bold text-gray-900 flex items-center gap-2">
           <Award className="w-5 h-5 text-blue-600" />
-          1. Technical Guides & Educational Utility Purpose
+          1. Technical Guides & Computing Utility Scope
         </h2>
         <p className="text-sm text-gray-600 leading-relaxed">
-          PULSE TechTips provides step-by-step technological guides and digital utilities across four primary domains:
+          PULSE TechTips publishes verified step-by-step technological guides across four core domains:
         </p>
         <ul className="list-disc pl-5 space-y-1 text-xs text-gray-600">
-          <li><strong>Computer & Operating System Tips:</strong> Windows 11/10 and macOS optimization, disk cleanup, keyboard shortcuts, and troubleshooting common driver/hardware errors.</li>
-          <li><strong>Mobile Devices & Privacy:</strong> Smartphone battery preservation, Android cache maintenance, and two-factor authentication security setups.</li>
-          <li><strong>Office Productivity:</strong> Spreadsheet formula mastery (XLOOKUP, SUMIFS), document formatting standards, and practical AI workflow automation.</li>
-          <li><strong>Online Browser Utilities:</strong> Client-side browser tools for link shortening, text analysis, secure password creation, QR code generation, and JSON formatting.</li>
+          <li><strong>Computer & Operating System Tips:</strong> Windows 11/10 and macOS performance tuning, disk space liberation, keyboard shortcuts, and driver error diagnosis.</li>
+          <li><strong>Mobile Devices & Privacy:</strong> Smartphone battery health preservation, Android cache maintenance, and multi-factor authentication security setups.</li>
+          <li><strong>Office Productivity:</strong> Advanced Microsoft Excel spreadsheet formulas (XLOOKUP, SUMIFS, Pivot Tables), Word document formatting, and automation scripts.</li>
+          <li><strong>Online Browser Utilities:</strong> Instant client-side browser tools for URL shortening, text case transforms, cryptographic password creation, QR code generation, and JSON formatting.</li>
         </ul>
         <p className="text-xs text-gray-500">
-          All opinions and analyses expressed in published articles are those of our contributing writers and do not represent professional financial, legal, or athletic coaching advice.
+          While all steps and terminal commands are thoroughly tested before publication, readers execute system-level alterations, command-line scripts, and software updates at their own risk. We strongly recommend maintaining recent system backups before undertaking major operating system changes.
         </p>
       </section>
 
-      {/* 2. Fair Use Copyright Notice */}
+      {/* 2. Software Brands & Fair Use Copyright Notice */}
       <section className="space-y-3 pt-4 border-t border-gray-200">
         <h2 className="text-xl font-bold text-gray-900 flex items-center gap-2">
           <Scale className="w-5 h-5 text-blue-600" />
-          2. Fair Use Copyright Notice (17 U.S. Code § 107)
+          2. Trademarks & Fair Use Notice (17 U.S. Code § 107)
         </h2>
         <p className="text-sm text-gray-600 leading-relaxed">
-          This website references archival stills, broadcast screenshots, and classic television excerpts. Such third-party copyrighted materials are referenced under the <strong>Fair Use Doctrine</strong> (17 U.S. Code § 107) for transformative purposes of:
+          Product names, logos, brands, and software trademarks referenced on this website (such as Microsoft Windows, Apple iOS, macOS, Android, Microsoft Excel) belong exclusively to their respective owners. Their mention on PULSE TechTips is strictly for nominative identification, educational commentary, and instructional tutorial purposes under the <strong>Fair Use Doctrine</strong> (17 U.S. Code § 107).
         </p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-          <div className="p-3 bg-gray-50 rounded border border-gray-200">
-            <span className="font-bold text-gray-900">Criticism & Cultural Commentary:</span>
-            <p className="text-gray-600 mt-1">Analyzing comedy timing, television history, and narrative structure.</p>
-          </div>
-          <div className="p-3 bg-gray-50 rounded border border-gray-200">
-            <span className="font-bold text-gray-900">Historical & Educational Preservation:</span>
-            <p className="text-gray-600 mt-1">Documenting broadcast dates, backstage anecdotes, and sketch origins for future generations.</p>
-          </div>
-        </div>
         <p className="text-xs text-gray-500">
-          No copyright infringement is intended. If you are the legal copyright owner of any material featured on our site and wish for it to be removed or credited differently, please contact our designated Copyright Desk at <a href="mailto:hieucv2004@gmail.com" className="text-blue-600 underline">hieucv2004@gmail.com</a>.
+          No endorsement, sponsorship, or affiliation with trademark holders is implied. For copyright concerns or attribution corrections, please contact our Editorial Desk at <a href="mailto:hieucv2004@gmail.com" className="text-blue-600 underline">hieucv2004@gmail.com</a>.
         </p>
       </section>
 
@@ -83,20 +73,20 @@ export default function DisclaimerPage() {
       <section className="space-y-3 pt-4 border-t border-gray-200">
         <h2 className="text-xl font-bold text-gray-900 flex items-center gap-2">
           <ShieldAlert className="w-5 h-5 text-blue-600" />
-          3. Advertising & Programmatic Monetization (Google AdSense)
+          3. Programmatic Advertising Disclosures (Google AdSense)
         </h2>
         <p className="text-sm text-gray-600 leading-relaxed">
-          PULSE Entertainment displays automated digital advertisements served by third-party ad networks, notably <strong>Google AdSense</strong>.
+          PULSE TechTips displays automated digital advertisements served by third-party ad networks, primarily <strong>Google AdSense</strong>. In compliance with Google AdSense program policies:
         </p>
-        <div className="p-4 rounded-lg bg-gray-50 border border-gray-200 text-xs text-gray-600 space-y-2">
+        <div className="p-4 rounded-xl bg-gray-50 border border-gray-200 text-xs text-gray-600 space-y-2">
           <p>
-            <strong>Automated Placement:</strong> Advertisements presented across our pages are generated programmatically by Google ad algorithms based on context and reader demographics.
+            <strong>Automated Placement:</strong> Advertisements presented across our pages are delivered programmatically by Google ad algorithms based on context and user interest categories.
           </p>
           <p>
-            <strong>Non-Endorsement:</strong> The display of any advertisement, product, or service does not signify an endorsement, warranty, or recommendation by PULSE Entertainment.
+            <strong>Non-Endorsement:</strong> The appearance of an advertisement, software tool, or commercial service does not represent an endorsement, warranty, or recommendation by PULSE TechTips.
           </p>
           <p>
-            <strong>Commercial Transactions:</strong> Any interactions or transactions between you and advertisers found on our platform are exclusively between you and the respective third party.
+            <strong>Cookie Opt-Out:</strong> Third-party vendors, including Google, use cookies to serve ads based on prior visits. Users may opt out of personalized advertising by visiting <a href="https://adssettings.google.com" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">Google Ads Settings</a> or <a href="https://www.aboutads.info/choices/" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">aboutads.info</a>.
           </p>
         </div>
       </section>
@@ -108,22 +98,22 @@ export default function DisclaimerPage() {
           4. External Links & Video Embeds
         </h2>
         <p className="text-sm text-gray-600 leading-relaxed">
-          Our articles may feature embedded video players (such as YouTube-nocookie players) and links to external websites. We do not operate, inspect, or guarantee the privacy policies, availability, or accuracy of third-party platforms. Following any external link is done at your own discretion and risk.
+          Our tutorials may incorporate verified video embeds from official educational providers (such as YouTube-nocookie players) and links to external software download portals. PULSE TechTips does not operate, control, or warrant external platforms. Following any external hyperlink is undertaken at the user&apos;s sole discretion.
         </p>
       </section>
 
-      {/* 5. Errors and Omissions / Corrections */}
+      {/* 5. Corrections Policy */}
       <section className="space-y-3 pt-4 border-t border-gray-200">
-        <h2 className="text-xl font-bold text-gray-900">5. Accuracy, Timeliness & Corrections Policy</h2>
+        <h2 className="text-xl font-bold text-gray-900">5. Technical Accuracy & Corrections Policy</h2>
         <p className="text-sm text-gray-600 leading-relaxed">
-          While our editorial team endeavors to ensure the factual accuracy of historical dates, sports scores, and celebrity biographies at the time of publication, errors, typos, or outdated facts may occasionally occur. We make no guarantees regarding complete timeliness or exhaustive accuracy.
+          Operating system software builds and application APIs frequently evolve. When an OS update alters a setting location or command argument, our editorial desk promptly updates the affected guide.
         </p>
         <p className="text-xs text-gray-500">
-          We maintain an active corrections policy. If you spot a factual error in any of our articles, please report it to our team at <a href="mailto:hieucv2004@gmail.com" className="text-blue-600 underline">hieucv2004@gmail.com</a>.
+          To submit a technical correction or suggest an updated command syntax, email our editorial desk at <a href="mailto:hieucv2004@gmail.com" className="text-blue-600 underline">hieucv2004@gmail.com</a>.
         </p>
       </section>
 
-      {/* 6. Contact Section */}
+      {/* 6. Legal & Editorial Contact */}
       <section className="space-y-3 pt-4 border-t border-gray-200">
         <h2 className="text-xl font-bold text-gray-900 flex items-center gap-2">
           <Mail className="w-5 h-5 text-blue-600" />
@@ -132,8 +122,8 @@ export default function DisclaimerPage() {
         <p className="text-sm text-gray-600">
           For inquiries concerning this disclaimer, rights management, or editorial policies:
         </p>
-        <div className="p-4 rounded-md bg-gray-50 border border-gray-200 text-xs space-y-1 text-gray-700">
-          <p className="font-bold text-gray-900">PULSE Entertainment</p>
+        <div className="p-4 rounded-xl bg-gray-50 border border-gray-200 text-xs space-y-1 text-gray-700">
+          <p className="font-bold text-gray-900">PULSE TechTips</p>
           <p>Official Website: <a href="https://www.pulseetm.click" className="text-blue-600 hover:underline">https://www.pulseetm.click</a></p>
           <p>Editorial Inquiries: <a href="mailto:hieucv2004@gmail.com" className="text-blue-600 hover:underline">hieucv2004@gmail.com</a></p>
           <p>

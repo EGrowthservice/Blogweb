@@ -32,7 +32,7 @@ export default function TermsOfServicePage() {
       {/* Introduction Card */}
       <div className="p-6 rounded-lg bg-gray-50 border border-gray-200 space-y-2">
         <p className="text-sm text-gray-700 leading-relaxed">
-          Welcome to <strong>PULSE TechTips</strong> (&quot;PULSE,&quot; &quot;we,&quot; &quot;our,&quot; or &quot;the Service&quot;), accessible via <strong>https://www.pulseetm.click</strong>. These Terms of Service (&quot;Terms&quot;) constitute a legally binding agreement between you (&quot;User,&quot; &quot;Visitor,&quot; or &quot;Reader&quot;) and PULSE TechTips regarding your access to and use of our digital publication, entertainment journalism, sports tactical analyses, and archival retrospectives.
+          Welcome to <strong>PULSE TechTips</strong> (&quot;PULSE,&quot; &quot;we,&quot; &quot;our,&quot; or &quot;the Service&quot;), accessible via <strong>https://www.pulseetm.click</strong>. These Terms of Service (&quot;Terms&quot;) constitute a legally binding agreement between you (&quot;User,&quot; &quot;Visitor,&quot; or &quot;Reader&quot;) and PULSE TechTips regarding your access to and use of our technical tutorials, computer guides, software instructions, and online browser utilities.
         </p>
         <p className="text-xs text-gray-500">
           By accessing, reading, or interacting with any portion of our site, you acknowledge that you have read, understood, and agree to be bound by these Terms and our Privacy Policy. If you do not agree, you must immediately cease accessing the Service.
@@ -65,7 +65,7 @@ export default function TermsOfServicePage() {
         <div className="p-4 rounded-md bg-blue-50/60 border border-blue-200 text-xs text-blue-900 space-y-2">
           <p className="font-semibold">Fair Use Notice (17 U.S. Code § 107):</p>
           <p className="leading-relaxed">
-            Historical television clips, classic sketch stills, production photographs, and athletic match imagery referenced throughout our retrospectives are incorporated in accordance with the <strong>Fair Use Doctrine</strong> (17 U.S.C. § 107) for transformative, non-profit educational purposes of criticism, cultural commentary, historical preservation, and journalistic review. All third-party registered trademarks, program names, and broadcast footage remain the property of their respective copyright holders.
+            Software screenshots, operating system interface captures, command-line references, and instructional diagrams referenced throughout our tutorials are incorporated in accordance with the <strong>Fair Use Doctrine</strong> (17 U.S.C. § 107) for transformative, non-profit educational purposes of technical instruction, software review, and computational troubleshooting. All third-party registered trademarks, operating system names, and software logos remain the property of their respective copyright holders.
           </p>
         </div>
       </section>

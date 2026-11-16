@@ -86,17 +86,17 @@ export default function ShortLinkModal({
             </div>
             <div>
               <h3 className="text-base font-bold text-gray-900 leading-none">
-                Tạo & Xem Trước Short Link
+                Generate & Preview Short Link
               </h3>
               <p className="text-[11px] text-gray-500 mt-1">
-                Tùy chọn tạo link rút gọn theo Title hoặc Random
+                Choose between Semantic Title-based or Random alphanumeric format
               </p>
             </div>
           </div>
           <button
             onClick={onClose}
             className="p-1.5 rounded-lg text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition"
-            aria-label="Đóng"
+            aria-label="Close"
           >
             <X className="w-5 h-5" />
           </button>
@@ -116,10 +116,10 @@ export default function ShortLinkModal({
             </h4>
           </div>
 
-          {/* Mode Selector (2 Dạng) */}
+          {/* Mode Selector (2 Formats) */}
           <div>
             <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">
-              Chọn định dạng Shortlink:
+              Select URL Format:
             </label>
             <div className="grid grid-cols-2 gap-3">
               <button
@@ -133,10 +133,10 @@ export default function ShortLinkModal({
               >
                 <div className="flex items-center gap-1.5 text-xs">
                   <Sparkles className="w-3.5 h-3.5 text-blue-600" />
-                  <span>Theo Title (Tiêu đề)</span>
+                  <span>Title-Based</span>
                 </div>
                 <span className="text-[10px] text-gray-500 mt-1">
-                  vd: /s/news-desk-3a8f
+                  e.g. /s/guide-title-3a8f
                 </span>
               </button>
 
@@ -151,10 +151,10 @@ export default function ShortLinkModal({
               >
                 <div className="flex items-center gap-1.5 text-xs">
                   <Shuffle className="w-3.5 h-3.5 text-blue-600" />
-                  <span>Theo Random (Ngẫu nhiên)</span>
+                  <span>Random Code</span>
                 </div>
                 <span className="text-[10px] text-gray-500 mt-1">
-                  vd: /s/rnd-8k2m9p
+                  e.g. /s/rnd-8k2m9p
                 </span>
               </button>
             </div>
@@ -163,7 +163,7 @@ export default function ShortLinkModal({
           {/* Shortlink Preview Box */}
           <div className="space-y-2">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-bold text-gray-700">Link rút gọn của bạn:</span>
+              <span className="text-xs font-bold text-gray-700">Your Shareable Shortlink:</span>
               <button
                 type="button"
                 onClick={handleRegenerate}
@@ -171,15 +171,15 @@ export default function ShortLinkModal({
                 className="inline-flex items-center gap-1 text-[11px] text-blue-600 hover:text-blue-800 disabled:opacity-50"
               >
                 <RefreshCw className={`w-3 h-3 ${loading ? 'animate-spin' : ''}`} />
-                <span>Tạo mã khác</span>
+                <span>Regenerate</span>
               </button>
             </div>
 
-            <div className="flex items-center gap-2 p-3 bg-gray-900 rounded-xl text-white">
+            <div className="flex items-center gap-2 p-3 bg-gray-950 rounded-xl text-white">
               <input
                 type="text"
                 readOnly
-                value={loading ? 'Đang tạo link...' : shortUrl}
+                value={loading ? 'Generating shortlink...' : shortUrl}
                 className="flex-1 bg-transparent border-none text-xs sm:text-sm font-mono text-blue-300 focus:outline-none select-all"
               />
               <button
@@ -191,12 +191,12 @@ export default function ShortLinkModal({
                 {copied ? (
                   <>
                     <Check className="w-3.5 h-3.5 text-emerald-300" />
-                    <span>Đã chép!</span>
+                    <span>Copied!</span>
                   </>
                 ) : (
                   <>
                     <Copy className="w-3.5 h-3.5" />
-                    <span>Sao chép</span>
+                    <span>Copy</span>
                   </>
                 )}
               </button>
@@ -204,7 +204,7 @@ export default function ShortLinkModal({
 
             {targetUrl && (
               <p className="text-[11px] text-gray-500 truncate pt-1">
-                Đích đến: <code className="text-gray-700 bg-gray-100 px-1 py-0.5 rounded">{targetUrl}</code>
+                Destination: <code className="text-gray-700 bg-gray-100 px-1 py-0.5 rounded">{targetUrl}</code>
               </p>
             )}
           </div>
@@ -220,7 +220,7 @@ export default function ShortLinkModal({
               className="inline-flex items-center gap-1 text-blue-600 hover:underline font-medium"
             >
               <ExternalLink className="w-3.5 h-3.5" />
-              <span>Mở thử link rút gọn</span>
+              <span>Test redirection</span>
             </a>
           ) : <div />}
 
@@ -229,7 +229,7 @@ export default function ShortLinkModal({
             onClick={onClose}
             className="px-4 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold transition"
           >
-            Đóng
+            Close
           </button>
         </div>
       </div>

@@ -13,6 +13,7 @@ import {
   Clock,
   Layers,
   HelpCircle,
+  Home,
 } from 'lucide-react';
 
 export default function TextCasePage() {
@@ -66,7 +67,6 @@ export default function TextCasePage() {
         .toLowerCase()
         .normalize('NFD')
         .replace(/[\u0300-\u036f]/g, '')
-        .replace(/[đĐ]/g, 'd')
         .replace(/[^a-z0-9\s-]/g, '')
         .trim()
         .replace(/\s+/g, '-')
@@ -90,57 +90,60 @@ export default function TextCasePage() {
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
       {/* Breadcrumb */}
-      <div className="mb-6">
-        <Link
-          href="/tools"
-          className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-medium text-gray-500 hover:text-blue-600 transition"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          <span>Quay lại danh sách Tiện ích</span>
+      <nav className="flex items-center gap-2 text-xs text-slate-500 mb-6 font-medium">
+        <Link href="/" className="hover:text-blue-600 transition flex items-center gap-1">
+          <Home className="w-3.5 h-3.5" />
+          <span>Home</span>
         </Link>
-      </div>
+        <span>/</span>
+        <Link href="/tools" className="hover:text-blue-600 transition">
+          Web Tools
+        </Link>
+        <span>/</span>
+        <span className="text-slate-900 font-bold">Text Case &amp; Word Counter</span>
+      </nav>
 
       {/* Header */}
       <div className="mb-8">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-semibold mb-3 border border-emerald-200">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-bold mb-3 border border-blue-200">
           <Type className="w-3.5 h-3.5" />
-          <span>Tiện Ích Xử Lý Văn Bản</span>
+          <span>Client-Side Editorial Utility</span>
         </div>
-        <h1 className="text-2xl sm:text-4xl font-extrabold text-gray-900 tracking-tight mb-2">
-          Đếm Từ & Chuyển Đổi Định Dạng Chữ Trực Tuyến
+        <h1 className="text-2xl sm:text-4xl font-black text-slate-900 tracking-tight font-display mb-2">
+          Text Case Converter &amp; Real-Time Word Counter
         </h1>
-        <p className="text-sm sm:text-base text-gray-600">
-          Đếm số từ, ký tự, số dòng theo thời gian thực và chuyển đổi văn bản sang CHỮ HOA, chữ thường, Title Case, Slug SEO cực nhanh.
+        <p className="text-sm sm:text-base text-slate-600">
+          Analyze character, word, and paragraph counts in real time. Instantly transform casing into UPPERCASE, lowercase, Title Case, and SEO slug format.
         </p>
       </div>
 
       {/* Main Interactive Tool Card */}
-      <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-6 sm:p-8 mb-10">
+      <div className="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 sm:p-8 mb-10">
         {/* Statistics Bar */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 mb-6">
-          <div className="bg-gray-50 rounded-xl p-3 border border-gray-100 text-center">
-            <span className="block text-2xl font-black text-gray-900">{stats.words}</span>
-            <span className="text-xs text-gray-500 font-medium">Số Từ</span>
+          <div className="bg-slate-50 rounded-2xl p-3 border border-slate-100 text-center">
+            <span className="block text-2xl font-black text-slate-900">{stats.words}</span>
+            <span className="text-xs text-slate-500 font-bold">Words</span>
           </div>
-          <div className="bg-gray-50 rounded-xl p-3 border border-gray-100 text-center">
+          <div className="bg-slate-50 rounded-2xl p-3 border border-slate-100 text-center">
             <span className="block text-2xl font-black text-blue-600">{stats.chars}</span>
-            <span className="text-xs text-gray-500 font-medium">Ký Tự (có dấu cách)</span>
+            <span className="text-xs text-slate-500 font-bold">Chars (w/ space)</span>
           </div>
-          <div className="bg-gray-50 rounded-xl p-3 border border-gray-100 text-center">
+          <div className="bg-slate-50 rounded-2xl p-3 border border-slate-100 text-center">
             <span className="block text-2xl font-black text-emerald-600">{stats.charsNoSpaces}</span>
-            <span className="text-xs text-gray-500 font-medium">Ký Tự (không cách)</span>
+            <span className="text-xs text-slate-500 font-bold">Chars (no space)</span>
           </div>
-          <div className="bg-gray-50 rounded-xl p-3 border border-gray-100 text-center">
+          <div className="bg-slate-50 rounded-2xl p-3 border border-slate-100 text-center">
             <span className="block text-2xl font-black text-purple-600">{stats.lines}</span>
-            <span className="text-xs text-gray-500 font-medium">Số Dòng</span>
+            <span className="text-xs text-slate-500 font-bold">Lines</span>
           </div>
-          <div className="bg-gray-50 rounded-xl p-3 border border-gray-100 text-center">
+          <div className="bg-slate-50 rounded-2xl p-3 border border-slate-100 text-center">
             <span className="block text-2xl font-black text-amber-600">{stats.paragraphs}</span>
-            <span className="text-xs text-gray-500 font-medium">Đoạn Văn</span>
+            <span className="text-xs text-slate-500 font-bold">Paragraphs</span>
           </div>
-          <div className="bg-gray-50 rounded-xl p-3 border border-gray-100 text-center">
-            <span className="block text-2xl font-black text-indigo-600">~{stats.readingTime}p</span>
-            <span className="text-xs text-gray-500 font-medium">Thời Gian Đọc</span>
+          <div className="bg-slate-50 rounded-2xl p-3 border border-slate-100 text-center">
+            <span className="block text-2xl font-black text-red-600">~{stats.readingTime}m</span>
+            <span className="text-xs text-slate-500 font-bold">Read Time</span>
           </div>
         </div>
 
@@ -150,14 +153,14 @@ export default function TextCasePage() {
             value={text}
             onChange={(e) => setText(e.target.value)}
             rows={10}
-            placeholder="Dán hoặc nhập nội dung văn bản của bạn tại đây để bắt đầu đếm từ và chuyển đổi định dạng..."
-            className="w-full p-4 sm:p-5 text-sm sm:text-base border border-gray-300 rounded-xl bg-gray-50/50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition leading-relaxed resize-y font-mono"
+            placeholder="Type or paste your text here to inspect word counts and apply instant transformations..."
+            className="w-full p-4 sm:p-5 text-sm sm:text-base border border-slate-300 rounded-2xl bg-slate-50/50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition leading-relaxed resize-y font-mono"
           />
           {text.length > 0 && (
             <button
               onClick={handleClear}
-              className="absolute top-3 right-3 p-1.5 text-xs text-gray-400 hover:text-red-500 bg-white/80 rounded-md border border-gray-200 transition"
-              title="Xóa toàn bộ nội dung"
+              className="absolute top-3 right-3 p-1.5 text-xs text-slate-400 hover:text-red-500 bg-white/80 rounded-md border border-slate-200 transition"
+              title="Clear all text"
             >
               <RotateCcw className="w-3.5 h-3.5" />
             </button>
@@ -165,70 +168,70 @@ export default function TextCasePage() {
         </div>
 
         {/* Action Buttons Toolbar */}
-        <div className="flex flex-wrap items-center justify-between gap-2.5 pt-4 border-t border-gray-200">
+        <div className="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-slate-200">
           <div className="flex flex-wrap items-center gap-2">
             <button
               onClick={toUppercase}
               disabled={!text}
-              className="px-3.5 py-2 text-xs sm:text-sm font-semibold rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-800 disabled:opacity-50 transition"
+              className="px-3.5 py-2 text-xs font-bold rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 disabled:opacity-40 transition"
             >
-              CHỮ HOA
+              UPPERCASE
             </button>
             <button
               onClick={toLowercase}
               disabled={!text}
-              className="px-3.5 py-2 text-xs sm:text-sm font-semibold rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-800 disabled:opacity-50 transition"
+              className="px-3.5 py-2 text-xs font-bold rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 disabled:opacity-40 transition"
             >
-              chữ thường
+              lowercase
             </button>
             <button
               onClick={toTitleCase}
               disabled={!text}
-              className="px-3.5 py-2 text-xs sm:text-sm font-semibold rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-800 disabled:opacity-50 transition"
+              className="px-3.5 py-2 text-xs font-bold rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 disabled:opacity-40 transition"
             >
-              Viết Hoa Chữ Đầu
+              Title Case
             </button>
             <button
               onClick={toSentenceCase}
               disabled={!text}
-              className="px-3.5 py-2 text-xs sm:text-sm font-semibold rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-800 disabled:opacity-50 transition"
+              className="px-3.5 py-2 text-xs font-bold rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 disabled:opacity-40 transition"
             >
-              Chữ Đầu Câu
+              Sentence case
             </button>
             <button
               onClick={toSlugCase}
               disabled={!text}
-              className="px-3.5 py-2 text-xs sm:text-sm font-semibold rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-800 disabled:opacity-50 transition"
-              title="Chuyển thành định dạng url-slug không dấu"
+              className="px-3.5 py-2 text-xs font-bold rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 disabled:opacity-40 transition"
+              title="Convert to URL hyphenated slug"
             >
-              slug-seo-case
+              slug-url-case
             </button>
             <button
               onClick={cleanExtraSpaces}
               disabled={!text}
-              className="px-3.5 py-2 text-xs sm:text-sm font-semibold rounded-lg bg-blue-50 hover:bg-blue-100 text-blue-700 disabled:opacity-50 transition"
-              title="Xóa khoảng trắng thừa và dòng trống liên tiếp"
+              className="px-3.5 py-2 text-xs font-bold rounded-xl bg-blue-50 hover:bg-blue-100 text-blue-700 disabled:opacity-40 transition"
+              title="Strip redundant consecutive whitespace and blank lines"
             >
-              Xóa Khoảng Trắng Thừa
+              Clean Extra Spaces
             </button>
           </div>
 
           <button
             onClick={handleCopy}
             disabled={!text}
-            className={`inline-flex items-center gap-1.5 px-5 py-2 text-xs sm:text-sm font-bold rounded-lg transition shadow-sm ${
+            className={`inline-flex items-center gap-1.5 px-5 py-2.5 text-xs sm:text-sm font-bold rounded-xl transition shadow-sm ${
               copied
                 ? 'bg-emerald-600 text-white'
-                : 'bg-blue-600 hover:bg-blue-700 text-white disabled:opacity-50'
+                : 'bg-blue-600 hover:bg-blue-700 text-white disabled:opacity-40'
             }`}
           >
             {copied ? (
               <>
-                <Check className="w-4 h-4" /> Đã Sao Chép!
+                <Check className="w-4 h-4" /> Copied!
               </>
             ) : (
               <>
-                <Copy className="w-4 h-4" /> Sao Chép Kết Quả
+                <Copy className="w-4 h-4" /> Copy Output
               </>
             )}
           </button>
@@ -236,35 +239,35 @@ export default function TextCasePage() {
       </div>
 
       {/* Educational Article & Instructions for SEO & E-E-A-T */}
-      <div className="prose prose-blue max-w-none bg-white rounded-2xl border border-gray-200 p-6 sm:p-8">
-        <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+      <div className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-sm space-y-4 text-sm sm:text-base text-slate-700 leading-relaxed">
+        <h2 className="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2 font-display">
           <HelpCircle className="w-5 h-5 text-blue-600" />
-          Hướng Dẫn & Mẹo Tối Ưu Hóa Định Dạng Văn Bản
+          Text Casing Guidelines &amp; Editorial Standards
         </h2>
-        <div className="space-y-4 text-sm sm:text-base text-gray-700 leading-relaxed">
+        <div className="space-y-4">
           <p>
-            Trong quá trình soạn thảo tài liệu văn phòng, viết bài chuẩn SEO, hoặc đăng tải nội dung mạng xã hội, việc chuẩn hóa định dạng văn bản đóng vai trò then chốt trong việc tạo ấn tượng chuyên nghiệp và thu hút độc giả.
+            Standardizing typography and casing is critical when authoring software documentation, drafting client communications, or preparing web copy for search engine optimization (SEO).
           </p>
 
-          <h3 className="text-lg font-bold text-gray-900 mt-6">1. Khi nào nên dùng từng kiểu chữ?</h3>
-          <ul className="list-disc pl-5 space-y-2">
+          <h3 className="text-base font-bold text-slate-900 mt-4">1. When to Use Each Case Style</h3>
+          <ul className="list-disc pl-5 space-y-2 text-xs sm:text-sm text-slate-600">
             <li>
-              <strong>CHỮ HOA (UPPERCASE):</strong> Dùng cho tiêu đề cấp cao, từ viết tắt (SEO, HTML, RAM), hoặc thông báo cảnh báo khẩn cấp. Tránh viết hoa toàn bộ đoạn văn vì gây cảm giác la hét và khó đọc.
+              <strong>UPPERCASE:</strong> Recommended for acronyms (HTML, CSS, JSON, API), database reserved keywords, and emergency system alerts. Avoid full paragraph capitalization to maintain readability.
             </li>
             <li>
-              <strong>Title Case (Viết Hoa Chữ Đầu Từ):</strong> Chuẩn mực cho tiêu đề bài viết blog, tiêu đề sách, và các nút kêu gọi hành động (CTA).
+              <strong>Title Case:</strong> The standard convention for article headlines, book titles, and call-to-action buttons.
             </li>
             <li>
-              <strong>Sentence case (Chữ Đầu Câu):</strong> Dùng cho các đoạn văn thông thường, mô tả sản phẩm và nội dung email chuyên nghiệp.
+              <strong>Sentence case:</strong> The preferred format for standard body paragraphs, UI tooltips, and business correspondence.
             </li>
             <li>
-              <strong>slug-case (Đường dẫn SEO):</strong> Tự động chuyển đổi tiếng Việt có dấu thành chuỗi không dấu, phân cách bằng dấu gạch ngang (ví dụ: <code>thuat-toan-xlookup-excel</code>), thích hợp để đặt tên file và slug URL website.
+              <strong>slug-case:</strong> Strips special punctuation and spaces, replacing them with standard hyphens (e.g., <code>how-to-fix-windows-11-lag</code>), ideal for clean web URLs and file naming.
             </li>
           </ul>
 
-          <h3 className="text-lg font-bold text-gray-900 mt-6">2. Xóa khoảng trắng thừa và dòng trống</h3>
-          <p>
-            Văn bản copy từ PDF hoặc các trang web thường dính lỗi khoảng trắng kép hoặc ngắt dòng lộn xộn. Tính năng <strong>&quot;Xóa Khoảng Trắng Thừa&quot;</strong> sẽ tự động gom các khoảng trắng liên tiếp thành 1 dấu cách duy nhất và giữ cấu trúc đoạn văn sạch sẽ.
+          <h3 className="text-base font-bold text-slate-900 mt-4">2. Reclaiming Clean Copy via Whitespace Normalization</h3>
+          <p className="text-xs sm:text-sm text-slate-600">
+            Text copied from PDF manuals or scanned documents frequently contains erratic line breaks and multi-space tabs. The &quot;Clean Extra Spaces&quot; function collapses duplicate whitespace into clean single spaces and normalizes paragraph breaks without corrupting your prose.
           </p>
         </div>
       </div>

@@ -15,8 +15,8 @@ interface SearchPageProps {
 export async function generateMetadata({ searchParams }: SearchPageProps): Promise<Metadata> {
   const query = searchParams.q || '';
   return {
-    title: query ? `Kết quả tìm kiếm cho "${query}" | PULSE TechTips` : 'Tìm Kiếm Thủ Thuật | PULSE TechTips',
-    description: `Tìm kiếm bài viết hướng dẫn và thủ thuật công nghệ phù hợp với "${query}".`,
+    title: query ? `Search Results for "${query}" | PULSE TechTips` : 'Search Tutorials & Guides | PULSE TechTips',
+    description: `Search verified technical tutorials, computer guides, and digital utilities matching "${query}".`,
     robots: {
       index: false,
       follow: true,
@@ -33,21 +33,21 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
       {/* Breadcrumb */}
       <nav className="flex items-center gap-2 text-xs text-gray-400 mb-6">
         <Link href="/" className="hover:text-gray-700 transition">
-          Trang Chủ
+          Home
         </Link>
         <ChevronRight className="w-3.5 h-3.5 text-gray-400" />
-        <span className="text-gray-900 font-medium">Tìm Kiếm</span>
+        <span className="text-gray-900 font-medium">Search</span>
       </nav>
 
       <div className="mb-8 max-w-2xl">
         <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight flex items-center gap-3">
           <Search className="w-6 h-6 text-gray-500" />
-          {query ? `Kết quả cho "${query}"` : 'Tìm Kiếm Thủ Thuật & Tiện Ích'}
+          {query ? `Results for "${query}"` : 'Search Tech Tutorials & Online Utilities'}
         </h1>
         <p className="mt-2 text-sm text-gray-600">
           {query
-            ? `Tìm thấy ${results.length} bài viết hướng dẫn phù hợp.`
-            : 'Tìm kiếm thủ thuật Windows, mẹo iPhone, phím tắt Excel hoặc công cụ tiện ích số.'}
+            ? `Found ${results.length} verified technical guide${results.length === 1 ? '' : 's'} matching your query.`
+            : 'Search Windows optimization guides, iPhone battery tips, Excel formulas, or browser tools.'}
         </p>
 
         {/* Search Input on page */}
@@ -56,12 +56,12 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
             type="text"
             name="q"
             defaultValue={query}
-            placeholder="Ví dụ: tăng tốc windows 11, hàm xlookup, phím tắt, đổi dns..."
+            placeholder="e.g. speed up windows 11, xlookup formula, shortcuts, dns cache..."
             className="flex-1 bg-white border border-gray-300 rounded-md px-3.5 py-2 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:border-blue-500"
           />
           <button
             type="submit"
-            className="px-5 py-2 bg-gray-900 hover:bg-gray-800 text-white text-sm font-semibold rounded-md shadow-sm transition"
+            className="px-5 py-2 bg-gray-900 hover:bg-blue-600 text-white text-sm font-semibold rounded-md shadow-sm transition"
           >
             Search
           </button>
@@ -76,7 +76,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
         </div>
       ) : query ? (
         <div className="py-12 text-center text-gray-500 bg-gray-50 rounded-lg border border-gray-200">
-          No stories found for &quot;{query}&quot;. Try different keywords.
+          No tutorials found matching &quot;{query}&quot;. Try different keywords such as &quot;windows&quot;, &quot;excel&quot;, or &quot;security&quot;.
         </div>
       ) : null}
 
