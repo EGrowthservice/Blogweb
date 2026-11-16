@@ -55,18 +55,18 @@ export default function ArticleDetailView({
   const authorName =
     article.author?.name && article.author.name !== 'Super Admin'
       ? article.author.name
-      : 'PULSE Editorial Team';
-  const authorRole = article.author?.role || 'Entertainment & Sports Journalist';
+      : 'Ban Biên Tập PULSE TechTips';
+  const authorRole = article.author?.role || 'Tech Lead & Senior Editor';
   const authorBio =
     article.author?.bio ||
-    'Dedicated to comprehensive television history, sports tactical analysis, and classic variety archives.';
+    'Chuyên gia công nghệ với hơn 8 năm kinh nghiệm trong quản trị hệ thống, tối ưu máy tính, thủ thuật di động và đào tạo tin học văn phòng ứng dụng.';
   const authorAvatar =
     article.author?.avatar ||
     'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=256';
 
   const jsonLd = {
     '@context': 'https://schema.org',
-    '@type': 'NewsArticle',
+    '@type': 'TechArticle',
     mainEntityOfPage: {
       '@type': 'WebPage',
       '@id': pageUrl,
@@ -83,7 +83,7 @@ export default function ArticleDetailView({
     },
     publisher: {
       '@type': 'Organization',
-      name: 'PULSE Entertainment',
+      name: 'PULSE TechTips',
     },
   };
 

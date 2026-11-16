@@ -4,9 +4,9 @@ import Link from 'next/link';
 import { AlertCircle, Scale, ShieldAlert, Video, Award, Mail } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Disclaimer & Editorial Disclosures | PULSE Entertainment',
+  title: 'Disclaimer & Editorial Disclosures | PULSE TechTips',
   description:
-    'Editorial disclaimer, Fair Use notice under 17 U.S. Code § 107, sports analysis commentary, and Google AdSense programmatic advertising disclosures for PULSE Entertainment.',
+    'Technical disclaimer, software guide notices, and programmatic advertising disclosures for PULSE TechTips.',
 };
 
 export default function DisclaimerPage() {
@@ -31,7 +31,7 @@ export default function DisclaimerPage() {
       {/* Intro Card */}
       <div className="p-6 rounded-lg bg-gray-50 border border-gray-200 space-y-2">
         <p className="text-sm text-gray-700 leading-relaxed">
-          The information, cultural retrospectives, sports tactical analyses, and commentary provided on <strong>PULSE Entertainment</strong> (accessible at <strong>https://www.pulseetm.click</strong>) are published in good faith for general informational, educational, and leisure entertainment purposes only.
+          The tutorials, technical guides, computer troubleshooting instructions, and software utilities provided on <strong>PULSE TechTips</strong> (accessible at <strong>https://www.pulseetm.click</strong>) are published in good faith for general informational, educational, and productivity purposes only.
         </p>
       </div>
 
@@ -39,15 +39,16 @@ export default function DisclaimerPage() {
       <section className="space-y-3 pt-4 border-t border-gray-200">
         <h2 className="text-xl font-bold text-gray-900 flex items-center gap-2">
           <Award className="w-5 h-5 text-blue-600" />
-          1. Commentary, Archival & Journalistic Purpose
+          1. Technical Guides & Educational Utility Purpose
         </h2>
         <p className="text-sm text-gray-600 leading-relaxed">
-          PULSE Entertainment provides retrospective journalism and commentary covering three primary domains:
+          PULSE TechTips provides step-by-step technological guides and digital utilities across four primary domains:
         </p>
         <ul className="list-disc pl-5 space-y-1 text-xs text-gray-600">
-          <li><strong>Pop Culture & Entertainment:</strong> Television awards (Emmys), industry developments, drama series reviews, and casting retrospectives.</li>
-          <li><strong>Sports Retrospectives & Tactical Analysis:</strong> In-depth historical breakdowns of memorable football encounters, tactical diagrams, and managerial analysis.</li>
-          <li><strong>Classic Television & Comedy Archives:</strong> Archival documentation and preservation of vintage variety shows, sketches from <em>The Carol Burnett Show</em>, and comedy legends such as Tim Conway and Harvey Korman.</li>
+          <li><strong>Computer & Operating System Tips:</strong> Windows 11/10 and macOS optimization, disk cleanup, keyboard shortcuts, and troubleshooting common driver/hardware errors.</li>
+          <li><strong>Mobile Devices & Privacy:</strong> Smartphone battery preservation, Android cache maintenance, and two-factor authentication security setups.</li>
+          <li><strong>Office Productivity:</strong> Spreadsheet formula mastery (XLOOKUP, SUMIFS), document formatting standards, and practical AI workflow automation.</li>
+          <li><strong>Online Browser Utilities:</strong> Client-side browser tools for link shortening, text analysis, secure password creation, QR code generation, and JSON formatting.</li>
         </ul>
         <p className="text-xs text-gray-500">
           All opinions and analyses expressed in published articles are those of our contributing writers and do not represent professional financial, legal, or athletic coaching advice.

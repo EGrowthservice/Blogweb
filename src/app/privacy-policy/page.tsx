@@ -4,9 +4,9 @@ import Link from 'next/link';
 import { Shield, Lock, Eye, Cookie, FileText, Globe, CheckCircle2, Mail, ExternalLink } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy | PULSE Entertainment',
+  title: 'Privacy Policy | PULSE TechTips',
   description:
-    'Comprehensive Privacy Policy for PULSE Entertainment detailing Google AdSense disclosures, cookie technologies, GDPR & CCPA rights, and reader data practices.',
+    'Comprehensive Privacy Policy for PULSE TechTips detailing Google AdSense disclosures, cookie technologies, GDPR & CCPA rights, and reader data practices.',
 };
 
 export default function PrivacyPolicyPage() {
@@ -36,7 +36,7 @@ export default function PrivacyPolicyPage() {
           <span>Our Commitment to Your Privacy</span>
         </div>
         <p className="text-sm text-gray-700 leading-relaxed">
-          At <strong>PULSE Entertainment</strong> (&quot;PULSE,&quot; &quot;we,&quot; &quot;our,&quot; or &quot;us&quot;), operating via <strong>https://www.pulseetm.click</strong>, we place paramount importance on safeguarding the privacy of our readers and visitors. This Privacy Policy details the types of information we collect, how it is processed and protected, our use of cookies and third-party advertising services (specifically <strong>Google AdSense</strong>), and your legal rights under regional and international data protection laws including the General Data Protection Regulation (<strong>GDPR</strong>) and the California Consumer Privacy Act (<strong>CCPA/CPRA</strong>).
+          At <strong>PULSE TechTips</strong> (&quot;PULSE,&quot; &quot;we,&quot; &quot;our,&quot; or &quot;us&quot;), operating via <strong>https://www.pulseetm.click</strong>, we place paramount importance on safeguarding the privacy of our readers and visitors. This Privacy Policy details the types of information we collect, how it is processed and protected, our use of cookies and third-party advertising services (specifically <strong>Google AdSense</strong>), and your legal rights under regional and international data protection laws including the General Data Protection Regulation (<strong>GDPR</strong>) and the California Consumer Privacy Act (<strong>CCPA/CPRA</strong>).
         </p>
       </div>
 
@@ -53,7 +53,7 @@ export default function PrivacyPolicyPage() {
           <div className="flex items-start gap-2.5">
             <CheckCircle2 className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
             <p>
-              <strong>Third-Party Vendor Cookies:</strong> Google, as a third-party vendor, uses cookies, web beacons, and unique identifiers to serve advertisements on PULSE Entertainment.
+              <strong>Third-Party Vendor Cookies:</strong> Google, as a third-party vendor, uses cookies, web beacons, and unique identifiers to serve advertisements on PULSE TechTips.
             </p>
           </div>
           <div className="flex items-start gap-2.5">
@@ -115,7 +115,7 @@ export default function PrivacyPolicyPage() {
           2. Log Files & Tracking Technologies
         </h2>
         <p className="text-sm text-gray-600 leading-relaxed">
-          Like virtually all standard web platforms, PULSE Entertainment utilizes standard log files and modern edge caching. Information collected inside log files includes:
+          Like virtually all standard web platforms, PULSE TechTips utilizes standard log files and modern edge caching. Information collected inside log files includes:
         </p>
         <ul className="list-disc pl-5 space-y-1.5 text-xs text-gray-600">
           <li>Internet Protocol (IP) addresses (anonymized for analytical assessment);</li>
@@ -154,7 +154,7 @@ export default function PrivacyPolicyPage() {
         <h2 className="text-xl font-bold text-gray-900">4. Information You Voluntarily Provide</h2>
         <div className="space-y-2 text-sm text-gray-600">
           <p>
-            You are free to explore and read all articles, sports analyses, and archives on PULSE Entertainment without registering or disclosing any personal details.
+            You are free to explore and read all articles, sports analyses, and archives on PULSE TechTips without registering or disclosing any personal details.
           </p>
           <p>
             When you post a comment or submit an inquiry through our Contact Form, you may provide your name and email address. We use this information solely to display your public comment or respond to your inquiry. We never sell, lease, or monetize your contact details with external data brokers.
@@ -198,7 +198,7 @@ export default function PrivacyPolicyPage() {
       <section className="space-y-3 pt-4 border-t border-gray-200">
         <h2 className="text-xl font-bold text-gray-900">7. Children&apos;s Online Privacy Protection Act (COPPA)</h2>
         <p className="text-sm text-gray-600 leading-relaxed">
-          Protecting the safety of children online is an absolute priority. PULSE Entertainment does not knowingly collect or solicit any personally identifiable information from children under the age of 13. If you believe your child has submitted personal details on our site, please contact us immediately at <a href="mailto:hieucv2004@gmail.com" className="text-blue-600 underline">hieucv2004@gmail.com</a>, and we will promptly remove such records from our databases.
+          Protecting the safety of children online is an absolute priority. PULSE TechTips does not knowingly collect or solicit any personally identifiable information from children under the age of 13. If you believe your child has submitted personal details on our site, please contact us immediately at <a href="mailto:hieucv2004@gmail.com" className="text-blue-600 underline">hieucv2004@gmail.com</a>, and we will promptly remove such records from our databases.
         </p>
       </section>
 
@@ -206,7 +206,7 @@ export default function PrivacyPolicyPage() {
       <section className="space-y-3 pt-4 border-t border-gray-200">
         <h2 className="text-xl font-bold text-gray-900">8. Data Security & Encryption</h2>
         <p className="text-sm text-gray-600 leading-relaxed">
-          We implement industry-standard administrative and technological safeguards to prevent unauthorized data exposure, alteration, or interception. All data transmission across PULSE Entertainment is encrypted using Modern Transport Layer Security (TLS/HTTPS).
+          We implement industry-standard administrative and technological safeguards to prevent unauthorized data exposure, alteration, or interception. All data transmission across PULSE TechTips is encrypted using Modern Transport Layer Security (TLS/HTTPS).
         </p>
       </section>
 
@@ -220,7 +220,7 @@ export default function PrivacyPolicyPage() {
           For any questions regarding this Privacy Policy, your rights, or our advertising disclosures, please contact:
         </p>
         <div className="p-4 rounded-md bg-gray-50 border border-gray-200 text-xs space-y-1 text-gray-700">
-          <p className="font-bold text-gray-900">PULSE Entertainment — Privacy Desk</p>
+          <p className="font-bold text-gray-900">PULSE TechTips — Privacy Desk</p>
           <p>Official Website: <a href="https://www.pulseetm.click" className="text-blue-600 hover:underline">https://www.pulseetm.click</a></p>
           <p>Compliance Inquiries: <a href="mailto:hieucv2004@gmail.com" className="text-blue-600 hover:underline">hieucv2004@gmail.com</a></p>
           <p>

@@ -15,8 +15,8 @@ interface SearchPageProps {
 export async function generateMetadata({ searchParams }: SearchPageProps): Promise<Metadata> {
   const query = searchParams.q || '';
   return {
-    title: query ? `Search results for "${query}" | PULSE Entertainment` : 'Search Stories | PULSE Entertainment',
-    description: `Browse comedy stories and television sketches matching "${query}".`,
+    title: query ? `Kết quả tìm kiếm cho "${query}" | PULSE TechTips` : 'Tìm Kiếm Thủ Thuật | PULSE TechTips',
+    description: `Tìm kiếm bài viết hướng dẫn và thủ thuật công nghệ phù hợp với "${query}".`,
     robots: {
       index: false,
       follow: true,
@@ -33,21 +33,21 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
       {/* Breadcrumb */}
       <nav className="flex items-center gap-2 text-xs text-gray-400 mb-6">
         <Link href="/" className="hover:text-gray-700 transition">
-          Home
+          Trang Chủ
         </Link>
         <ChevronRight className="w-3.5 h-3.5 text-gray-400" />
-        <span className="text-gray-900 font-medium">Search</span>
+        <span className="text-gray-900 font-medium">Tìm Kiếm</span>
       </nav>
 
       <div className="mb-8 max-w-2xl">
         <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight flex items-center gap-3">
           <Search className="w-6 h-6 text-gray-500" />
-          {query ? `Results for "${query}"` : 'Search Stories'}
+          {query ? `Kết quả cho "${query}"` : 'Tìm Kiếm Thủ Thuật & Tiện Ích'}
         </h1>
         <p className="mt-2 text-sm text-gray-600">
           {query
-            ? `Found ${results.length} ${results.length === 1 ? 'story' : 'stories'} matching your search.`
-            : 'Explore our archive of comedy sketches, Tim Conway retrospectives, and vintage variety moments.'}
+            ? `Tìm thấy ${results.length} bài viết hướng dẫn phù hợp.`
+            : 'Tìm kiếm thủ thuật Windows, mẹo iPhone, phím tắt Excel hoặc công cụ tiện ích số.'}
         </p>
 
         {/* Search Input on page */}
@@ -56,7 +56,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
             type="text"
             name="q"
             defaultValue={query}
-            placeholder="Search Tim Conway, Carson, sketches..."
+            placeholder="Ví dụ: tăng tốc windows 11, hàm xlookup, phím tắt, đổi dns..."
             className="flex-1 bg-white border border-gray-300 rounded-md px-3.5 py-2 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:border-blue-500"
           />
           <button

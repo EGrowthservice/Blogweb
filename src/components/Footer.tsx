@@ -23,12 +23,12 @@ export default function Footer({ categories = [] }: FooterProps) {
                 </span>
                 <span className="w-1.5 h-1.5 rounded-full bg-blue-600"></span>
               </div>
-              <span className="text-[9px] font-semibold tracking-[0.22em] text-gray-500 uppercase mt-0.5">
-                ENTERTAINMENT
+              <span className="text-[9px] font-bold tracking-[0.22em] text-blue-600 uppercase mt-0.5">
+                TECH TIPS & TOOLS
               </span>
             </Link>
             <p className="text-xs sm:text-sm text-gray-500 leading-relaxed">
-              Your definitive destination for pop culture retrospectives, sports tactical analyses, and classic television comedy archives.
+              Chuyên trang thủ thuật công nghệ, tối ưu máy tính Windows/Mac, mẹo dùng smartphone, kỹ năng tin học văn phòng Excel và bộ công cụ tiện ích số miễn phí.
             </p>
             <div className="pt-1 flex items-center gap-1.5 text-xs text-gray-600">
               <Mail className="w-3.5 h-3.5 text-blue-600" />
@@ -41,7 +41,7 @@ export default function Footer({ categories = [] }: FooterProps) {
           {/* Col 2: Dynamic Categories from Database */}
           <div>
             <h4 className="text-gray-900 font-bold text-xs uppercase tracking-wider mb-3">
-              Categories
+              Chuyên Mục
             </h4>
             <ul className="space-y-2 text-sm">
               {categories.length > 0 ? (
@@ -53,7 +53,7 @@ export default function Footer({ categories = [] }: FooterProps) {
                   </li>
                 ))
               ) : (
-                <li className="text-gray-400 text-xs">No categories yet</li>
+                <li className="text-gray-400 text-xs">Đang cập nhật</li>
               )}
             </ul>
           </div>
@@ -61,42 +61,47 @@ export default function Footer({ categories = [] }: FooterProps) {
           {/* Col 3: Quick Links */}
           <div>
             <h4 className="text-gray-900 font-bold text-xs uppercase tracking-wider mb-3">
-              Quick Links
+              Tiện Ích & Liên Kết
             </h4>
             <ul className="space-y-2 text-sm">
               <li>
                 <Link href="/" className="hover:text-blue-600 transition">
-                  Home
+                  Trang Chủ
                 </Link>
               </li>
               <li>
-                <Link href="/all-stories" className="hover:text-blue-600 transition">
-                  All Stories
-                </Link>
-              </li>
-              <li>
-                <Link href="/s/random" className="hover:text-blue-600 transition">
-                  Random Story
+                <Link href="/tools" className="hover:text-blue-600 transition font-semibold text-blue-600">
+                  Trung Tâm Tiện Ích Số
                 </Link>
               </li>
               <li>
                 <Link href="/shortlink" className="hover:text-blue-600 transition">
-                  Short Links
+                  Rút Gọn Link (ShortLink)
                 </Link>
               </li>
               <li>
-                <Link href="/search" className="hover:text-blue-600 transition">
-                  Search
+                <Link href="/tools/text-case" className="hover:text-blue-600 transition">
+                  Đếm Từ & Đổi Chữ
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="hover:text-blue-600 transition">
-                  About Editorial
+                <Link href="/tools/password-generator" className="hover:text-blue-600 transition">
+                  Tạo Mật Khẩu Mạnh
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="hover:text-blue-600 transition">
-                  Contact Us
+                <Link href="/tools/qr-generator" className="hover:text-blue-600 transition">
+                  Tạo Mã QR Miễn Phí
+                </Link>
+              </li>
+              <li>
+                <Link href="/tools/json-formatter" className="hover:text-blue-600 transition">
+                  Làm Đẹp JSON
+                </Link>
+              </li>
+              <li>
+                <Link href="/blog" className="hover:text-blue-600 transition">
+                  Chuyên Mục Blog
                 </Link>
               </li>
             </ul>
@@ -105,32 +110,32 @@ export default function Footer({ categories = [] }: FooterProps) {
           {/* Col 4: Website / Legal */}
           <div>
             <h4 className="text-gray-900 font-bold text-xs uppercase tracking-wider mb-3">
-              Website
+              Pháp Lý & Hỗ Trợ
             </h4>
             <ul className="space-y-2 text-sm">
               <li>
                 <Link href="/about" className="hover:text-blue-600 transition">
-                  About Us
+                  Giới Thiệu
                 </Link>
               </li>
               <li>
                 <Link href="/contact" className="hover:text-blue-600 transition">
-                  Contact
+                  Liên Hệ
                 </Link>
               </li>
               <li>
                 <Link href="/terms-of-service" className="hover:text-blue-600 transition">
-                  Terms of Service
+                  Điều Khoản Dịch Vụ
                 </Link>
               </li>
               <li>
                 <Link href="/privacy-policy" className="hover:text-blue-600 transition">
-                  Privacy Policy
+                  Chính Sách Bảo Mật
                 </Link>
               </li>
               <li>
                 <Link href="/disclaimer" className="hover:text-blue-600 transition">
-                  Disclaimer
+                  Tuyên Bố Miễn Trừ
                 </Link>
               </li>
             </ul>
@@ -139,7 +144,7 @@ export default function Footer({ categories = [] }: FooterProps) {
 
         {/* Bottom Bar */}
         <div className="pt-6 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500 gap-2">
-          <p>© {currentYear} PULSE Entertainment. All rights reserved.</p>
+          <p>© {currentYear} PULSE TechTips. All rights reserved.</p>
           <div className="flex items-center gap-4">
             <Link href="/about" className="hover:text-gray-800">
               About

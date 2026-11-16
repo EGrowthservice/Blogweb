@@ -4,9 +4,9 @@ import Link from 'next/link';
 import { FileText, Shield, AlertTriangle, Scale, Mail, HelpCircle } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Terms of Service | PULSE Entertainment',
+  title: 'Terms of Service | PULSE TechTips',
   description:
-    'Comprehensive Terms of Service, editorial conditions of use, intellectual property rights, community rules, and DMCA notice procedures for PULSE Entertainment.',
+    'Comprehensive Terms of Service, editorial conditions of use, intellectual property rights, community rules, and DMCA notice procedures for PULSE TechTips.',
 };
 
 export default function TermsOfServicePage() {
@@ -32,7 +32,7 @@ export default function TermsOfServicePage() {
       {/* Introduction Card */}
       <div className="p-6 rounded-lg bg-gray-50 border border-gray-200 space-y-2">
         <p className="text-sm text-gray-700 leading-relaxed">
-          Welcome to <strong>PULSE Entertainment</strong> (&quot;PULSE,&quot; &quot;we,&quot; &quot;our,&quot; or &quot;the Service&quot;), accessible via <strong>https://www.pulseetm.click</strong>. These Terms of Service (&quot;Terms&quot;) constitute a legally binding agreement between you (&quot;User,&quot; &quot;Visitor,&quot; or &quot;Reader&quot;) and PULSE Entertainment regarding your access to and use of our digital publication, entertainment journalism, sports tactical analyses, and archival retrospectives.
+          Welcome to <strong>PULSE TechTips</strong> (&quot;PULSE,&quot; &quot;we,&quot; &quot;our,&quot; or &quot;the Service&quot;), accessible via <strong>https://www.pulseetm.click</strong>. These Terms of Service (&quot;Terms&quot;) constitute a legally binding agreement between you (&quot;User,&quot; &quot;Visitor,&quot; or &quot;Reader&quot;) and PULSE TechTips regarding your access to and use of our digital publication, entertainment journalism, sports tactical analyses, and archival retrospectives.
         </p>
         <p className="text-xs text-gray-500">
           By accessing, reading, or interacting with any portion of our site, you acknowledge that you have read, understood, and agree to be bound by these Terms and our Privacy Policy. If you do not agree, you must immediately cease accessing the Service.
@@ -46,7 +46,7 @@ export default function TermsOfServicePage() {
           1. Acceptance of Terms & Reader Eligibility
         </h2>
         <p className="text-sm text-gray-600">
-          By accessing PULSE Entertainment, you represent and warrant that you are at least 13 years of age (or 16 years of age in the European Economic Area / UK), or that you possess legal parental or guardian consent to use the website under applicable jurisdiction laws.
+          By accessing PULSE TechTips, you represent and warrant that you are at least 13 years of age (or 16 years of age in the European Economic Area / UK), or that you possess legal parental or guardian consent to use the website under applicable jurisdiction laws.
         </p>
         <p className="text-sm text-gray-600">
           Our publication is designed for personal, non-commercial educational, informational, and leisure enjoyment. Any unauthorized automated scraping, extraction, or commercial re-syndication without explicit prior written authorization is strictly prohibited.
@@ -60,7 +60,7 @@ export default function TermsOfServicePage() {
           2. Intellectual Property & Fair Use Doctrine
         </h2>
         <p className="text-sm text-gray-600">
-          All original written prose, editorial commentary, tactical diagrams, retrospective outlines, headlines, brand trademarks, and site design on PULSE Entertainment are protected by applicable national and international copyright and intellectual property laws.
+          All original written prose, editorial commentary, tactical diagrams, retrospective outlines, headlines, brand trademarks, and site design on PULSE TechTips are protected by applicable national and international copyright and intellectual property laws.
         </p>
         <div className="p-4 rounded-md bg-blue-50/60 border border-blue-200 text-xs text-blue-900 space-y-2">
           <p className="font-semibold">Fair Use Notice (17 U.S. Code § 107):</p>
@@ -77,11 +77,11 @@ export default function TermsOfServicePage() {
           3. DMCA Notice & Copyright Agent Takedown Procedure
         </h2>
         <p className="text-sm text-gray-600">
-          PULSE Entertainment respects the intellectual property rights of creators and adheres to the Digital Millennium Copyright Act (17 U.S.C. § 512). If you believe your copyrighted work has been utilized on our site in a manner that constitutes infringement, please submit a formal written notice to our designated Copyright Agent:
+          PULSE TechTips respects the intellectual property rights of creators and adheres to the Digital Millennium Copyright Act (17 U.S.C. § 512). If you believe your copyrighted work has been utilized on our site in a manner that constitutes infringement, please submit a formal written notice to our designated Copyright Agent:
         </p>
         <div className="p-5 rounded-md bg-gray-50 border border-gray-200 text-xs text-gray-700 space-y-2">
           <p className="font-bold text-gray-900 text-sm">Designated Copyright Agent:</p>
-          <p><strong>Entity:</strong> PULSE Entertainment Editorial Compliance Desk</p>
+          <p><strong>Entity:</strong> PULSE TechTips Editorial Compliance Desk</p>
           <p><strong>Designated Email:</strong> <a href="mailto:hieucv2004@gmail.com" className="text-blue-600 underline font-medium">hieucv2004@gmail.com</a></p>
           <p><strong>Response Turnaround:</strong> 24 to 48 business hours upon receipt of formal notification.</p>
         </div>
@@ -102,7 +102,7 @@ export default function TermsOfServicePage() {
       <section className="space-y-3 pt-4 border-t border-gray-200">
         <h2 className="text-xl font-bold text-gray-900">4. Community Comments & User Contributions</h2>
         <p className="text-sm text-gray-600">
-          PULSE Entertainment enables reader discussions and commentary on articles. By submitting a comment or reaction, you grant PULSE Entertainment a perpetual, royalty-free, non-exclusive license to display, archive, and moderate such content.
+          PULSE TechTips enables reader discussions and commentary on articles. By submitting a comment or reaction, you grant PULSE TechTips a perpetual, royalty-free, non-exclusive license to display, archive, and moderate such content.
         </p>
         <p className="text-sm text-gray-600">
           When participating in discussions, you agree not to post:
@@ -122,10 +122,10 @@ export default function TermsOfServicePage() {
       <section className="space-y-3 pt-4 border-t border-gray-200">
         <h2 className="text-xl font-bold text-gray-900">5. Third-Party Advertising & Embedded Media</h2>
         <p className="text-sm text-gray-600">
-          Our publication displays automated digital advertising provided by certified third-party ad networks, including <strong>Google AdSense</strong>. Third-party advertisers are solely responsible for the content and claims of their ads. The display of an advertisement on PULSE Entertainment does not constitute an endorsement, guarantee, or sponsorship by our editorial team.
+          Our publication displays automated digital advertising provided by certified third-party ad networks, including <strong>Google AdSense</strong>. Third-party advertisers are solely responsible for the content and claims of their ads. The display of an advertisement on PULSE TechTips does not constitute an endorsement, guarantee, or sponsorship by our editorial team.
         </p>
         <p className="text-sm text-gray-600">
-          Articles may contain embedded players and links to third-party services (such as YouTube or Wikimedia). PULSE Entertainment does not control the data practices, uptime, or availability of third-party platforms.
+          Articles may contain embedded players and links to third-party services (such as YouTube or Wikimedia). PULSE TechTips does not control the data practices, uptime, or availability of third-party platforms.
         </p>
       </section>
 
@@ -136,10 +136,10 @@ export default function TermsOfServicePage() {
           Provided &quot;As Is&quot; and &quot;As Available&quot;:
         </p>
         <p className="text-xs text-gray-600 leading-relaxed">
-          The Service and all materials published herein are provided strictly on an &quot;as is&quot; and &quot;as available&quot; basis, without warranties of any kind, whether express, statutory, or implied. PULSE Entertainment explicitly disclaims all implied warranties of merchantability, fitness for a particular purpose, and non-infringement.
+          The Service and all materials published herein are provided strictly on an &quot;as is&quot; and &quot;as available&quot; basis, without warranties of any kind, whether express, statutory, or implied. PULSE TechTips explicitly disclaims all implied warranties of merchantability, fitness for a particular purpose, and non-infringement.
         </p>
         <p className="text-xs text-gray-600 leading-relaxed">
-          In no event shall PULSE Entertainment, its editors, authors, or technical affiliates be liable for any indirect, consequential, incidental, special, or punitive damages arising from your access to, use of, or inability to access the website, including but not limited to loss of data, errors in published historical retrospectives, or external server downtime.
+          In no event shall PULSE TechTips, its editors, authors, or technical affiliates be liable for any indirect, consequential, incidental, special, or punitive damages arising from your access to, use of, or inability to access the website, including but not limited to loss of data, errors in published historical retrospectives, or external server downtime.
         </p>
       </section>
 
@@ -161,7 +161,7 @@ export default function TermsOfServicePage() {
           If you have questions, feedback, or require legal clarification regarding these Terms of Service, please reach out to our team:
         </p>
         <div className="p-4 rounded-md bg-gray-50 border border-gray-200 text-xs space-y-1 text-gray-700">
-          <p className="font-bold text-gray-900">PULSE Entertainment</p>
+          <p className="font-bold text-gray-900">PULSE TechTips</p>
           <p>Website: <a href="https://www.pulseetm.click" className="text-blue-600 hover:underline">https://www.pulseetm.click</a></p>
           <p>Direct Inquiries: <a href="mailto:hieucv2004@gmail.com" className="text-blue-600 hover:underline">hieucv2004@gmail.com</a></p>
           <p>

@@ -15,10 +15,11 @@ export default function Header({ categories = [] }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
 
-  // Dynamically build navigation from database categories
+  // Dynamically build navigation from database categories + Tools Hub
   const navLinks = [
-    { name: 'Home', href: '/' },
+    { name: 'Trang Chủ', href: '/' },
     ...categories.map((c) => ({ name: c.name, href: `/${c.slug}` })),
+    { name: 'Tiện Ích Số', href: '/tools' },
   ];
 
   const handleSearchSubmit = (e: React.FormEvent) => {
@@ -49,8 +50,8 @@ export default function Header({ categories = [] }: HeaderProps) {
                 </span>
                 <span className="w-2 h-2 rounded-full bg-blue-600 animate-pulse"></span>
               </div>
-              <span className="text-[9px] sm:text-[10px] font-semibold tracking-[0.22em] text-gray-500 uppercase mt-0.5">
-                ENTERTAINMENT
+              <span className="text-[9px] sm:text-[10px] font-bold tracking-[0.22em] text-blue-600 uppercase mt-0.5">
+                TECH TIPS & TOOLS
               </span>
             </Link>
           </div>
@@ -78,12 +79,13 @@ export default function Header({ categories = [] }: HeaderProps) {
           {/* Right: Search Bar & Random Story */}
           <div className="flex items-center gap-3">
             <Link
-              href="/s/random"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium text-gray-700 bg-gray-100 hover:bg-blue-50 hover:text-blue-600 transition border border-gray-200"
-              title="Read a random story via short link"
+              href="/tools"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold text-blue-700 bg-blue-50 hover:bg-blue-100 transition border border-blue-200"
+              title="Trung tâm tiện ích trực tuyến miễn phí"
             >
-              <Shuffle className="w-3.5 h-3.5 text-blue-600" />
-              <span className="hidden md:inline">Random Story</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-blue-600 animate-ping"></span>
+              <span className="hidden md:inline">Tiện Ích Trực Tuyến</span>
+              <span className="md:hidden">Tiện Ích</span>
             </Link>
 
             <form onSubmit={handleSearchSubmit} className="relative hidden sm:block">
@@ -91,7 +93,7 @@ export default function Header({ categories = [] }: HeaderProps) {
                 type="search"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search stories"
+                placeholder="Tìm thủ thuật, phím tắt..."
                 className="w-48 md:w-60 pl-3 pr-9 py-1.5 text-xs sm:text-sm bg-gray-50 border border-gray-300 rounded-md text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 transition"
               />
               <button
@@ -112,7 +114,7 @@ export default function Header({ categories = [] }: HeaderProps) {
               type="search"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search stories..."
+              placeholder="Tìm thủ thuật, mẹo máy tính..."
               className="w-full pl-3 pr-9 py-1.5 text-xs bg-gray-50 border border-gray-300 rounded-md text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-blue-500"
             />
             <button

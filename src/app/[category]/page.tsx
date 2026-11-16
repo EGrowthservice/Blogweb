@@ -25,10 +25,10 @@ export async function generateMetadata({ params }: CategoryOrArticlePageProps): 
     const categoryUrl = `${baseUrl}/${cat.slug}`;
 
     return {
-      title: `${cat.name} | PULSE Entertainment`,
+      title: `${cat.name} | PULSE TechTips`,
       description: cat.description,
       openGraph: {
-        title: `${cat.name} | PULSE Entertainment`,
+        title: `${cat.name} | PULSE TechTips`,
         description: cat.description,
         url: categoryUrl,
       },
@@ -50,7 +50,7 @@ export async function generateMetadata({ params }: CategoryOrArticlePageProps): 
         : new Date(article.publishedAt).toISOString();
 
     return {
-      title: `${article.title} | PULSE Entertainment`,
+      title: `${article.title} | PULSE TechTips`,
       description: article.excerpt,
       alternates: {
         canonical: canonicalArticleUrl,

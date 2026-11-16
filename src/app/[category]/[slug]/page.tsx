@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: ArticlePageProps): Promise<Me
       : new Date(article.publishedAt).toISOString();
 
   return {
-    title: `${article.title} | PULSE Entertainment`,
+    title: `${article.title} | PULSE TechTips`,
     description: article.excerpt,
     alternates: {
       canonical: url,
@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: ArticlePageProps): Promise<Me
       title: article.title,
       description: article.excerpt,
       url,
-      siteName: 'PULSE Entertainment',
+      siteName: 'PULSE TechTips',
       type: 'article',
       publishedTime: publishedIso,
       images: [

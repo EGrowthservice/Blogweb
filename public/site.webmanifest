@@ -1,7 +1,7 @@
 {
-  "name": "PULSE Entertainment",
+  "name": "PULSE TechTips",
   "short_name": "PULSE",
-  "description": "Pop culture retrospectives, sports analysis & classic television archives",
+  "description": "Thủ thuật công nghệ, tối ưu máy tính, mẹo điện thoại & tiện ích số trực tuyến",
   "icons": [
     {
       "src": "/favicon-32x32.png",

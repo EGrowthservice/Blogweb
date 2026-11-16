@@ -10,9 +10,9 @@ import { ChevronRight, Newspaper } from 'lucide-react';
 export const revalidate = 60; // ISR cache 60s for instant loading
 
 export const metadata: Metadata = {
-  title: 'All Stories & Archive | PULSE Entertainment',
+  title: 'Tất Cả Thủ Thuật & Hướng Dẫn | PULSE TechTips',
   description:
-    'Browse our complete collection of classic comedy sketches, vintage television moments, and entertainment retrospectives.',
+    'Duyệt qua toàn bộ danh mục bài viết hướng dẫn về Windows, macOS, Android, iPhone, Excel và kỹ năng công nghệ thực chiến.',
   alternates: {
     canonical: 'https://www.pulseetm.click/all-stories',
   },
@@ -40,13 +40,13 @@ export default async function AllStoriesPage() {
         <div>
           <div className="flex items-center gap-2 text-blue-600 mb-2">
             <Newspaper className="w-5 h-5" />
-            <span className="text-xs font-bold uppercase tracking-wider">Archives</span>
+            <span className="text-xs font-bold uppercase tracking-wider">Kho Lưu Trữ</span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight">
-            All Stories
+            Tất Cả Thủ Thuật & Hướng Dẫn
           </h1>
           <p className="mt-1 text-sm text-gray-600">
-            Browse through all {articles.length} published stories and retrospectives.
+            Duyệt qua toàn bộ {articles.length} bài viết hướng dẫn chi tiết từng bước.
           </p>
         </div>
 
@@ -56,7 +56,7 @@ export default async function AllStoriesPage() {
             href="/all-stories"
             className="px-3 py-1.5 rounded-full text-xs font-semibold bg-gray-900 text-white"
           >
-            All Stories
+            Tất cả ({articles.length})
           </Link>
           {categories.map((cat) => (
             <Link
