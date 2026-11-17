@@ -36,12 +36,16 @@ export default function ArticleCard({
     return (
       <article className="group flex gap-3.5 items-center py-3 border-b border-slate-100 last:border-b-0">
         {hasValidImage && (
-          <div className="relative w-20 h-20 shrink-0 rounded-xl overflow-hidden bg-slate-100 border border-slate-200">
+          <div
+            className="relative w-20 h-20 shrink-0 rounded-xl overflow-hidden bg-slate-100 border border-slate-200"
+            style={{ width: '80px', height: '80px', aspectRatio: '1/1' }}
+          >
             <Image
               src={article.featuredImage}
               alt={article.featuredImageAlt || article.title}
               fill
               sizes="80px"
+              loading="lazy"
               className="object-cover group-hover:scale-105 transition duration-300"
             />
           </div>
@@ -51,7 +55,7 @@ export default function ArticleCard({
             {article.category?.replace('-', ' ')}
           </span>
           <h4 className="text-xs sm:text-sm font-bold text-slate-900 group-hover:text-blue-600 transition line-clamp-2 leading-snug">
-            <Link href={articleUrl} prefetch={true}>
+            <Link href={articleUrl} prefetch={false}>
               {article.title}
             </Link>
           </h4>
@@ -69,13 +73,17 @@ export default function ArticleCard({
     return (
       <article className="group flex flex-col sm:flex-row gap-5 p-5 rounded-2xl bg-white border border-slate-200 hover:shadow-lg hover:border-blue-500/40 transition duration-200">
         {hasValidImage && (
-          <div className="relative w-full sm:w-64 h-48 sm:h-auto shrink-0 rounded-xl overflow-hidden bg-slate-100 border border-slate-100">
-            <Link href={articleUrl} prefetch={true}>
+          <div
+            className="relative w-full sm:w-56 aspect-[16/10] shrink-0 rounded-xl overflow-hidden bg-slate-100 border border-slate-100"
+            style={{ aspectRatio: '16 / 10' }}
+          >
+            <Link href={articleUrl} prefetch={false}>
               <Image
                 src={article.featuredImage}
                 alt={article.featuredImageAlt || article.title}
                 fill
-                sizes="(max-width: 640px) 100vw, 256px"
+                sizes="(max-width: 640px) 100vw, 224px"
+                loading="lazy"
                 className="object-cover group-hover:scale-105 transition duration-300"
               />
             </Link>
@@ -125,13 +133,17 @@ export default function ArticleCard({
   return (
     <article className="group flex flex-col bg-white rounded-2xl overflow-hidden border border-slate-200 hover:shadow-xl hover:border-blue-500/40 transition duration-300">
       {hasValidImage && (
-        <div className="relative w-full aspect-[16/10] bg-slate-100 overflow-hidden">
-          <Link href={articleUrl} tabIndex={-1} prefetch={true}>
+        <div
+          className="relative w-full aspect-[16/10] bg-slate-100 overflow-hidden"
+          style={{ aspectRatio: '16 / 10' }}
+        >
+          <Link href={articleUrl} tabIndex={-1} prefetch={false}>
             <Image
               src={article.featuredImage}
               alt={article.featuredImageAlt || article.title}
               fill
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              loading="lazy"
               className="object-cover group-hover:scale-105 transition duration-300"
             />
           </Link>

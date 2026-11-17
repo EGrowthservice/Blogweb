@@ -91,6 +91,17 @@ body, article, .article-prose, main {
   user-select: text;
 }
 
+/* Core Web Vitals: Prevent AdSense Dynamic Injection Layout Shift */
+.google-auto-placed {
+  min-height: 0;
+  transition: none !important;
+}
+
+ins.adsbygoogle {
+  display: block;
+  overflow: hidden;
+}
+
 /* Modal and Interstitial Animations */
 @keyframes fadeIn {
   from { opacity: 0; }

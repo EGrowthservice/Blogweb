@@ -1,8 +1,9 @@
 'use client';
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
-import { Play, Video, CheckCircle2, ExternalLink, Sparkles, MonitorPlay } from 'lucide-react';
+import { Play, Video, ExternalLink, Sparkles, MonitorPlay } from 'lucide-react';
 
 interface VideoTutorial {
   id: string;
@@ -45,6 +46,13 @@ const FEATURED_VIDEOS: VideoTutorial[] = [
 
 export default function YouTubeVideoSection() {
   const [selectedVideo, setSelectedVideo] = useState<VideoTutorial>(FEATURED_VIDEOS[0]);
+  const [isPlaying, setIsPlaying] = useState<boolean>(false);
+
+  const handleSelectVideo = (video: VideoTutorial) => {
+    setSelectedVideo(video);
+    // If user was already watching, smoothly play the newly selected video
+    // Otherwise keep thumbnail facade for max page speed
+  };
 
   return (
     <section className="mb-14 bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
@@ -57,7 +65,7 @@ export default function YouTubeVideoSection() {
           </div>
           <h2 className="text-xl sm:text-2xl font-black tracking-tight text-white flex items-center gap-2 font-display">
             <MonitorPlay className="w-6 h-6 text-red-500" />
-            Watch & Learn: Hands-On Tech Masterclasses
+            Watch &amp; Learn: Hands-On Tech Masterclasses
           </h2>
         </div>
         <a
@@ -73,16 +81,54 @@ export default function YouTubeVideoSection() {
 
       <div className="p-6 sm:p-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          {/* Main Video Player Container (8 cols) */}
+          {/* Main Video Player Container (8 cols) with High-Performance Facade */}
           <div className="lg:col-span-8 flex flex-col">
-            <div className="relative w-full aspect-video rounded-2xl overflow-hidden bg-black shadow-lg border border-slate-900">
-              <iframe
-                src={`https://www.youtube-nocookie.com/embed/${selectedVideo.id}?rel=0&modestbranding=1`}
-                title={selectedVideo.title}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-                className="absolute inset-0 w-full h-full border-0"
-              />
+            <div
+              className="relative w-full rounded-2xl overflow-hidden bg-slate-950 shadow-lg border border-slate-900 group"
+              style={{ aspectRatio: '16 / 9' }}
+            >
+              {isPlaying ? (
+                <iframe
+                  src={`https://www.youtube-nocookie.com/embed/${selectedVideo.id}?autoplay=1&rel=0&modestbranding=1`}
+                  title={selectedVideo.title}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                  className="absolute inset-0 w-full h-full border-0"
+                />
+              ) : (
+                /* High-Speed Facade: Zero blocking JS, instant render */
+                <button
+                  type="button"
+                  onClick={() => setIsPlaying(true)}
+                  aria-label={`Play ${selectedVideo.title}`}
+                  className="relative w-full h-full block text-left cursor-pointer focus:outline-none focus:ring-4 focus:ring-blue-500/50"
+                >
+                  <Image
+                    src={`https://i.ytimg.com/vi/${selectedVideo.id}/hqdefault.jpg`}
+                    alt={selectedVideo.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 66vw, 800px"
+                    className="object-cover group-hover:scale-105 transition duration-500 brightness-90 group-hover:brightness-100"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-black/30" />
+
+                  {/* Red High-Impact Play Icon */}
+                  <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
+                    <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-red-600/90 text-white flex items-center justify-center shadow-2xl group-hover:scale-110 group-hover:bg-red-600 transition-all duration-300">
+                      <Play className="w-8 h-8 sm:w-10 sm:h-10 fill-white translate-x-0.5" />
+                    </div>
+                    <span className="px-3.5 py-1.5 rounded-full bg-slate-900/85 backdrop-blur-md text-white text-xs font-bold border border-white/20 shadow-md">
+                      Click to Play Masterclass
+                    </span>
+                  </div>
+
+                  {/* Video duration tag bottom right */}
+                  <div className="absolute bottom-3 right-3 px-2 py-0.5 rounded bg-black/80 backdrop-blur-sm text-white text-[11px] font-mono font-bold">
+                    {selectedVideo.duration}
+                  </div>
+                </button>
+              )}
             </div>
 
             {/* Video Meta Info */}
@@ -120,7 +166,7 @@ export default function YouTubeVideoSection() {
               return (
                 <button
                   key={video.id}
-                  onClick={() => setSelectedVideo(video)}
+                  onClick={() => handleSelectVideo(video)}
                   className={`w-full text-left p-3.5 rounded-2xl border transition-all duration-200 flex items-start gap-3 ${
                     isCurrent
                       ? 'bg-blue-50/80 border-blue-500 shadow-sm'
@@ -148,7 +194,7 @@ export default function YouTubeVideoSection() {
                       {video.title}
                     </h5>
                     <span className="block text-[11px] text-slate-400 mt-1">
-                      {video.channel} • {video.duration}
+                      {video.channel} &bull; {video.duration}
                     </span>
                   </div>
                 </button>
@@ -168,7 +214,7 @@ export default function YouTubeVideoSection() {
                 href="/tools"
                 className="inline-flex items-center gap-1 font-bold text-blue-400 hover:text-blue-300 text-xs pt-1"
               >
-                Open Web Tools Suite →
+                Open Web Tools Suite &rarr;
               </Link>
             </div>
           </div>
@@ -177,4 +223,3 @@ export default function YouTubeVideoSection() {
     </section>
   );
 }
-

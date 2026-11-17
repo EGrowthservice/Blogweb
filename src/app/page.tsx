@@ -24,7 +24,7 @@ import {
   ShieldCheck,
 } from 'lucide-react';
 
-export const revalidate = 60; // ISR cache 60s for blazing-fast initial load
+export const revalidate = 300; // ISR cache 5 mins for instant edge response
 
 const QUICK_TOOLS = [
   {
@@ -290,13 +290,17 @@ export default async function HomePage() {
                 {/* Category Featured Article Card */}
                 {article ? (
                   <article className="group flex flex-col flex-1 bg-white rounded-2xl overflow-hidden border border-slate-200 hover:shadow-xl transition duration-200">
-                    <div className="relative w-full aspect-[16/10] bg-slate-100 overflow-hidden">
-                      <Link href={`/${category.slug}/${article.slug}`} tabIndex={-1} prefetch={true}>
+                    <div
+                      className="relative w-full aspect-[16/10] bg-slate-100 overflow-hidden"
+                      style={{ aspectRatio: '16 / 10' }}
+                    >
+                      <Link href={`/${category.slug}/${article.slug}`} tabIndex={-1} prefetch={false}>
                         <Image
                           src={article.featuredImage}
                           alt={article.featuredImageAlt || article.title}
                           fill
                           sizes="(max-width: 768px) 100vw, 33vw"
+                          loading="lazy"
                           className="object-cover group-hover:scale-105 transition duration-300"
                         />
                       </Link>

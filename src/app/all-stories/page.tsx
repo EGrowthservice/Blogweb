@@ -6,7 +6,7 @@ import { getAllCategories } from '@/lib/categories';
 import ArticleCard from '@/components/ArticleCard';
 import { ChevronRight, BookOpen, Sparkles, Filter, Home } from 'lucide-react';
 
-export const revalidate = 60; // ISR cache 60s for instant loading
+export const revalidate = 300; // ISR cache 5 mins for instant loading
 
 export const metadata: Metadata = {
   title: 'Complete Tutorials & Tech Guides Archive | PULSE TechTips',

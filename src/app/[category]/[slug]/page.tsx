@@ -11,7 +11,7 @@ interface ArticlePageProps {
   };
 }
 
-export const revalidate = 60; // Cache article for 60s at CDN edge
+export const revalidate = 300; // Cache article for 5 mins at CDN edge
 
 export async function generateMetadata({ params }: ArticlePageProps): Promise<Metadata> {
   const article = await getArticleBySlug(params.slug);

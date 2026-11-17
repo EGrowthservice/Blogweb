@@ -176,7 +176,10 @@ export default function ArticleDetailView({
               </div>
 
               {/* Featured Image */}
-              <div className="relative w-full aspect-[16/10] rounded-lg overflow-hidden bg-gray-100 mb-6">
+              <div
+                className="relative w-full aspect-[16/10] rounded-lg overflow-hidden bg-gray-100 mb-6"
+                style={{ aspectRatio: '16 / 10' }}
+              >
                 <Image
                   src={article.featuredImage}
                   alt={article.featuredImageAlt || article.title}

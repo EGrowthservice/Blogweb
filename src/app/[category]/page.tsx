@@ -14,7 +14,7 @@ interface CategoryOrArticlePageProps {
   };
 }
 
-export const revalidate = 60; // Cache for 60s at CDN edge
+export const revalidate = 300; // Cache for 5 mins at CDN edge
 
 export async function generateMetadata({ params }: CategoryOrArticlePageProps): Promise<Metadata> {
   // 1. Check if category exists in database

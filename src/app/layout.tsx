@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Script from 'next/script';
 import { Inter, Outfit } from 'next/font/google';
 import './globals.css';
 import AuthProvider from '@/components/providers/AuthProvider';
@@ -6,15 +7,17 @@ import PublicLayoutWrapper from '@/components/PublicLayoutWrapper';
 import GoogleAnalytics from '@/components/analytics/GoogleAnalytics';
 import { getAllCategories } from '@/lib/categories';
 const inter = Inter({
-  subsets: ['latin', 'latin-ext', 'vietnamese'],
+  subsets: ['latin'],
   variable: '--font-inter',
   display: 'swap',
+  preload: true,
 });
 
 const outfit = Outfit({
-  subsets: ['latin', 'latin-ext'],
+  subsets: ['latin'],
   variable: '--font-outfit',
   display: 'swap',
+  preload: true,
 });
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.pulseetm.click';
@@ -136,18 +139,20 @@ export default async function RootLayout({
           content="rpBsmx7-EVogE7lH6Ybg9T_U_MA4k6qCXbQKSkcsxqg"
         />
 
-        {/* Google AdSense Account Meta Tag */}
+        {/* Google AdSense Account Meta Tag (Immediate verification) */}
         <meta name="google-adsense-account" content={adsenseId} />
 
         {/* Performance Preconnect & DNS Prefetch */}
-        <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://images.unsplash.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://i.ytimg.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://googleads.g.doubleclick.net" />
 
-        {/* Google AdSense Script in Head */}
-        <script
-          async
+        {/* Google AdSense Script - Non-blocking afterInteractive */}
+        <Script
+          id="google-adsense"
+          strategy="afterInteractive"
           src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseId}`}
           crossOrigin="anonymous"
         />
